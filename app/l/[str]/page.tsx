@@ -3,21 +3,22 @@ import { decodeString } from "@/lib/utils";
 import lz from "lzutf8";
 import { notFound, redirect } from "next/navigation";
 type Props = {
-    params: {
-        str: string;
-    }
-}
+  params: {
+    str: string;
+  };
+};
 export default async function RedirectPage({ params: { str } }: Props) {
-    const id = decodeString(str);
-    const item = await db.query.links.findFirst({
-        where: (link, { eq }) => eq(link.id, id)
-    });
+  const id = decodeString(str);
 
+  if (isNaN(id)) return notFound();
 
-    if (!item)
-        return notFound();
+  const item = await db.query.links.findFirst({
+    where: (link, { eq }) => eq(link.id, id),
+  });
 
-    const url = lz.decompress(lz.decodeBase64(item.compressedUrl))
+  if (!item) return notFound();
 
-    return redirect(url);
+  const url = lz.decompress(lz.decodeBase64(item.compressedUrl));
+
+  return redirect(url);
 }
