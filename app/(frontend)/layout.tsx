@@ -28,8 +28,10 @@ export default function Layout({ children }: React.PropsWithChildren) {
                     </nav>
                 </div>
             </header>
-            <main className="flex-1">
-                {children}
+            <main className="flex-1 flex flex-col">
+                <div className="flex-1 h-full flex items-center justify-center mx-auto max-w-7xl">
+                    {children}
+                </div>
             </main>
             <footer className="border-t shadow-sm">
                 <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4">

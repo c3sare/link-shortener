@@ -1,7 +1,10 @@
+import { sql } from "drizzle-orm";
 import {
+  bigint,
   integer,
   pgTable,
   primaryKey,
+  serial,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
@@ -15,6 +18,9 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  createdAt: timestamp("uploaded_at", { mode: "date" })
+    .notNull()
+    .default(sql`now()`),
 });
 
 export const accounts = pgTable(
@@ -60,3 +66,13 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const links = pgTable("links", {
+  id: serial("id").notNull(),
+  userId: text("user_id"),
+  compressedUrl: text("compressedUrl").notNull(),
+  redirects: integer("redirects").default(0),
+  createdAt: timestamp("uploaded_at", { mode: "date" })
+    .notNull()
+    .default(sql`now()`),
+});
