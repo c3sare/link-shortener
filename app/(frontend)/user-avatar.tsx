@@ -2,7 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PersonIcon } from "@radix-ui/react-icons";
 import { Session } from "next-auth";
 
 type Props = {
