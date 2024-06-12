@@ -12,15 +12,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user) {
-        token.id = user.id;
-      }
+      if (user.id) token.id = user.id;
+
       return token;
     },
     session: async ({ session, token }) => {
-      if (token.id) {
-        session.user.id = token.id as unknown as string;
-      }
+      session.user.id = token.id;
       return session;
     },
   },
