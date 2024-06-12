@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import lz from "lzutf8";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,4 +32,12 @@ export function decodeString(encoded: string) {
     number = number * base + key.indexOf(encoded[i]);
   }
   return number;
+}
+
+export function compressUrl(url: string) {
+  return lz.encodeBase64(lz.compress(url));
+}
+
+export function decompressUrl(compressedUrl: string) {
+  return lz.decompress(lz.decodeBase64(compressedUrl));
 }

@@ -1,9 +1,17 @@
 import { auth } from "@/auth";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-export function middleware(request: NextApiRequest, response: NextApiResponse) {
-  return auth(request, response);
-}
+const protectedRoutes = ["/profile"];
+
+export default auth((req) => {
+  const isAuthorized = !!req.auth?.user;
+
+  if (!isAuthorized) {
+    if (protectedRoutes.some((url) => req.nextUrl.pathname.startsWith(url)))
+      return NextResponse.redirect(new URL("/", req.url));
+  }
+});
+
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
