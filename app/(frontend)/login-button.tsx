@@ -18,41 +18,43 @@ export const LoginButton = async () => {
             <DropdownMenuTrigger asChild>
                 <UserAvatar session={session} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent side="bottom" align="end">
-                {(() => {
-                    if (session?.user)
+            <DropdownMenuContent side="bottom" align="end" asChild>
+                <form>
+                    {(() => {
+                        if (session?.user)
+                            return (
+                                <>
+                                    <DropdownMenuLabel>Hello, {session.user.name ?? "user"}</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem asChild>
+                                        <Link href={`/profile`}>
+                                            Your links
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuServerActionItem className="flex items-center gap-4 w-full" formAction={signOut}>
+                                        <LogOutIcon />
+                                        <span>Logout</span>
+                                    </DropdownMenuServerActionItem>
+                                </>
+                            );
+
                         return (
                             <>
-                                <DropdownMenuLabel>Hello, {session.user.name ?? "user"}</DropdownMenuLabel>
+                                <DropdownMenuLabel className="text-center min-w-40">Sign in with</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem asChild>
-                                    <Link href={`/profile`}>
-                                        Your links
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuServerActionItem className="flex items-center gap-4 w-full" action={signOut}>
-                                    <LogOutIcon />
-                                    <span>Logout</span>
+                                <DropdownMenuServerActionItem className="flex items-center justify-between gap-4 w-full text-lg font-bold" formAction={signInWithGoogle}>
+                                    <GoogleIcon width={24} height={24} />
+                                    <span>Google</span>
+                                </DropdownMenuServerActionItem>
+                                <DropdownMenuServerActionItem className="flex items-center justify-between gap-4 w-full text-lg font-bold" formAction={signInWithGithub}>
+                                    <GitHubLogoIcon width={24} height={24} />
+                                    <span>Github</span>
                                 </DropdownMenuServerActionItem>
                             </>
-                        );
-
-                    return (
-                        <>
-                            <DropdownMenuLabel className="text-center min-w-40">Sign in with</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuServerActionItem className="flex items-center justify-between gap-4 w-full text-lg font-bold" action={signInWithGoogle}>
-                                <GoogleIcon width={24} height={24} />
-                                <span>Google</span>
-                            </DropdownMenuServerActionItem>
-                            <DropdownMenuServerActionItem className="flex items-center justify-between gap-4 w-full text-lg font-bold" action={signInWithGithub}>
-                                <GitHubLogoIcon width={24} height={24} />
-                                <span>Github</span>
-                            </DropdownMenuServerActionItem>
-                        </>
-                    )
-                })()}
+                        )
+                    })()}
+                </form>
             </DropdownMenuContent>
         </DropdownMenu>
     )
