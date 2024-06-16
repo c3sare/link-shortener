@@ -10,6 +10,8 @@ export default auth((req) => {
     if (protectedRoutes.some((url) => req.nextUrl.pathname.startsWith(url)))
       return NextResponse.redirect(new URL("/", req.url));
   }
+
+  return;
 });
 
 export const config = {

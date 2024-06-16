@@ -7,18 +7,21 @@ import github from "next-auth/providers/github";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [google, github],
-  session: {
-    strategy: "jwt",
-  },
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user.id) token.id = user.id;
-
+      if (user) {
+        token.id = user.id as string;
+      }
       return token;
     },
     session: async ({ session, token }) => {
-      session.user.id = token.id;
+      if (token.id) {
+        session.user.id = token.id as unknown as string;
+      }
       return session;
     },
+  },
+  session: {
+    strategy: "jwt",
   },
 });
