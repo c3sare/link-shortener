@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { addLink } from "@/actions/links/addLink";
 import { Input } from "@/components/ui/input";
-import { ReadyLinkInput } from "./ready-link-inpu";
+import { ReadyLinkInput } from "./ready-link-input";
 
 const schema = z.object({ url: z.string().url() });
 

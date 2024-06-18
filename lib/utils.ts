@@ -16,7 +16,7 @@ export function getBaseUrl() {
 const key = process.env.AUTH_SECRET ?? "";
 
 export function encodeNumber(number: number) {
-  number = number + 123456;
+  number = number + 15243;
   const base = key.length;
   let encoded = "";
   while (number > 0) {
@@ -32,7 +32,7 @@ export function decodeString(encoded: string) {
   for (let i = 0; i < encoded.length; i++) {
     number = number * base + key.indexOf(encoded[i]);
   }
-  return number - 123456;
+  return number - 15243;
 }
 
 export function compressUrl(url: string) {

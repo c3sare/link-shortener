@@ -2,10 +2,8 @@ import { getUserLinks } from "@/actions/links/getUserLinks";
 import { Button } from "@/components/ui/button";
 import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { decompressUrl, encodeNumber, getBaseUrl } from "@/lib/utils";
-import { CopyIcon, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function ProfilePage() {
@@ -25,22 +23,37 @@ export default async function ProfilePage() {
         </Button>
       </div>
       <div className="flex flex-wrap max-w-7xl mx-auto gap-4">
-        {items.map(item => (
+        {items.map((item) => (
           <div key={item.id} className="flex flex-col p-4 border w-full gap-4">
             <div className="flex-1">
               <Label className="flex-1">
                 Short URL
-                <CopyInput value={`${baseUrl}/l/${encodeNumber(item.id)}`} className="w-full" />
+                <CopyInput
+                  value={`${baseUrl}/l/${encodeNumber(item.id)}`}
+                  className="w-full"
+                />
               </Label>
             </div>
             <div className="flex-1">
               <Label className="flex-1">
                 Orginal URL
-                <CopyInput value={decompressUrl(item.compressedUrl)} className="w-full" />
+                <CopyInput
+                  value={decompressUrl(item.compressedUrl)}
+                  className="w-full"
+                />
               </Label>
             </div>
-          </div>))}
+            <div>
+              <Label>
+                Redirects:
+                <div className="border rounded-xl text-2xl py-1 px-2">
+                  {item.redirects}
+                </div>
+              </Label>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
-  )
+  );
 }
