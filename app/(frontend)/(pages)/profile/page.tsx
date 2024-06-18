@@ -29,7 +29,7 @@ export default async function ProfilePage() {
               <Label className="flex-1">
                 Short URL
                 <CopyInput
-                  value={`${baseUrl}/l/${encodeNumber(item.id)}`}
+                  value={`${baseUrl}/l/${item.id}`}
                   className="w-full"
                 />
               </Label>

@@ -29,7 +29,5 @@ export const addLink = action(schema, async ({ url }) => {
 
   if (!link) throw new Error("Can't insert link!");
 
-  const codedUrl = encodeNumber(link.id);
-
-  return { shorterUrl: getBaseUrl() + "/l/" + codedUrl };
+  return { shorterUrl: getBaseUrl() + "/l/" + link.id };
 });
