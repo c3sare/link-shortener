@@ -1,5 +1,9 @@
 import { getUserLinks } from "@/actions/links/getUserLinks";
 import { Button } from "@/components/ui/button";
+import { CopyInput } from "@/components/ui/copy-input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { decompressUrl, encodeNumber, getBaseUrl } from "@/lib/utils";
 import { CopyIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
@@ -20,21 +24,22 @@ export default async function ProfilePage() {
           </Link>
         </Button>
       </div>
-      <div className="space-y-4">
+      <div className="flex flex-wrap max-w-7xl mx-auto gap-4">
         {items.map(item => (
-          <div key={item.id} className="bg-white dark:bg-gray-950 p-4 rounded-lg shadow-sm flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-[200px]">
-                <p className="text-sm text-gray-500 dark:text-gray-400">Short URL</p>
-                <p className="font-medium">{`${baseUrl}/l/${encodeNumber(item.id)}`}</p>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-500 dark:text-gray-400">Original URL</p>
-                <p className="font-medium">{decompressUrl(item.compressedUrl)}</p>
-              </div>
+          <div key={item.id} className="flex flex-col p-4 border w-full gap-4">
+            <div className="flex-1">
+              <Label className="flex-1">
+                Short URL
+                <CopyInput value={`${baseUrl}/l/${encodeNumber(item.id)}`} className="w-full" />
+              </Label>
             </div>
-          </div>
-        ))}
+            <div className="flex-1">
+              <Label className="flex-1">
+                Orginal URL
+                <CopyInput value={decompressUrl(item.compressedUrl)} className="w-full" />
+              </Label>
+            </div>
+          </div>))}
       </div>
     </section>
   )
