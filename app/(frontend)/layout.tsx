@@ -61,6 +61,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
           <div className="flex items-center gap-4 flex-wrap sm:justify-center w-full justify-between sm:w-auto">
             <a href="https://github.com/c3sare/link-shortener">
               <GithubIcon className="dark:invert" width={32} height={32} />
+              <span className="sr-only">Github</span>
             </a>
             <ThemeSwitch />
           </div>
