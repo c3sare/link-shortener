@@ -4,12 +4,9 @@ import { decodeString } from "@/lib/utils";
 import { eq, sql } from "drizzle-orm";
 import lz from "lzutf8";
 import { notFound, redirect } from "next/navigation";
-type Props = {
-  params: {
-    str: string;
-  };
-};
-export default async function RedirectPage({ params: { str } }: Props) {
+import { type NextRequest } from "next/server";
+
+export async function GET(req: NextRequest, { params: { str } }: { params: { str: string } }) {
   const id = decodeString(str);
 
   if (isNaN(id)) return notFound();
