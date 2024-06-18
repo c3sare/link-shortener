@@ -28,7 +28,6 @@ export default function Layout({ children }: React.PropsWithChildren) {
             </Link>
           </div>
           <nav className="flex gap-4 items-center">
-
             <Suspense fallback={<Skeleton className="size-10 rounded-full" />}>
               <LoginButton />
             </Suspense>
@@ -41,9 +40,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
         </div>
       </main>
       <footer className="border-t shadow-sm">
-        <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4">
+        <div className="max-w-7xl mx-auto flex items-center min-h-20 px-4 flex-col-reverse py-4 justify-center gap-4 sm:flex-row sm:justify-between">
           <a
-            className="flex items-center justify-center"
+            className="flex items-center justify-center text-xs text-nowrap"
             href="https://vercel.com/"
             target="_blank"
             rel="noreferrer"
@@ -53,13 +52,13 @@ export default function Layout({ children }: React.PropsWithChildren) {
               <Image
                 alt="Vercel Logo"
                 className="dark:invert"
-                width={71}
-                height={16}
+                width={55}
+                height={12.5}
                 src="/vercel.svg"
               />
             </div>
           </a>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap sm:justify-center w-full justify-between sm:w-auto">
             <a href="https://github.com/c3sare/link-shortener">
               <GithubIcon className="dark:invert" width={32} height={32} />
             </a>

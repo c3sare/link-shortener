@@ -1,6 +1,10 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
-type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type Props = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 export const DropdownMenuServerActionItem = ({
   children,
@@ -8,7 +12,9 @@ export const DropdownMenuServerActionItem = ({
   className,
   ...rest
 }: Props) => (
-  <DropdownMenuItem className={className} asChild>
-    <button formAction={formAction} {...rest}>{children}</button>
+  <DropdownMenuItem className={cn("cursor-pointer", className)} asChild>
+    <button formAction={formAction} {...rest}>
+      {children}
+    </button>
   </DropdownMenuItem>
 );
