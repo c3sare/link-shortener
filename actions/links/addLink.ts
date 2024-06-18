@@ -23,20 +23,28 @@ export const addLink = action(schema, async ({ url }) => {
     .select({ count: count() })
     .from(links);
 
-  const spaces = Math.ceil(linkCount / 1000);
+  const spaces = Math.ceil(linkCount / 100000);
 
-  const item = await db
-    .insert(links)
-    .values({
-      id: nanoid(2 + spaces),
-      compressedUrl,
-      userId: session?.user?.id ?? null,
-    })
-    .returning();
+  let searchMore = false;
 
-  const link = item.at(0);
+  do {
+    try {
+      const item = await db
+        .insert(links)
+        .values({
+          id: nanoid(2 + spaces),
+          compressedUrl,
+          userId: session?.user?.id ?? null,
+        })
+        .returning();
 
-  if (!link) throw new Error("Can't insert link!");
+      const link = item.at(0);
 
-  return { shorterUrl: getBaseUrl() + "/l/" + link.id };
+      if (!link) throw new Error("Can't insert link!");
+
+      return { shorterUrl: getBaseUrl() + "/l/" + link.id };
+    } catch {
+      searchMore = true;
+    }
+  } while (searchMore);
 });

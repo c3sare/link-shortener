@@ -66,7 +66,7 @@ export const verificationTokens = pgTable(
 );
 
 export const links = pgTable("links", {
-  id: text("id").notNull(),
+  id: text("id").notNull().primaryKey(),
   userId: text("user_id"),
   compressedUrl: text("compressedUrl").notNull(),
   redirects: integer("redirects").default(0),
