@@ -7,6 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { GithubIcon } from "@/components/icons/github-icon";
 
+export const experimental_ppr = true;
+
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>

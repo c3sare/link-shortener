@@ -1,6 +1,6 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement>;
+type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const DropdownMenuServerActionItem = ({
   children,

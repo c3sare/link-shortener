@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserIcon } from "lucide-react";
 import { Session } from "next-auth";
 
 type Props = {
@@ -17,7 +18,7 @@ export const UserAvatar = ({ session, ...props }: Props) => {
         <button className="rounded-full" {...props}>
             <Avatar>
                 <AvatarImage src={avatarUrl} alt={name} />
-                <AvatarFallback><Skeleton /></AvatarFallback>
+                <AvatarFallback><Skeleton><UserIcon /></Skeleton></AvatarFallback>
             </Avatar>
         </button>
     )

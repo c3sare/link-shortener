@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { useTheme } from "next-themes"
 import { Switch } from "./ui/switch"
 
