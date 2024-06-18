@@ -1,5 +1,4 @@
 import { sql } from "drizzle-orm";
-import shortid from "shortid";
 import {
   integer,
   pgTable,
@@ -67,7 +66,7 @@ export const verificationTokens = pgTable(
 );
 
 export const links = pgTable("links", {
-  id: text("id").notNull().$defaultFn(() => shortid.generate()),
+  id: text("id").notNull(),
   userId: text("user_id"),
   compressedUrl: text("compressedUrl").notNull(),
   redirects: integer("redirects").default(0),
@@ -75,4 +74,3 @@ export const links = pgTable("links", {
     .notNull()
     .default(sql`now()`),
 });
-

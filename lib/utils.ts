@@ -13,28 +13,6 @@ export function getBaseUrl() {
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
-const key = process.env.AUTH_SECRET ?? "";
-
-export function encodeNumber(number: number) {
-  number = number + 1234;
-  const base = key.length;
-  let encoded = "";
-  while (number > 0) {
-    encoded = key[number % base] + encoded;
-    number = Math.floor(number / base);
-  }
-  return encoded;
-}
-
-export function decodeString(encoded: string) {
-  const base = key.length;
-  let number = 0;
-  for (let i = 0; i < encoded.length; i++) {
-    number = number * base + key.indexOf(encoded[i]);
-  }
-  return number - 1234;
-}
-
 export function compressUrl(url: string) {
   return lz.encodeBase64(lz.compress(url));
 }

@@ -2,7 +2,7 @@ import { getUserLinks } from "@/actions/links/getUserLinks";
 import { Button } from "@/components/ui/button";
 import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
-import { decompressUrl, encodeNumber, getBaseUrl } from "@/lib/utils";
+import { decompressUrl, getBaseUrl } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
