@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/theme-switch";
+import { ThemeSwitch } from "@/components/theme-switch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { LoginButton } from "./login-button";
@@ -28,7 +28,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
             </Link>
           </div>
           <nav className="flex gap-4 items-center">
-            <ThemeToggle />
+
             <Suspense fallback={<Skeleton className="size-10 rounded-full" />}>
               <LoginButton />
             </Suspense>
@@ -59,10 +59,11 @@ export default function Layout({ children }: React.PropsWithChildren) {
               />
             </div>
           </a>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <a href="https://github.com/c3sare/link-shortener">
               <GithubIcon className="dark:invert" width={32} height={32} />
             </a>
+            <ThemeSwitch />
           </div>
         </div>
       </footer>
