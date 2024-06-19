@@ -9,14 +9,14 @@ type Props = {
 
 export const ReadyLinkInput = ({ url, clearUrl }: Props) => {
   return (
-    <div className="flex gap-2 items-end flex-wrap md:flex-nowrap">
-      <CopyInput value={url} />
+    <div className="flex gap-2 items-end flex-wrap flex-col md:flex-row md:flex-nowrap">
+      <CopyInput value={url} className="w-full" />
       <Button
         variant="secondary"
-        className="w-1/2 md:w-auto"
+        className="w-full mx-auto md:w-auto text-xs"
         onClick={clearUrl}
       >
-        <RefreshCw className="w-4 h-4 mr-2" /> New
+        <RefreshCw className="w-4 h-4 mr-1" /> Create new short link
       </Button>
     </div>
   );

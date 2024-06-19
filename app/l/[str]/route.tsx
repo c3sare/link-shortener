@@ -9,6 +9,10 @@ export async function GET(
   req: NextRequest,
   { params: { str } }: { params: { str: string } }
 ) {
+  const agent = req.geo;
+
+  console.log(agent);
+
   const items = await db
     .update(links)
     .set({

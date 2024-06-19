@@ -28,7 +28,7 @@ export const CopyInput = ({ value, className }: Props) => {
         <div className={cn("relative flex-1 border border-primary rounded-lg", className)}>
             <Input
                 value={value}
-                className="flex-1 pr-[60px]"
+                className="flex-1 pr-11 text-ellipsis"
                 onFocus={() => {
                     inputRef.current!.select();
                     inputRef.current!.setSelectionRange(0, value.length);
@@ -39,7 +39,7 @@ export const CopyInput = ({ value, className }: Props) => {
             <TooltipProvider>
                 <Tooltip open={isVisibleTooltip}>
                     <TooltipTrigger asChild>
-                        <Button onClick={handleCopy} className="absolute right-0 top-1/2 -translate-y-1/2 rounded-l-none"><CopyIcon className="size-4" /></Button>
+                        <Button onClick={handleCopy} className="absolute right-0 top-1/2 -translate-y-1/2 rounded-l-none w-11"><CopyIcon className="size-3" /></Button>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Coppied to clipboard!</p>
