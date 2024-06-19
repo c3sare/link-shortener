@@ -82,7 +82,7 @@ export default function RootLayout({
                   className="dark:invert"
                   width={55}
                   height={12.5}
-                  src="/vercel.svg"
+                  src="/images/vercel.svg"
                 />
               </div>
             </a>
