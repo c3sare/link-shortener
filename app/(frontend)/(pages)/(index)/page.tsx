@@ -1,6 +1,4 @@
-import { lazy, Suspense } from "react";
-
-const CreateLinkForm = lazy(() => import("./create-link-form"));
+import CreateLinkForm from "./create-link-form";
 
 export default function Home() {
   return (
@@ -18,9 +16,7 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full max-w-md space-y-2">
-              <Suspense fallback={null}>
-                <CreateLinkForm />
-              </Suspense>
+              <CreateLinkForm />
             </div>
           </div>
         </div>
