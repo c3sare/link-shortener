@@ -4,7 +4,8 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Core } from "nextjs-darkmode";
 import Link from "next/link";
-import { GithubIcon, ScissorsIcon } from "lucide-react";
+import { ScissorsIcon } from "lucide-react";
+import { GithubIcon } from "@/components/icons/github-icon"
 import { Suspense } from "react";
 import { LoginButton } from "./login-button";
 import { Skeleton } from "@/components/ui/skeleton";
