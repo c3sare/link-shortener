@@ -1,12 +1,6 @@
-import dynamicfn from "next/dynamic";
-import { Loader } from "lucide-react";
+import { lazy, Suspense } from "react";
 
-export const dynamic = "force-static";
-
-const CreateLinkForm = dynamicfn(
-  () => import("./create-link-form").then((m) => m.CreateLinkForm),
-  { loading: () => <Loader className="animate-spin" /> }
-);
+const CreateLinkForm = lazy(() => import("./create-link-form"));
 
 export default function Home() {
   return (
@@ -24,7 +18,9 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full max-w-md space-y-2">
-              <CreateLinkForm />
+              <Suspense fallback={null}>
+                <CreateLinkForm />
+              </Suspense>
             </div>
           </div>
         </div>

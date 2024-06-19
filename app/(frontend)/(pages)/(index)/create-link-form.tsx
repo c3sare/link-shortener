@@ -10,7 +10,7 @@ import { ReadyLinkInput } from "./ready-link-input";
 
 const schema = z.object({ url: z.string().url() });
 
-export const CreateLinkForm = () => {
+const CreateLinkForm = () => {
   const [isPending, startTransition] = useTransition();
   const [url, setUrl] = useState<string | null>(null);
   const { register, handleSubmit, setValue } = useForm({
@@ -48,3 +48,5 @@ export const CreateLinkForm = () => {
     </form>
   );
 };
+
+export default CreateLinkForm;
