@@ -17,8 +17,6 @@ const schema = z.object({
 export const addLink = action(schema, async ({ url }) => {
   const session = await auth();
 
-  const compressedUrl = lz.encodeBase64(lz.compress(url));
-
   const [{ count: linkCount }] = await db
     .select({ count: count() })
     .from(links);
@@ -33,7 +31,7 @@ export const addLink = action(schema, async ({ url }) => {
         .insert(links)
         .values({
           id: nanoid(2 + spaces),
-          compressedUrl,
+          url,
           userId: session?.user?.id ?? null,
         })
         .returning();

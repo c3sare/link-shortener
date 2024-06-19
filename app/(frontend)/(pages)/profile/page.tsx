@@ -2,7 +2,7 @@ import { getUserLinks } from "@/actions/links/getUserLinks";
 import { Button } from "@/components/ui/button";
 import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
-import { decompressUrl, getBaseUrl } from "@/lib/utils";
+import { getBaseUrl } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ export default async function ProfilePage() {
               <Label className="flex-1">
                 Orginal URL
                 <CopyInput
-                  value={decompressUrl(item.compressedUrl)}
+                  value={item.url}
                   className="w-full"
                 />
               </Label>

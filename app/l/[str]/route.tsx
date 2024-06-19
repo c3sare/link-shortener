@@ -1,7 +1,6 @@
 import { db } from "@/drizzle";
 import { links } from "@/drizzle/schema";
 import { eq, sql } from "drizzle-orm";
-import lz from "lzutf8";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { type NextRequest } from "next/server";
@@ -44,7 +43,5 @@ export async function GET(
 
   if (!item) return notFound();
 
-  const url = lz.decompress(lz.decodeBase64(item.compressedUrl));
-
-  return redirect(url);
+  return redirect(item.url);
 }
