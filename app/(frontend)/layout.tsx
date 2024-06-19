@@ -12,8 +12,8 @@ export const experimental_ppr = true;
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>
-      <header className="border-b sticky top-0 z-10 bg-background">
-        <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20 shadow-sm">
+      <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
+        <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">
           <div>
             <Link href="/">
               <h1 className="flex items-center gap-2 font-bold select-none">
