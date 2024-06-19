@@ -1,8 +1,9 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   integer,
   pgTable,
   primaryKey,
+  serial,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
@@ -67,10 +68,34 @@ export const verificationTokens = pgTable(
 
 export const links = pgTable("links", {
   id: text("id").notNull().primaryKey(),
-  userId: text("user_id"),
+  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   url: text("url").notNull(),
-  redirects: integer("redirects").default(0),
-  createdAt: timestamp("uploaded_at", { mode: "date" })
+  createdAt: timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
 });
+
+export const linksRelations = relations(links, ({ many, one }) => ({
+  redirects: many(redirects),
+  user: one(users, { fields: [links.userId], references: [users.id] }),
+}));
+
+export const redirects = pgTable("redirects", {
+  id: serial("id").notNull().primaryKey(),
+  linkId: text("link_id")
+    .notNull()
+    .references(() => links.id, { onDelete: "cascade" }),
+  ip: text("ip"),
+  country: text("country"),
+  city: text("city"),
+  continent: text("continent"),
+  latitude: text("latitude"),
+  timezone: text("timezone"),
+  createdAt: timestamp("created_at", { mode: "date" })
+    .notNull()
+    .default(sql`now()`),
+});
+
+export const redirectsRelations = relations(redirects, ({ one }) => ({
+  link: one(links, { fields: [redirects.linkId], references: [links.id] }),
+}));
