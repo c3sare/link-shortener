@@ -24,7 +24,7 @@ export default function Home() {
     startTransition(async () => {
       const response = await addLink(data as z.infer<typeof schema>);
 
-      const url = response.data?.shorterUrl;
+      const url = response?.data?.shorterUrl;
 
       if (url) {
         setValue("url", "");
