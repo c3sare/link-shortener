@@ -11,6 +11,8 @@ import { ReadyLinkInput } from "./ready-link-input";
 
 const schema = z.object({ url: z.string().url() });
 
+export const dynamic = "force-static";
+
 export default function Home() {
   const [isPending, startTransition] = useTransition();
   const [url, setUrl] = useState<string | null>(null);
@@ -25,7 +27,7 @@ export default function Home() {
       const url = response.data?.shorterUrl;
 
       if (url) {
-        setValue("url", "")
+        setValue("url", "");
         setUrl(url);
       }
     });
@@ -41,21 +43,28 @@ export default function Home() {
                 Shorten Your Links
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Easily shorten your long links and share them with your friends and colleagues.
+                Easily shorten your long links and share them with your friends
+                and colleagues.
               </p>
             </div>
             <div className="w-full max-w-md space-y-2">
-              {url ? <ReadyLinkInput clearUrl={() => setUrl(null)} url={url} />
-                :
+              {url ? (
+                <ReadyLinkInput clearUrl={() => setUrl(null)} url={url} />
+              ) : (
                 <form
                   onSubmit={onSubmit}
                   className="flex gap-2 max-w-full flex-col sm:flex-row"
                 >
-                  <Input {...register("url")} placeholder="Enter your long URL" disabled={isPending} />
+                  <Input
+                    {...register("url")}
+                    placeholder="Enter your long URL"
+                    disabled={isPending}
+                  />
                   <Button disabled={isPending} type="submit">
                     Shorten
                   </Button>
-                </form>}
+                </form>
+              )}
             </div>
           </div>
         </div>

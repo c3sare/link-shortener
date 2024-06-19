@@ -14,6 +14,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
+export const runtime = "edge";
+
 export default function RootLayout({
   children,
 }: Readonly<{

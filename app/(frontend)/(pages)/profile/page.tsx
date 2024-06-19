@@ -37,10 +37,7 @@ export default async function ProfilePage() {
             <div className="flex-1">
               <Label className="flex-1">
                 Orginal URL
-                <CopyInput
-                  value={item.url}
-                  className="w-full"
-                />
+                <CopyInput value={item.url} className="w-full" />
               </Label>
             </div>
             <div>

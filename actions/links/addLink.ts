@@ -5,7 +5,6 @@ import { action } from "../safe-action";
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
 import { links } from "@/drizzle/schema";
-import lz from "lzutf8";
 import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
