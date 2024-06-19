@@ -12,8 +12,8 @@ export default async function ProfilePage() {
   const baseUrl = getBaseUrl();
 
   return (
-    <section className="w-full mx-auto py-8 px-4 md:px-6 mb-auto">
-      <div className="flex items-center justify-between mb-6">
+    <section className="w-full py-8 px-4 md:px-6 flex flex-col gap-4">
+      <div className="flex items-center w-full justify-between mb-6 gap-2 flex-col sm:flex-row">
         <h2 className="text-2xl font-bold">Shortened Links</h2>
         <Button size="sm" variant="outline" asChild>
           <Link href="/">
@@ -22,7 +22,7 @@ export default async function ProfilePage() {
           </Link>
         </Button>
       </div>
-      <div className="flex flex-wrap max-w-7xl mx-auto gap-4">
+      <div className="flex flex-wrap mx-auto gap-4 w-full">
         {items.map((item) => (
           <div key={item.id} className="flex flex-col p-4 border w-full gap-4">
             <div className="flex-1">

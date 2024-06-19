@@ -34,8 +34,8 @@ export default function Layout({ children }: React.PropsWithChildren) {
           </nav>
         </div>
       </header>
-      <main className="flex-1 flex flex-col">
-        <div className="flex-1 h-full flex items-center justify-center mx-auto max-w-7xl">
+      <main className="flex-1 flex flex-col w-full">
+        <div className="flex-1 w-full mx-auto max-w-7xl h-full flex flex-col">
           {children}
         </div>
       </main>
