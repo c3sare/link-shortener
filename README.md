@@ -17,6 +17,7 @@
 
 ## Features
 
+- Light/dark mode of website
 - Creating shorter links
 - Signing in with google, github
 - Adding created links to used account
