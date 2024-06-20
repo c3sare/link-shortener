@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { type NextRequest } from "next/server";
 
-export const runtime = process.env.VERCEL_URL ? "edge" : "nodejs";
+export const runtime = "edge";
 
 export async function GET(
   req: NextRequest,
