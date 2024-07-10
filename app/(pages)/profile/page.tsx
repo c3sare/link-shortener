@@ -26,7 +26,10 @@ export default async function ProfilePage() {
       </div>
       <div className="flex flex-wrap mx-auto gap-4 w-full">
         {items.map((item) => (
-          <div key={item.id} className="flex p-4 w-full border shadow-sm gap-4">
+          <div
+            key={item.id}
+            className="flex flex-col-reverse md:flex-row p-4 w-full border shadow-sm gap-4"
+          >
             <div className="flex p-4 w-full flex-col gap-4">
               <div className="flex-1">
                 <Label className="flex-1">
