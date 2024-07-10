@@ -1,44 +1,44 @@
 "use client";
 
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useMode } from "nextjs-darkmode/hooks";
+import dynamic from "next/dynamic";
+import { Skeleton } from "./ui/skeleton";
+
+const ThemeSwitchButton = dynamic(() => import("./theme-switch-button"), {
+  ssr: false,
+  loading: () => <Skeleton className="size-10 rounded-none" />,
+});
 
 export function ThemeSwitch() {
   const { mode, setMode } = useMode();
 
   return (
-    <div className="rounded-3xl border flex gap-2 items-center">
-      <button
-        onClick={() => setMode("")}
-        className={cn(
-          "size-10 rounded-full flex items-center justify-center",
-          mode === "" ? "bg-muted" : ""
-        )}
+    <div className="rounded-3xl border flex items-center overflow-hidden">
+      <ThemeSwitchButton
+        currentMode={mode}
+        mode=""
+        setMode={setMode}
+        name="Light theme"
       >
         <SunIcon />
-        <span className="sr-only">Light theme</span>
-      </button>
-      <button
-        onClick={() => setMode("system")}
-        className={cn(
-          "size-10 rounded-full flex items-center justify-center",
-          mode === "system" ? "bg-muted" : ""
-        )}
+      </ThemeSwitchButton>
+      <ThemeSwitchButton
+        currentMode={mode}
+        mode="system"
+        setMode={setMode}
+        name="System theme"
       >
         <MonitorIcon />
-        <span className="sr-only">System theme</span>
-      </button>
-      <button
-        onClick={() => setMode("dark")}
-        className={cn(
-          "size-10 rounded-full flex items-center justify-center",
-          mode === "dark" ? "bg-muted" : ""
-        )}
+      </ThemeSwitchButton>
+      <ThemeSwitchButton
+        currentMode={mode}
+        mode="dark"
+        setMode={setMode}
+        name="Dark theme"
       >
         <MoonIcon />
-        <span className="sr-only">Dark theme</span>
-      </button>
+      </ThemeSwitchButton>
     </div>
   );
 }

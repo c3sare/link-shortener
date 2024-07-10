@@ -12,10 +12,10 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    reactCompiler: true,
-    ppr: "incremental",
-  },
+  // experimental: {
+  //   reactCompiler: true,
+  //   ppr: "incremental",
+  // },
 };
 
 export default nextConfig;
