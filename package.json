@@ -39,11 +39,11 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.22.7",
+    "drizzle-kit": "^0.22.8",
     "eslint": "^8",
     "eslint-config-next": "^14.2.4",
     "postcss": "^8.4.38",
