@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
 const locales = ["en", "pl"];
@@ -12,14 +12,17 @@ const I18nMiddleware = createI18nMiddleware({
 
 const protectedRoutes = ["/profile"];
 
-const localeProtectedRoutes = locales.flatMap((locale) =>
-  protectedRoutes.flatMap((url) => "/" + locale + url)
-);
+const localeProtectedRoutes = [
+  ...locales.flatMap((locale) =>
+    protectedRoutes.flatMap((url) => "/" + locale + url)
+  ),
+  ...protectedRoutes,
+];
 
-export default auth((req) => {
-  const isAuthorized = !!req.auth?.user;
+export const middleware = async (req: NextRequest) => {
+  const session = await auth();
 
-  const response = NextResponse.next(I18nMiddleware(req));
+  const isAuthorized = !!session?.user;
 
   if (!isAuthorized) {
     if (
@@ -28,8 +31,8 @@ export default auth((req) => {
       return NextResponse.redirect(new URL("/", req.url));
   }
 
-  return response;
-});
+  return NextResponse.next(I18nMiddleware(req));
+};
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
