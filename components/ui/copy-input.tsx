@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip";
+import { useI18n } from "@/locales/client";
 
 type Props = {
   value: string;
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export const CopyInput = ({ value, className }: Props) => {
+  const t = useI18n();
   const [isVisibleTooltip, setIsVisibleTooltip] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -57,7 +59,7 @@ export const CopyInput = ({ value, className }: Props) => {
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Coppied to clipboard!</p>
+            <p>{t("coppied")}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

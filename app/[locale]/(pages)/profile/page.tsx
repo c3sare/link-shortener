@@ -7,8 +7,10 @@ import { getBaseUrl } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { DateChart } from "./date-chart";
+import { getI18n } from "@/locales/server";
 
 export default async function ProfilePage() {
+  const t = await getI18n();
   const items = await getUserLinks();
 
   const baseUrl = getBaseUrl();
@@ -16,11 +18,11 @@ export default async function ProfilePage() {
   return (
     <section className="w-full py-8 px-4 md:px-6 flex flex-col gap-4">
       <div className="flex items-center w-full justify-between mb-6 gap-2 flex-col sm:flex-row">
-        <h2 className="text-2xl font-bold">Shortened Links</h2>
+        <h2 className="text-2xl font-bold">{t("shortened_links")}</h2>
         <Button size="sm" variant="outline" asChild>
           <Link href="/">
             <PlusIcon className="w-4 h-4 mr-2" />
-            Create Link
+            {t("create_link_button")}
           </Link>
         </Button>
       </div>
@@ -33,7 +35,7 @@ export default async function ProfilePage() {
             <div className="flex p-4 w-full flex-col gap-4">
               <div className="flex-1">
                 <Label className="flex-1">
-                  Short URL
+                  {t("short_url")}
                   <CopyInput
                     value={`${baseUrl}/l/${item.id}`}
                     className="w-full"
@@ -42,13 +44,13 @@ export default async function ProfilePage() {
               </div>
               <div className="flex-1">
                 <Label className="flex-1">
-                  Orginal URL
+                  {t("orginal_url")}
                   <CopyInput value={item.url} className="w-full" />
                 </Label>
               </div>
               <div>
                 <Label>
-                  Total redirects:
+                  {t("total_redirects")}:
                   <div className="border rounded-xl text-2xl py-1 px-2">
                     {item.redirects.length}
                   </div>
@@ -57,7 +59,7 @@ export default async function ProfilePage() {
             </div>
             <Card>
               <CardHeader>
-                <CardTitle>Redirects by days</CardTitle>
+                <CardTitle>{t("redirects_by_days")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <DateChart redirects={item.redirects} />

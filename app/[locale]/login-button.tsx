@@ -16,9 +16,11 @@ import Link from "next/link";
 import { UserAvatar } from "./user-avatar";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { signInWithGithub } from "@/actions/auth/signInWithGithub";
+import { getI18n } from "@/locales/server";
 
 export const LoginButton = async () => {
   const session = await auth();
+  const t = await getI18n();
 
   return (
     <DropdownMenu>
@@ -32,11 +34,11 @@ export const LoginButton = async () => {
               return (
                 <>
                   <DropdownMenuLabel>
-                    Hello, {session.user.name ?? "user"}
+                    {t("hello", { name: session.user.name ?? "user" })}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href={`/profile`}>Your links</Link>
+                    <Link href={`/profile`}>{t("your_links")}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuServerActionItem
@@ -44,7 +46,7 @@ export const LoginButton = async () => {
                     formAction={signOut}
                   >
                     <LogOutIcon />
-                    <span>Logout</span>
+                    <span>{t("logout")}</span>
                   </DropdownMenuServerActionItem>
                 </>
               );
@@ -52,7 +54,7 @@ export const LoginButton = async () => {
             return (
               <>
                 <DropdownMenuLabel className="text-center min-w-40">
-                  Sign in with
+                  {t("sign_in_with")}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuServerActionItem
