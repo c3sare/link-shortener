@@ -7,7 +7,6 @@ const locales = ["en", "pl"];
 const I18nMiddleware = createI18nMiddleware({
   locales,
   defaultLocale: "en",
-  urlMappingStrategy: "rewrite",
 });
 
 const protectedRoutes = ["/profile"];
@@ -22,14 +21,13 @@ const localeProtectedRoutes = [
 export const middleware = async (req: NextRequest) => {
   const session = await auth();
 
-  const isAuthorized = !!session?.user;
+  const isAuthorized = !!session?.user?.email;
 
-  if (!isAuthorized) {
-    if (
-      localeProtectedRoutes.some((url) => req.nextUrl.pathname.startsWith(url))
-    )
-      return NextResponse.redirect(new URL("/", req.url));
-  }
+  if (
+    !isAuthorized &&
+    localeProtectedRoutes.some((url) => req.nextUrl.pathname.startsWith(url))
+  )
+    return NextResponse.redirect(new URL("/", req.url));
 
   return I18nMiddleware(req);
 };
