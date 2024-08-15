@@ -5,13 +5,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { UserIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Image from "next/image";
+import defaultAvatar from "@/images/avatars/default.webp";
 
 type Props = {
   session: Session | null;
 };
 
 export const UserAvatar = ({ session, ...props }: Props) => {
-  const avatarUrl = session?.user?.image ?? "/images/avatars/default.webp";
+  const avatarUrl = session?.user?.image ?? defaultAvatar.src;
 
   const name = session?.user?.name ?? "User";
 

@@ -31,7 +31,7 @@ export const middleware = async (req: NextRequest) => {
       return NextResponse.redirect(new URL("/", req.url));
   }
 
-  return NextResponse.next(I18nMiddleware(req));
+  return I18nMiddleware(req);
 };
 
 export const config = {
