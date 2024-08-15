@@ -27,11 +27,11 @@ export const middleware = async (req: NextRequest) => {
     !isAuthorized &&
     localeProtectedRoutes.some((url) => req.nextUrl.pathname.startsWith(url))
   )
-    return NextResponse.redirect(new URL("/", req.url));
+    NextResponse.redirect(new URL("/", req.url));
 
   return I18nMiddleware(req);
 };
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)", {source: "/"}, {source: "/:locale"}],
 };
