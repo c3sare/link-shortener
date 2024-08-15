@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CopyInput } from "@/components/ui/copy-input";
-import { useI18n } from "@/locales/client";
+import { useTranslations } from "next-intl";
 import { RefreshCw } from "lucide-react";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const ReadyLinkInput = ({ url, clearUrl }: Props) => {
-  const t = useI18n();
+  const t = useTranslations();
   return (
     <div className="flex gap-2 items-end flex-wrap flex-col md:flex-row md:flex-nowrap">
       <CopyInput value={url} className="w-full" />

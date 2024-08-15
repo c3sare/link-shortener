@@ -1,8 +1,8 @@
-import { getI18n } from "@/locales/server";
+import { getTranslations } from "next-intl/server";
 import CreateLinkForm from "./create-link-form";
 
 export default async function Home() {
-  const t = await getI18n();
+  const t = await getTranslations();
 
   return (
     <div className="flex-1 mt-auto h-min flex items-center justify-center">
