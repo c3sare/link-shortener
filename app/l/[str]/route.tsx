@@ -8,27 +8,11 @@ import { type NextRequest } from "next/server";
 export const runtime = "edge";
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params: { str } }: { params: { str: string } }
 ) {
-  const item = await db.transaction(async (db) => {
-    const link = await db.query.links.findFirst({
-      where: eq(links.id, str),
-    });
-
-    if (!link) return null;
-
-    await db.insert(redirects).values({
-      linkId: link.id,
-      ip,
-      country,
-      city,
-      continent,
-      latitude,
-      timezone,
-    });
-
-    return link;
+  const item = await db.query.links.findFirst({
+    where: eq(links.id, str),
   });
 
   if (!item) return notFound();
@@ -39,6 +23,16 @@ export async function GET(
   const continent = headers().get("x-vercel-ip-continent");
   const latitude = headers().get("x-vercel-ip-latitude");
   const timezone = headers().get("x-vercel-ip-timezone");
+
+  await db.insert(redirects).values({
+    linkId: item.id,
+    ip,
+    country,
+    city,
+    continent,
+    latitude,
+    timezone,
+  });
 
   return redirect(item.url);
 }
