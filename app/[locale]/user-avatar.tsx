@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { UserIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Image from "next/image";
-import defaultAvatar from "@/images/avatars/default.webp";
+import defaultAvatar from "@/public/images/avatars/default.webp";
 
 type Props = {
   session: Session | null;
