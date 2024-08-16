@@ -37,9 +37,9 @@ export const LoginButton = async () => {
                     {t("hello", { name: session.user.name ?? "user" })}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href={`/profile`}>{t("your_links")}</Link>
-                  </DropdownMenuItem>
+                  <Link href={`/profile`}>
+                    <DropdownMenuItem>{t("your_links")}</DropdownMenuItem>
+                  </Link>
                   <DropdownMenuSeparator />
                   <DropdownMenuServerActionItem
                     className="flex items-center gap-4 w-full"
