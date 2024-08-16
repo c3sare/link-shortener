@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { GlobeIcon } from "lucide-react";
-import { useChangeLocale, useCurrentLocale, useI18n } from "@/locales/client";
+import { usePathname, useRouter } from "@/navigation";
 
 const locales = {
   pl: "Polski",
@@ -20,9 +21,10 @@ const locales = {
 const localeKeys = Object.keys(locales) as (keyof typeof locales)[];
 
 export const LangSwitch = () => {
-  const t = useI18n();
-  const currentLocale = useCurrentLocale();
-  const changeLocale = useChangeLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations();
+  const currentLocale = useLocale();
 
   return (
     <DropdownMenu>
@@ -38,7 +40,7 @@ export const LangSwitch = () => {
           <DropdownMenuCheckboxItem
             key={locale}
             checked={locale === currentLocale}
-            onClick={() => changeLocale(locale)}
+            onClick={() => router.push(pathname, { locale })}
           >
             {locales[locale]}
           </DropdownMenuCheckboxItem>

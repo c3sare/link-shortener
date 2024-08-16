@@ -14,7 +14,8 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import Image from "next/image";
 import vercelLogo from "@/public/images/vercel.svg";
 import { LangSwitch } from "@/components/lang-switch";
-import { I18nProviderClient } from "@/locales/client";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Link shortener",
@@ -37,6 +38,8 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
+  const messages = await getMessages();
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <head />
@@ -46,7 +49,7 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <I18nProviderClient locale={locale}>
+        <NextIntlClientProvider messages={messages}>
           <Core />
           <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
             <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">
@@ -108,7 +111,7 @@ export default async function RootLayout({
               </div>
             </div>
           </footer>
-        </I18nProviderClient>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

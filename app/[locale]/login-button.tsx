@@ -16,11 +16,11 @@ import Link from "next/link";
 import { UserAvatar } from "./user-avatar";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { signInWithGithub } from "@/actions/auth/signInWithGithub";
-import { getI18n } from "@/locales/server";
+import { getTranslations } from "next-intl/server";
 
 export const LoginButton = async () => {
   const session = await auth();
-  const t = await getI18n();
+  const t = await getTranslations();
 
   return (
     <DropdownMenu>

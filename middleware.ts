@@ -1,12 +1,17 @@
 import { auth } from "@/auth";
 import { NextRequest, NextResponse } from "next/server";
-import { createI18nMiddleware } from "next-international/middleware";
+import createMiddleware from "next-intl/middleware";
 
 const locales = ["en", "pl"];
 
-const I18nMiddleware = createI18nMiddleware({
+const I18nMiddleware = createMiddleware({
+  // A list of all locales that are supported
   locales,
+
+  // Used when no locale matches
   defaultLocale: "en",
+
+  localePrefix: "as-needed",
 });
 
 const protectedRoutes = ["/profile"];

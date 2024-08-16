@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip";
-import { useI18n } from "@/locales/client";
+import { useTranslations } from "next-intl";
 
 type Props = {
   value: string;
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const CopyInput = ({ value, className }: Props) => {
-  const t = useI18n();
+  const t = useTranslations();
   const [isVisibleTooltip, setIsVisibleTooltip] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
