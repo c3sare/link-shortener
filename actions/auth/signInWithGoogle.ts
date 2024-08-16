@@ -1,7 +1,12 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { getCurrentLocale } from "@/locales/server";
 
 export const signInWithGoogle = async () => {
-  await signIn("google");
+  const currentLocale = getCurrentLocale();
+
+  await signIn("google", {
+    redirectTo: `/${currentLocale}/`,
+  });
 };

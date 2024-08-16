@@ -1,7 +1,12 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { getCurrentLocale } from "@/locales/server";
 
 export const signInWithGithub = async () => {
-  await signIn("github");
+  const currentLocale = getCurrentLocale();
+
+  await signIn("github", {
+    redirectTo: `/${currentLocale}/`,
+  });
 };
