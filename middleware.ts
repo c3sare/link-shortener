@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createI18nMiddleware } from "next-international/middleware";
 
 const locales = ["en", "pl"];
@@ -18,8 +18,10 @@ const protectedRoutesWithLocale = [
   ),
 ];
 
-export default auth((req) => {
-  const isAuthorized = !!req.auth?.user;
+export async function middleware(req: NextRequest) {
+  const session = await auth();
+
+  const isAuthorized = !!session?.user;
 
   if (!isAuthorized) {
     if (
@@ -31,7 +33,7 @@ export default auth((req) => {
   }
 
   return I18nMiddleware(req);
-});
+}
 
 export const config = {
   matcher: ["/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)"],
