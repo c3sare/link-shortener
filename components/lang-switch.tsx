@@ -1,15 +1,16 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { GlobeIcon } from "lucide-react";
-import { DropdownMenuSetLocale } from "./dropdown-menu-set-locale";
-import { getUserLocale } from "@/actions/locale";
+import { useChangeLocale, useCurrentLocale, useI18n } from "@/locales/client";
 
 const locales = {
   pl: "Polski",
@@ -18,9 +19,10 @@ const locales = {
 
 const localeKeys = Object.keys(locales) as (keyof typeof locales)[];
 
-export const LangSwitch = async () => {
-  const currentLocale = await getUserLocale();
-  const t = await getTranslations();
+export const LangSwitch = () => {
+  const t = useI18n();
+  const currentLocale = useCurrentLocale();
+  const changeLocale = useChangeLocale();
 
   return (
     <DropdownMenu>
@@ -33,11 +35,13 @@ export const LangSwitch = async () => {
         <DropdownMenuLabel>{t("language")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {localeKeys.map((locale) => (
-          <DropdownMenuSetLocale
-            locale={locale}
-            currentLocale={currentLocale}
+          <DropdownMenuCheckboxItem
             key={locale}
-          />
+            checked={locale === currentLocale}
+            onClick={() => changeLocale(locale)}
+          >
+            {locales[locale]}
+          </DropdownMenuCheckboxItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>

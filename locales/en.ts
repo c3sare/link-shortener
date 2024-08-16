@@ -1,0 +1,22 @@
+export default {
+  hello: "Hello, {name}!",
+  logout: "Logout",
+  your_links: "Your links",
+  link_shortner: "Link Shortener",
+  index_title: "Shorten Your Links",
+  index_description:
+    "Easily shorten your long links and share them with your friends and colleagues.",
+  shortener_input_placeholder: "Enter your long URL",
+  shortener_form_submit: "Shorten",
+  create_link_button: "Create link",
+  create_new_link: "Create new short link",
+  coppied: "Coppied to clipboard!",
+  short_url: "Short URL",
+  orginal_url: "Original URL",
+  total_redirects: "Total redirects",
+  redirects_by_days: "Redirects by days",
+  sign_in_with: "Sign in with",
+  shortened_links: "Shortened links",
+  redirects: "Redirects",
+  language: "Language",
+} as const;

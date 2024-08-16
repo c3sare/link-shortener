@@ -8,14 +8,14 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import { useTranslations } from "next-intl";
+import { useI18n } from "@/locales/client";
 
 type Props = {
   redirects: (typeof schema.redirects.$inferSelect)[];
 };
 
 export const DateChart = ({ redirects }: Props) => {
-  const t = useTranslations();
+  const t = useI18n();
   const data = groupByDate(redirects);
 
   const chartConfig = {

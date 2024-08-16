@@ -7,12 +7,12 @@ import { useState, useTransition } from "react";
 import { addLink } from "@/actions/links/addLink";
 import { Input } from "@/components/ui/input";
 import { ReadyLinkInput } from "./ready-link-input";
-import { useTranslations } from "next-intl";
+import { useI18n } from "@/locales/client";
 
 const schema = z.object({ url: z.string().url() });
 
 const CreateLinkForm = () => {
-  const t = useTranslations();
+  const t = useI18n();
   const [isPending, startTransition] = useTransition();
   const [url, setUrl] = useState<string | null>(null);
   const { register, handleSubmit, setValue } = useForm({

@@ -7,10 +7,10 @@ import { getBaseUrl } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { DateChart } from "./date-chart";
-import { getTranslations } from "next-intl/server";
+import { getI18n } from "@/locales/server";
 
 export default async function ProfilePage() {
-  const t = await getTranslations();
+  const t = await getI18n();
   const items = await getUserLinks();
 
   const baseUrl = getBaseUrl();

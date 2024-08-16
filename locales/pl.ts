@@ -1,0 +1,22 @@
+export default {
+  hello: "Witaj, {name}!",
+  logout: "Wyloguj",
+  your_links: "Twoje odnośniki",
+  link_shortner: "Skracacz linków",
+  index_title: "Skróć swoje odnośniki",
+  index_description:
+    "Z łatwością skróć długie linki i udostępnij je znajomym i współpracownikom.",
+  shortener_input_placeholder: "Wprowadź adres do skrócenia",
+  shortener_form_submit: "Skróć",
+  create_link_button: "Stwórz odnośnik",
+  create_new_link: "Stwórz nowy odnośnik",
+  coppied: "Skopiowano do schowka!",
+  short_url: "Krótki adres URL",
+  orginal_url: "Oryginalny adres URL",
+  total_redirects: "Liczba przekierowań",
+  redirects_by_days: "Przekierowania według dni",
+  sign_in_with: "Zaloguj się za pomocą",
+  shortened_links: "Skrócone odnośniki",
+  redirects: "Przekierowań",
+  language: "Język",
+} as const;
