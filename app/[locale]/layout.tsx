@@ -4,7 +4,6 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Core } from "nextjs-darkmode";
 
-import Link from "next/link";
 import { ScissorsIcon } from "lucide-react";
 import { GithubIcon } from "@/components/icons/github-icon";
 import { Suspense } from "react";
@@ -16,6 +15,7 @@ import vercelLogo from "@/public/images/vercel.svg";
 import { LangSwitch } from "@/components/lang-switch";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { Link } from "@/navigation";
 
 export const metadata: Metadata = {
   title: "Link shortener",

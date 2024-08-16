@@ -5,9 +5,9 @@ import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
 import { getBaseUrl } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
-import Link from "next/link";
 import { DateChart } from "./date-chart";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/navigation";
 
 export default async function ProfilePage() {
   const t = await getTranslations();

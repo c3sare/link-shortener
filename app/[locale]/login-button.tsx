@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { LogOutIcon } from "lucide-react";
-import Link from "next/link";
 import { UserAvatar } from "./user-avatar";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { signInWithGithub } from "@/actions/auth/signInWithGithub";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/navigation";
 
 export const LoginButton = async () => {
   const session = await auth();
