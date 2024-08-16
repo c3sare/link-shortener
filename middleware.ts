@@ -7,7 +7,7 @@ const locales = ["en", "pl"];
 const I18nMiddleware = createI18nMiddleware({
   locales,
   defaultLocale: "en",
-  urlMappingStrategy: "rewriteDefault",
+  urlMappingStrategy: "rewrite",
 });
 
 const protectedRoutes = ["/profile"];
