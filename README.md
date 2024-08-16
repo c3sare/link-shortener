@@ -14,9 +14,11 @@
 - React-hook-form
 - Next-safe-actions
 - Zod
+- Next-international
 
 ## Features
 
+- Supported i18n (Polish, English)
 - Light/dark mode of website
 - Creating shorter links
 - Signing in with google, github
