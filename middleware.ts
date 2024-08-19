@@ -28,6 +28,9 @@ export async function middleware(req: NextRequest) {
 
   const isAuthorized = !!session?.user;
 
+if(req.nextUrl.pathname.startsWith('/l/'))
+return;
+
   if (!isAuthorized) {
     if (
       protectedRoutesWithLocale.some((url) =>
