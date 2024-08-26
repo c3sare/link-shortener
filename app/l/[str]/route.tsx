@@ -1,8 +1,8 @@
+import { registerRedirect } from "@/actions/links/register-redirect";
 import { db } from "@/drizzle";
-import { links, redirects } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
-import { headers } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "@/navigation";
+import { redirect as redirectNext } from "next/navigation";
+import { notFound } from "next/navigation";
 import { type NextRequest } from "next/server";
 
 export const runtime = "edge";
@@ -12,27 +12,14 @@ export async function GET(
   { params: { str } }: { params: { str: string } }
 ) {
   const item = await db.query.links.findFirst({
-    where: eq(links.id, str),
+    where: (links, { eq }) => eq(links.id, str),
   });
 
   if (!item) return notFound();
 
-  const ip = headers().get("x-forwarded-for");
-  const country = headers().get("x-vercel-ip-country");
-  const city = headers().get("x-vercel-ip-city");
-  const continent = headers().get("x-vercel-ip-continent");
-  const latitude = headers().get("x-vercel-ip-latitude");
-  const timezone = headers().get("x-vercel-ip-timezone");
+  if (item.passcode) return redirect(`/lp/${item.id}`);
 
-  await db.insert(redirects).values({
-    linkId: item.id,
-    ip,
-    country,
-    city,
-    continent,
-    latitude,
-    timezone,
-  });
+  await registerRedirect(item.id);
 
-  return redirect(item.url);
+  return redirectNext(item.url);
 }

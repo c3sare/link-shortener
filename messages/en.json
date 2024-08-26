@@ -18,5 +18,9 @@
   "shortened_links": "Shortened links",
   "redirects": "Redirects",
   "language": "Language",
-  "change_language": "Change language"
+  "change_language": "Change language",
+  "enter_passcode": "Enter passcode",
+  "passcode_description": "Enter the passcode to access the link",
+  "confirm": "Confirm",
+  "invalid_passcode": "Passcode is invalid!"
 }

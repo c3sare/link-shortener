@@ -18,5 +18,9 @@
   "shortened_links": "Skrócone odnośniki",
   "redirects": "Przekierowań",
   "language": "Język",
-  "change_language": "Zmień język"
+  "change_language": "Zmień język",
+  "enter_passcode": "Wprowadź kod dostępu",
+  "passcode_description": "Wprowadź kod dostępu, aby uzyskać dostęp do odnośnika",
+  "confirm": "Potwierdź",
+  "invalid_passcode": "Wprowadzony kod dostępu jest nieprawidłowy!"
 }

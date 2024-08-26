@@ -16,6 +16,7 @@ import { LangSwitch } from "@/components/lang-switch";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Link } from "@/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Link shortener",
@@ -50,6 +51,7 @@ export default async function RootLayout({
         )}
       >
         <NextIntlClientProvider messages={messages}>
+          <Toaster />
           <Core />
           <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
             <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">

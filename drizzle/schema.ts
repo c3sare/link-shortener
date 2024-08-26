@@ -70,6 +70,7 @@ export const links = pgTable("links", {
   id: text("id").notNull().primaryKey(),
   userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   url: text("url").notNull(),
+  passcode: text("passcode"),
   createdAt: timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
