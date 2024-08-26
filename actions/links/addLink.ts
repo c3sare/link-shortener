@@ -8,14 +8,16 @@ import { links } from "@/drizzle/schema";
 import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
+import bcrypt from "bcrypt-edge";
 
 export const addLink = action
   .schema(
     z.object({
       url: z.string().url(),
+      passcode: z.string().length(6).optional().nullable(),
     })
   )
-  .action(async ({ parsedInput: { url } }) => {
+  .action(async ({ parsedInput: { url, passcode } }) => {
     const session = await auth();
 
     const [{ count: linkCount }] = await db
@@ -26,6 +28,8 @@ export const addLink = action
 
     let searchMore = false;
 
+    const hashedPasscode = passcode ? bcrypt.hashSync(passcode, 10) : null;
+
     do {
       try {
         const item = await db
@@ -34,6 +38,7 @@ export const addLink = action
             id: nanoid(2 + spaces),
             url,
             userId: session?.user?.id ?? null,
+            passcode: hashedPasscode,
           })
           .returning();
 

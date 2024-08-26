@@ -22,5 +22,5 @@
   "enter_passcode": "Enter passcode",
   "passcode_description": "Enter the passcode to access the link",
   "confirm": "Confirm",
-  "invalid_passcode": "Passcode is invalid!"
+  "link_passcode": "Link passcode"
 }

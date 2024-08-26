@@ -22,5 +22,6 @@
   "enter_passcode": "Wprowadź kod dostępu",
   "passcode_description": "Wprowadź kod dostępu, aby uzyskać dostęp do odnośnika",
   "confirm": "Potwierdź",
-  "invalid_passcode": "Wprowadzony kod dostępu jest nieprawidłowy!"
+  "invalid_passcode": "Wprowadzony kod dostępu jest nieprawidłowy!",
+  "link_passcode": "Kod dostępu do odnośnika"
 }
