@@ -31,5 +31,7 @@
   "cancel": "Cancel",
   "continue": "Continue",
   "delete_link": "Delete link",
-  "sure_delete_link_description": "This action will delete this link from database. It cannot be undone."
+  "sure_delete_link_description": "This action will delete this link from database. It cannot be undone.",
+  "no_title": "No title...",
+  "no_description": "No description..."
 }

@@ -3,29 +3,34 @@
 import { z } from "zod";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
-import * as schema from "@/drizzle/schema";
+import * as s from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-export const deleteLinkPasscode = authAction
-  .schema(z.object({ linkId: z.string() }))
+export const updateTitleDesc = authAction
+  .schema(
+    z.object({
+      linkId: z.string(),
+      title: z.string().optional(),
+      description: z.string().optional(),
+    })
+  )
   .action(
     async ({
-      parsedInput: { linkId },
       ctx: {
         session: { id: userId },
       },
+      parsedInput: { linkId, title, description },
     }) => {
       const result = await db
-        .update(schema.links)
+        .update(s.links)
         .set({
-          passcode: null,
+          title: title === "" ? null : title,
+          description: description === "" ? null : description,
         })
-        .where(
-          and(eq(schema.links.id, linkId), eq(schema.links.userId, userId!))
-        );
+        .where(and(eq(s.links.id, linkId), eq(s.links.userId, userId!)));
 
-      if (result.rowCount !== 1)
+      if (result.rowCount === 0)
         return {
           success: false,
         };

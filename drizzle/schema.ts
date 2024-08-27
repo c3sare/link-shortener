@@ -71,6 +71,8 @@ export const links = pgTable("links", {
   userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   url: text("url").notNull(),
   passcode: text("passcode"),
+  title: text("title"),
+  description: text("description"),
   createdAt: timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),

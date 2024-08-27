@@ -38,6 +38,7 @@ export const addChangePasscode = authAction
           success: false,
         };
 
+      revalidatePath("/[locale]/profile", "page");
       revalidatePath("/profile");
 
       return {

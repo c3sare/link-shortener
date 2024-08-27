@@ -32,5 +32,7 @@
   "cancel": "Anuluj",
   "continue": "Kontynuuj",
   "delete_link": "Usuń odnośnik",
-  "sure_delete_link_description": "Ta akcja spowoduje usunięcie odnośnika z bazy danych. Nie można tego cofnąć."
+  "sure_delete_link_description": "Ta akcja spowoduje usunięcie odnośnika z bazy danych. Nie można tego cofnąć.",
+  "no_title": "Brak tytułu...",
+  "no_description": "Brak opisu..."
 }
