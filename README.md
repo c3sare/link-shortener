@@ -26,11 +26,11 @@
 - Adding created links to used account and deleting them
 - Created links list with statistics (with ip, redirect count, city, country, continent, time)
 - Adding link with pass code and managing it
+- Adding title and description for links
 
 ## Planned features
 
 - Adding labels for links
-- Adding title and description for links
 - Sorting links by create time (desc and asc)
 - Filtering links by label, title, description
 - Links pagination on "/profile" page

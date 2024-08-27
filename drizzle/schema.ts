@@ -81,6 +81,7 @@ export const links = pgTable("links", {
 export const linksRelations = relations(links, ({ many, one }) => ({
   redirects: many(redirects),
   user: one(users, { fields: [links.userId], references: [users.id] }),
+  labelLinks: many(labelsLinks),
 }));
 
 export const redirects = pgTable("redirects", {
@@ -98,6 +99,39 @@ export const redirects = pgTable("redirects", {
     .notNull()
     .default(sql`now()`),
 });
+
+export const labels = pgTable("labels", {
+  id: serial("id").notNull().primaryKey(),
+  label: text("label").notNull(),
+  color: text("color").notNull(),
+});
+
+export const labelsRelations = relations(labels, ({ many }) => ({
+  labelLinks: many(labelsLinks),
+}));
+
+export const labelsLinks = pgTable(
+  "labels_links",
+  {
+    linkId: text("link_id")
+      .notNull()
+      .references(() => links.id, { onDelete: "cascade" }),
+    labelId: integer("label_id")
+      .notNull()
+      .references(() => labels.id, { onDelete: "cascade" }),
+  },
+  (ll) => ({
+    compoundKey: primaryKey({ columns: [ll.linkId, ll.labelId] }),
+  })
+);
+
+export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
+  link: one(links, { fields: [labelsLinks.linkId], references: [links.id] }),
+  label: one(labels, {
+    fields: [labelsLinks.labelId],
+    references: [labels.id],
+  }),
+}));
 
 export const redirectsRelations = relations(redirects, ({ one }) => ({
   link: one(links, { fields: [redirects.linkId], references: [links.id] }),

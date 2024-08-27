@@ -13,6 +13,12 @@ export const getUserLinks = async () => {
     orderBy: (links, { desc }) => desc(links.createdAt),
     with: {
       redirects: true,
+      labelLinks: {
+        columns: {},
+        with: {
+          label: true,
+        },
+      },
     },
   });
 

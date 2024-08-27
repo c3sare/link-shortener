@@ -19,6 +19,7 @@ import { AddChangePasscodeForm } from "./add-change-passcode-form";
 import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DeleteLinkForm } from "./delete-link-form";
 import { TitleDescriptionForm } from "./title-description-form";
+import { Badge } from "@/components/ui/badge";
 
 export default async function ProfilePage() {
   const t = await getTranslations();
@@ -53,6 +54,15 @@ export default async function ProfilePage() {
               </CardHeader>
             </TitleDescriptionForm>
             <CardContent>
+              <div className="hover:bg-gray-100/10 cursor-pointer rounded-sm p-1 text-xs">
+                {item.labelLinks.length > 0
+                  ? item.labelLinks.map(({ label }) => (
+                      <Badge key={label.id} color={label.color}>
+                        {label.label}
+                      </Badge>
+                    ))
+                  : "No labels..."}
+              </div>
               <div className="flex p-4 w-full flex-col gap-4">
                 <div className="flex-1">
                   <Label className="flex-1">
