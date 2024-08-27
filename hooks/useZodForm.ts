@@ -1,8 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { Resolver, useForm } from "react-hook-form";
+import { useTransition } from "react";
+import {
+  Resolver,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { ZodSchema, z } from "zod";
 
 type PropsType<Z extends ZodSchema> = Omit<
@@ -16,17 +21,30 @@ export const useZodForm = <Z extends ZodSchema>({
   schema,
   ...props
 }: PropsType<Z>) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, startTransition] = useTransition();
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema) as Resolver<z.TypeOf<Z>, any>,
+    ...props,
+  });
 
   return {
-    ...useForm<z.infer<typeof schema>>({
-      resolver: zodResolver(schema) as Resolver<z.TypeOf<Z>, any>,
-      ...props,
-    }),
+    ...form,
     isLoading,
-    setIsLoading,
-    isError,
-    setIsError,
+    handleSubmit: (
+      onValid: SubmitHandler<z.TypeOf<Z>>,
+      onInvalid?: SubmitErrorHandler<z.TypeOf<Z>> | undefined
+    ) =>
+      form.handleSubmit(
+        (data) =>
+          startTransition(async () => {
+            onValid(data);
+          }),
+        onInvalid
+          ? (data) =>
+              startTransition(async () => {
+                onInvalid(data);
+              })
+          : undefined
+      ),
   };
 };

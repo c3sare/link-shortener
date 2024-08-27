@@ -29,7 +29,7 @@ export const PasscodeForm = ({ id }: Props) => {
 
   const onSubmit = form.handleSubmit(async (data) => {
     const response = await confirmLinkPasscode({
-      passcode: data.passcode,
+      ...data,
       id,
     });
 
@@ -49,6 +49,7 @@ export const PasscodeForm = ({ id }: Props) => {
       <Controller
         name="passcode"
         control={form.control}
+        disabled={form.isLoading}
         render={({ field }) => (
           <InputOTP maxLength={6} {...field}>
             <InputOTPGroup>
@@ -65,7 +66,9 @@ export const PasscodeForm = ({ id }: Props) => {
           </InputOTP>
         )}
       />
-      <Button type="submit">{t("confirm")}</Button>
+      <Button disabled={form.isLoading} type="submit">
+        {t("confirm")}
+      </Button>
     </form>
   );
 };

@@ -1,7 +1,6 @@
 import { registerRedirect } from "@/actions/links/register-redirect";
 import { db } from "@/drizzle";
-import { redirect } from "next/navigation";
-import { notFound } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 import { type NextRequest } from "next/server";
 
 export const runtime = "edge";

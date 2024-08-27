@@ -1,8 +1,7 @@
 "use client";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { addLink } from "@/actions/links/addLink";
 import { Input } from "@/components/ui/input";
 import { ReadyLinkInput } from "./ready-link-input";
@@ -32,30 +31,28 @@ const schema = z
 
 const CreateLinkForm = () => {
   const t = useTranslations();
-  const [isPending, startTransition] = useTransition();
   const [url, setUrl] = useState<string | null>(null);
-  const { register, handleSubmit, setValue, watch, control } = useZodForm({
-    schema,
-  });
+  const { register, handleSubmit, setValue, watch, control, isLoading } =
+    useZodForm({
+      schema,
+    });
 
   const isVisiblePasscode = watch("addPasscode");
 
   const onSubmit = handleSubmit(async (data) => {
-    startTransition(async () => {
-      const response = await addLink({
-        url: data.url,
-        passcode: data.addPasscode ? data.passcode : null,
-      });
-
-      const url = response?.data?.shorterUrl;
-
-      if (url) {
-        setValue("url", "");
-        setValue("addPasscode", false);
-        setValue("passcode", undefined);
-        setUrl(url);
-      }
+    const response = await addLink({
+      url: data.url,
+      passcode: data.addPasscode ? data.passcode : null,
     });
+
+    const url = response?.data?.shorterUrl;
+
+    if (url) {
+      setValue("url", "");
+      setValue("addPasscode", false);
+      setValue("passcode", undefined);
+      setUrl(url);
+    }
   });
 
   return url ? (
@@ -66,15 +63,16 @@ const CreateLinkForm = () => {
         <Input
           {...register("url")}
           placeholder={t("shortener_input_placeholder")}
-          disabled={isPending}
+          disabled={isLoading}
         />
-        <Button disabled={isPending} type="submit">
+        <Button disabled={isLoading} type="submit">
           {t("shortener_form_submit")}
         </Button>
       </div>
       <Label className="w-full flex items-center gap-2 justify-center">
         <Switch
           checked={isVisiblePasscode ?? false}
+          disabled={isLoading}
           onCheckedChange={(val) => setValue("addPasscode", val)}
         />
         {t("link_passcode")}
@@ -84,6 +82,7 @@ const CreateLinkForm = () => {
           <Controller
             name="passcode"
             control={control}
+            disabled={isLoading}
             render={({ field }) => (
               <InputOTP maxLength={6} {...field} className="max-w-sm mx-auto">
                 <InputOTPGroup>

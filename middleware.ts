@@ -1,14 +1,11 @@
 import { auth } from "@/auth";
 import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
-
-const locales = ["en", "pl"];
+import { locales } from "./i18n";
 
 const I18nMiddleware = createMiddleware({
-  // A list of all locales that are supported
   locales,
 
-  // Used when no locale matches
   defaultLocale: "en",
 
   localePrefix: "as-needed",
@@ -28,8 +25,7 @@ export async function middleware(req: NextRequest) {
 
   const isAuthorized = !!session?.user;
 
-if(req.nextUrl.pathname.startsWith('/l/'))
-return;
+  if (req.nextUrl.pathname.startsWith("/l/")) return;
 
   if (!isAuthorized) {
     if (

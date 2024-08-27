@@ -8,6 +8,9 @@ import { PlusIcon } from "lucide-react";
 import { DateChart } from "./date-chart";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
+import { AddChangePasscodeForm } from "./add-change-passcode-form";
+import { DeletePasscodeForm } from "./delete-passcode-form";
+import { DeleteLinkForm } from "./delete-link-form";
 
 export default async function ProfilePage() {
   const t = await getTranslations();
@@ -55,6 +58,14 @@ export default async function ProfilePage() {
                     {item.redirects.length}
                   </div>
                 </Label>
+              </div>
+              <div className="flex gap-2">
+                {!!item.passcode && <DeletePasscodeForm linkId={item.id} />}
+                <AddChangePasscodeForm
+                  linkId={item.id}
+                  havePasscode={!!item.passcode}
+                />
+                <DeleteLinkForm linkId={item.id} />
               </div>
             </div>
             <Card>

@@ -22,5 +22,14 @@
   "enter_passcode": "Enter passcode",
   "passcode_description": "Enter the passcode to access the link",
   "confirm": "Confirm",
-  "link_passcode": "Link passcode"
+  "link_passcode": "Link passcode",
+  "delete_passcode": "Delete passcode",
+  "add_passcode": "Add passcode",
+  "change_passcode": "Change passcode",
+  "sure_delete": "Are you absolutly sure?",
+  "sure_delete_description": "This action will remove passcode from this link.",
+  "cancel": "Cancel",
+  "continue": "Continue",
+  "delete_link": "Delete link",
+  "sure_delete_link_description": "This action will delete this link from database. It cannot be undone."
 }

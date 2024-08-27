@@ -23,5 +23,14 @@
   "passcode_description": "Wprowadź kod dostępu, aby uzyskać dostęp do odnośnika",
   "confirm": "Potwierdź",
   "invalid_passcode": "Wprowadzony kod dostępu jest nieprawidłowy!",
-  "link_passcode": "Kod dostępu do odnośnika"
+  "link_passcode": "Kod dostępu do odnośnika",
+  "delete_passcode": "Usuń kod dostępu",
+  "add_passcode": "Dodaj kod dostępu",
+  "change_passcode": "Zmień kod dostępu",
+  "sure_delete": "Czy jesteś pewien?",
+  "sure_delete_description": "Ta akcja spowoduje zniesienie kodu dostępu z tego odnośnika.",
+  "cancel": "Anuluj",
+  "continue": "Kontynuuj",
+  "delete_link": "Usuń odnośnik",
+  "sure_delete_link_description": "Ta akcja spowoduje usunięcie odnośnika z bazy danych. Nie można tego cofnąć."
 }

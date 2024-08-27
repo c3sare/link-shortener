@@ -17,7 +17,7 @@ export default async function PasscodeLinkPage({ params: { str } }: Props) {
       and(eq(links.id, str), isNotNull(links.passcode)),
   });
 
-  // if (!link) return notFound();
+  if (!link) return notFound();
 
   return (
     <div className="h-full flex-1 w-full flex items-center justify-center">
