@@ -22,6 +22,11 @@ export const users = pgTable("user", {
     .default(sql`now()`),
 });
 
+export const usersRelations = relations(users, ({ many }) => ({
+  labels: many(labels),
+  links: many(links),
+}));
+
 export const accounts = pgTable(
   "account",
   {
@@ -43,7 +48,7 @@ export const accounts = pgTable(
     compoundKey: primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  })
+  }),
 );
 
 export const sessions = pgTable("session", {
@@ -63,7 +68,7 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  }),
 );
 
 export const links = pgTable("links", {
@@ -103,7 +108,9 @@ export const redirects = pgTable("redirects", {
 export const labels = pgTable("labels", {
   id: serial("id").notNull().primaryKey(),
   label: text("label").notNull(),
-  color: text("color").notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const labelsRelations = relations(labels, ({ many }) => ({
@@ -122,7 +129,7 @@ export const labelsLinks = pgTable(
   },
   (ll) => ({
     compoundKey: primaryKey({ columns: [ll.linkId, ll.labelId] }),
-  })
+  }),
 );
 
 export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({

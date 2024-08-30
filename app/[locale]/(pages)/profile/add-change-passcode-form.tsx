@@ -55,7 +55,7 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
       }}
     >
       <DialogTrigger asChild>
-        <Button>
+        <Button className="w-full">
           {havePasscode ? t("change_passcode") : t("add_passcode")}
         </Button>
       </DialogTrigger>

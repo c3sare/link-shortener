@@ -36,7 +36,9 @@ export const DeleteLinkForm = ({ linkId }: Props) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">{t("delete_link")}</Button>
+        <Button className="w-full" variant="destructive">
+          {t("delete_link")}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

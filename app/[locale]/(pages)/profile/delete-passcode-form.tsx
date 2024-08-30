@@ -36,7 +36,7 @@ export const DeletePasscodeForm = ({ linkId }: Props) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button>{t("delete_passcode")}</Button>
+        <Button className="w-full">{t("delete_passcode")}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

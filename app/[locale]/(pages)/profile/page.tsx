@@ -20,10 +20,15 @@ import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DeleteLinkForm } from "./delete-link-form";
 import { TitleDescriptionForm } from "./title-description-form";
 import { Badge } from "@/components/ui/badge";
+import { PageFilters } from "./page-filters";
+import { getUserLabels } from "@/actions/links/getUserLabels";
 
 export default async function ProfilePage() {
-  const t = await getTranslations();
-  const items = await getUserLinks();
+  const [t, labels, items] = await Promise.all([
+    getTranslations(),
+    getUserLabels(),
+    getUserLinks(),
+  ]);
 
   const baseUrl = getBaseUrl();
 
@@ -38,6 +43,7 @@ export default async function ProfilePage() {
           </Link>
         </Button>
       </div>
+      <PageFilters labels={labels} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mx-auto w-full">
         {items.map((item) => (
           <Card key={item.id} className="overflow-hidden w-full">
@@ -90,13 +96,13 @@ export default async function ProfilePage() {
               </div>
               <DateChart redirects={item.redirects} />
             </CardContent>
-            <CardFooter className="gap-2 justify-between">
-              {!!item.passcode && <DeletePasscodeForm linkId={item.id} />}
+            <CardFooter className="gap-2 justify-between flex-col">
+              <DeleteLinkForm linkId={item.id} />
               <AddChangePasscodeForm
                 linkId={item.id}
                 havePasscode={!!item.passcode}
               />
-              <DeleteLinkForm linkId={item.id} />
+              {!!item.passcode && <DeletePasscodeForm linkId={item.id} />}
             </CardFooter>
           </Card>
         ))}
