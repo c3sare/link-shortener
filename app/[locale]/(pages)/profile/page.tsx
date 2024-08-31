@@ -63,9 +63,7 @@ export default async function ProfilePage() {
               <div className="hover:bg-gray-100/10 cursor-pointer rounded-sm p-1 text-xs">
                 {item.labelLinks.length > 0
                   ? item.labelLinks.map(({ label }) => (
-                      <Badge key={label.id} color={label.color}>
-                        {label.label}
-                      </Badge>
+                      <Badge key={label.id}>{label.label}</Badge>
                     ))
                   : "No labels..."}
               </div>
