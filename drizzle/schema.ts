@@ -48,7 +48,7 @@ export const accounts = pgTable(
     compoundKey: primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  }),
+  })
 );
 
 export const sessions = pgTable("session", {
@@ -68,7 +68,7 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  }),
+  })
 );
 
 export const links = pgTable("links", {
@@ -113,8 +113,9 @@ export const labels = pgTable("labels", {
     .references(() => users.id, { onDelete: "cascade" }),
 });
 
-export const labelsRelations = relations(labels, ({ many }) => ({
+export const labelsRelations = relations(labels, ({ many, one }) => ({
   labelLinks: many(labelsLinks),
+  user: one(users, { fields: [labels.userId], references: [users.id] }),
 }));
 
 export const labelsLinks = pgTable(
@@ -129,7 +130,7 @@ export const labelsLinks = pgTable(
   },
   (ll) => ({
     compoundKey: primaryKey({ columns: [ll.linkId, ll.labelId] }),
-  }),
+  })
 );
 
 export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
