@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { PasscodeForm } from "./passcode-form";
 
 type Props = {
-  params: {
+  params: Promise<{
     str: string;
-  };
+  }>;
 };
 
-export default async function PasscodeLinkPage({ params: { str } }: Props) {
+export default async function PasscodeLinkPage({ params }: Props) {
+  const { str } = await params;
   const link = await db.query.links.findFirst({
     columns: {
       id: true,

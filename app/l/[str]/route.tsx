@@ -7,8 +7,10 @@ export const runtime = "edge";
 
 export async function GET(
   req: NextRequest,
-  { params: { str } }: { params: { str: string } }
+  { params }: { params: Promise<{ str: string }> }
 ) {
+  const { str } = await params;
+
   const item = await db.query.links.findFirst({
     where: (links, { eq }) => eq(links.id, str),
   });
