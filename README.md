@@ -7,7 +7,7 @@
 ## Created using these technologies.
 
 - TypeScript
-- Next.js 14
+- Next.js 15
 - Next-auth v5
 - Drizzle ORM
 - TailwindCSS
