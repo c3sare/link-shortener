@@ -44,11 +44,11 @@ export const accounts = pgTable(
     id_token: text("id_token"),
     session_state: text("session_state"),
   },
-  (account) => ({
-    compoundKey: primaryKey({
+  (account) => [
+    primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  })
+  ]
 );
 
 export const sessions = pgTable("session", {
@@ -66,9 +66,7 @@ export const verificationTokens = pgTable(
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  (vt) => ({
-    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  (vt) => [primaryKey({ columns: [vt.identifier, vt.token] })]
 );
 
 export const links = pgTable("links", {
@@ -128,9 +126,7 @@ export const labelsLinks = pgTable(
       .notNull()
       .references(() => labels.id, { onDelete: "cascade" }),
   },
-  (ll) => ({
-    compoundKey: primaryKey({ columns: [ll.linkId, ll.labelId] }),
-  })
+  (ll) => [primaryKey({ columns: [ll.linkId, ll.labelId] })]
 );
 
 export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
