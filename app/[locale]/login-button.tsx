@@ -2,21 +2,40 @@ import { signInWithGoogle } from "@/actions/auth/signInWithGoogle";
 import { signOut } from "@/actions/auth/signOut";
 import { auth } from "@/auth";
 import { DropdownMenuServerActionItem } from "@/components/dropdown-menu-server-action-item";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import dynamic from "next/dynamic";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { LogOutIcon } from "lucide-react";
-import { UserAvatar } from "./user-avatar";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { signInWithGithub } from "@/actions/auth/signInWithGithub";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
+import { UserAvatar } from "./user-avatar";
+
+const DropdownMenu = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenu)
+);
+
+const DropdownMenuContent = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuContent)
+);
+
+const DropdownMenuItem = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuItem)
+);
+
+const DropdownMenuLabel = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuLabel)
+);
+
+const DropdownMenuSeparator = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then(
+    (mod) => mod.DropdownMenuSeparator
+  )
+);
+
+const DropdownMenuTrigger = dynamic(() =>
+  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuTrigger)
+);
 
 export const LoginButton = async () => {
   const session = await auth();

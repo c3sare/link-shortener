@@ -1,13 +1,10 @@
 "use client";
 
-import { lazy, Suspense } from "react";
 import { CreateLinkFormSkeleton } from "./create-link-form-skeleton";
-const CreateLinkForm = lazy(() => import("./create-link-form"));
+import dynamic from "next/dynamic";
+const CreateLinkForm = dynamic(() => import("./create-link-form"), {
+  ssr: false,
+  loading: () => <CreateLinkFormSkeleton />,
+});
 
-export const CreateLinkFormWrapper = () => {
-  return (
-    <Suspense fallback={<CreateLinkFormSkeleton />}>
-      <CreateLinkForm />
-    </Suspense>
-  );
-};
+export const CreateLinkFormWrapper = () => <CreateLinkForm />;
