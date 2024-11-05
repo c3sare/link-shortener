@@ -1,5 +1,5 @@
-import CreateLinkForm from "./create-link-form";
 import { useTranslations } from "next-intl";
+import { CreateLinkFormWrapper } from "./create-link-form-wrapper";
 
 export default function Home() {
   const t = useTranslations();
@@ -18,7 +18,7 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full max-w-md space-y-2">
-              <CreateLinkForm />
+              <CreateLinkFormWrapper />
             </div>
           </div>
         </div>
