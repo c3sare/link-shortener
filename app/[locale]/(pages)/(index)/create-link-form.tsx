@@ -64,7 +64,7 @@ const CreateLinkForm = () => {
           placeholder={t("shortener_input_placeholder")}
           disabled={isLoading}
         />
-        <Button disabled={isLoading} type="submit">
+        <Button disabled={isLoading} type="submit" className="w-full sm:w-20">
           {t("shortener_form_submit")}
         </Button>
       </div>
