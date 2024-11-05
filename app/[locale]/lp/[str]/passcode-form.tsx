@@ -7,7 +7,6 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useToast } from "@/components/ui/use-toast";
 import { useZodForm } from "@/hooks/useZodForm";
 import { useTranslations } from "next-intl";
 import { Controller } from "react-hook-form";
@@ -19,7 +18,6 @@ type Props = {
 };
 
 export const PasscodeForm = ({ id }: Props) => {
-  const { toast } = useToast();
   const t = useTranslations();
   const form = useZodForm({
     schema: z.object({
@@ -33,11 +31,11 @@ export const PasscodeForm = ({ id }: Props) => {
       id,
     });
 
-    if (response?.data?.isValid === false)
-      return toast({
-        title: t("invalid_passcode"),
-        variant: "destructive",
-      });
+    if (response?.data?.isValid === false) {
+      const toast = await import("sonner").then((mod) => mod.toast);
+
+      return toast.error(t("invalid_passcode"));
+    }
   });
 
   return (

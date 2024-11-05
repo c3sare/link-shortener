@@ -1,11 +1,26 @@
+"use client";
+
 /* eslint-disable jsx-a11y/alt-text */
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Image from "next/image";
 import defaultAvatar from "@/public/images/avatars/default.webp";
+import dynamic from "next/dynamic";
+
+const Avatar = dynamic(
+  () => import("@/components/ui/avatar").then((mod) => mod.Avatar),
+  { ssr: false }
+);
+const AvatarFallback = dynamic(
+  () => import("@/components/ui/avatar").then((mod) => mod.AvatarFallback),
+  { ssr: false }
+);
+const AvatarImage = dynamic(
+  () => import("@/components/ui/avatar").then((mod) => mod.AvatarImage),
+  { ssr: false }
+);
 
 type Props = {
   session: Session | null;

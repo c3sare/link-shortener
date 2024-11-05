@@ -21,10 +21,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // experimental: {
-  //   reactCompiler: true,
-  //   ppr: "incremental",
-  // },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "recharts"],
+    //   reactCompiler: true,
+    //   ppr: "incremental",
+  },
 };
 
 export default withBundleAnalyzer(withNextIntl(nextConfig));

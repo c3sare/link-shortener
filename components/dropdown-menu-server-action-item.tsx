@@ -1,8 +1,10 @@
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
-const DropdownMenuItem = dynamic(() =>
-  import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuItem)
+const DropdownMenuItem = dynamic(
+  () =>
+    import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuItem),
+  { loading: () => null }
 );
 
 type Props = React.DetailedHTMLProps<

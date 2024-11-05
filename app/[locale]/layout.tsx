@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 
 import { Inter as FontSans } from "next/font/google";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense } from "react";
 import { getMessages } from "next-intl/server";
@@ -21,17 +20,8 @@ import { Link } from "@/navigation";
 import { LoginButton } from "./login-button";
 import { ThemeSwitchWrapper } from "@/components/theme-switch-wrapper";
 import { LangSwitchWrapper } from "@/components/lang-switch-wrapper";
-
-const Toaster = dynamic(
-  () => import("@/components/ui/toaster").then((mod) => mod.Toaster),
-  {
-    loading: () => null,
-  }
-);
-
-const Core = dynamic(() => import("nextjs-darkmode").then((mod) => mod.Core), {
-  loading: () => null,
-});
+import { DynamicToaster } from "./dynamic-toaster";
+import { DynamicCore } from "./dynamic-core";
 
 export const metadata: Metadata = {
   title: "Link shortener",
@@ -67,8 +57,8 @@ export default async function RootLayout({
         )}
       >
         <NextIntlClientProvider messages={messages}>
-          <Toaster />
-          <Core />
+          <DynamicToaster />
+          <DynamicCore />
           <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
             <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">
               <div>
