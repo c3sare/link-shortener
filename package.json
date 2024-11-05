@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.7.2",
+    "@auth/drizzle-adapter": "^1.7.3",
     "@hookform/resolvers": "^3.9.1",
     "@neondatabase/serverless": "^0.10.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -27,9 +27,9 @@
     "bcrypt-edge": "^0.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cmdk": "^1.0.1",
+    "cmdk": "^1.0.4",
     "drizzle-orm": "^0.36.0",
-    "input-otp": "^1.2.5",
+    "input-otp": "^1.4.1",
     "lucide-react": "^0.454.0",
     "nanoid": "^5.0.8",
     "next": "^15.0.2",
@@ -40,20 +40,20 @@
     "react": "^19.0.0-rc-fb9a90fa48-20240614",
     "react-dom": "^19.0.0-rc-fb9a90fa48-20240614",
     "react-hook-form": "^7.53.1",
-    "react-is": "^18.3.1",
-    "recharts": "^2.13.2",
+    "react-is": "^19.0.0-rc-4d577fd2-20241104",
+    "recharts": "^2.13.3",
     "sharp": "0.32.6",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^22.8.6",
+    "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.27.0",
-    "eslint": "^9.13.0",
+    "drizzle-kit": "^0.27.1",
+    "eslint": "^9.14.0",
     "eslint-config-next": "^15.0.2",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
@@ -65,6 +65,6 @@
     "sharp"
   ],
   "overrides": {
-    "react-is": "$react-is"
+    "react-is": "^19.0.0-rc-4d577fd2-20241104"
   }
 }
