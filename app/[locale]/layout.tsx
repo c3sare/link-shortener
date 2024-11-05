@@ -1,22 +1,37 @@
-import type { Metadata } from "next";
 import "./globals.css";
+
+import type { Metadata } from "next";
+
 import { Inter as FontSans } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { Core } from "nextjs-darkmode";
+
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { Suspense } from "react";
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 import { ScissorsIcon } from "lucide-react";
-import { GithubIcon } from "@/components/icons/github-icon";
-import { Suspense } from "react";
-import { LoginButton } from "./login-button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ThemeSwitch } from "@/components/theme-switch";
-import Image from "next/image";
 import vercelLogo from "@/public/images/vercel.svg";
-import { LangSwitch } from "@/components/lang-switch";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { GithubIcon } from "@/components/icons/github-icon";
+
+import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/navigation";
-import { Toaster } from "@/components/ui/toaster";
+
+import { LoginButton } from "./login-button";
+import { ThemeSwitchWrapper } from "@/components/theme-switch-wrapper";
+import { LangSwitchWrapper } from "@/components/lang-switch-wrapper";
+
+const Toaster = dynamic(
+  () => import("@/components/ui/toaster").then((mod) => mod.Toaster),
+  {
+    loading: () => null,
+  }
+);
+
+const Core = dynamic(() => import("nextjs-darkmode").then((mod) => mod.Core), {
+  loading: () => null,
+});
 
 export const metadata: Metadata = {
   title: "Link shortener",
@@ -107,10 +122,8 @@ export default async function RootLayout({
                   <GithubIcon className="dark:invert" width={32} height={32} />
                   <span className="sr-only">Github</span>
                 </a>
-                <ThemeSwitch />
-                <Suspense>
-                  <LangSwitch />
-                </Suspense>
+                <ThemeSwitchWrapper />
+                <LangSwitchWrapper />
               </div>
             </div>
           </footer>

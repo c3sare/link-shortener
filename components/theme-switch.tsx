@@ -2,13 +2,7 @@
 
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useMode } from "nextjs-darkmode/hooks";
-import dynamic from "next/dynamic";
-import { Skeleton } from "./ui/skeleton";
-
-const ThemeSwitchButton = dynamic(() => import("./theme-switch-button"), {
-  ssr: false,
-  loading: () => <Skeleton className="size-10 rounded-none" />,
-});
+import ThemeSwitchButton from "./theme-switch-button";
 
 export function ThemeSwitch() {
   const { mode, setMode } = useMode();
