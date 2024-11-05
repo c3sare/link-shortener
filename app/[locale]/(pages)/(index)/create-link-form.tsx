@@ -73,6 +73,7 @@ const CreateLinkForm = () => {
           checked={isVisiblePasscode ?? false}
           disabled={isLoading}
           onCheckedChange={(val) => setValue("addPasscode", val)}
+          aria-label="Add passcode"
         />
         {t("link_passcode")}
       </Label>
