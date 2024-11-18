@@ -9,6 +9,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  output: process.env.STANDALONE ? "standalone" : undefined,
   images: {
     remotePatterns: [
       {
