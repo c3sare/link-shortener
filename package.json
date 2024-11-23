@@ -29,7 +29,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
-    "drizzle-orm": "^0.36.3",
+    "drizzle-orm": "^0.36.4",
     "input-otp": "^1.4.1",
     "lucide-react": "^0.460.0",
     "nanoid": "^5.0.8",
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.0.3",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "dotenv": "^16.4.5",
@@ -61,7 +61,7 @@
     "eslint-config-next": "^15.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "trustedDependencies": [
     "es5-ext",
@@ -69,6 +69,6 @@
     "sharp"
   ],
   "overrides": {
-    "react-is": "^19.0.0-rc-4d577fd2-20241104"
+    "react-is": "^19.0.0-rc-fb9a90fa48-20240614"
   }
 }
