@@ -20,7 +20,7 @@ export default function ThemeSwitchButton({
       onClick={() => setMode(mode)}
       className={cn(
         "size-10 rounded-full flex items-center justify-center",
-        currentMode === mode ? "bg-muted" : ""
+        currentMode === mode ? "bg-border border" : ""
       )}
     >
       {children}
