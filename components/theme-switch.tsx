@@ -1,34 +1,34 @@
 "use client";
 
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
-import { useMode } from "nextjs-darkmode/hooks";
+import { useTheme } from "next-themes";
 import ThemeSwitchButton from "./theme-switch-button";
 
 export function ThemeSwitch() {
-  const { mode, setMode } = useMode();
+  const { setTheme, theme } = useTheme()
 
   return (
     <div className="rounded-3xl border flex items-center overflow-hidden">
       <ThemeSwitchButton
-        currentMode={mode}
-        mode=""
-        setMode={setMode}
+        currentMode={theme}
+        mode="light"
+        setMode={setTheme}
         name="Light theme"
       >
         <SunIcon />
       </ThemeSwitchButton>
       <ThemeSwitchButton
-        currentMode={mode}
+        currentMode={theme}
         mode="system"
-        setMode={setMode}
+        setMode={setTheme}
         name="System theme"
       >
         <MonitorIcon />
       </ThemeSwitchButton>
       <ThemeSwitchButton
-        currentMode={mode}
+        currentMode={theme}
         mode="dark"
-        setMode={setMode}
+        setMode={setTheme}
         name="Dark theme"
       >
         <MoonIcon />

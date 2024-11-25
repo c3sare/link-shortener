@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
-import { ColorSchemePreference } from "nextjs-darkmode";
 
 type Props = {
-  currentMode: ColorSchemePreference;
-  mode: ColorSchemePreference;
-  setMode: (mode: ColorSchemePreference) => void;
+  currentMode?: string;
+  mode: string;
+  setMode: (mode: string) => void;
   children: React.ReactNode;
   name: string;
 };

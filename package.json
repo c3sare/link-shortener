@@ -38,7 +38,6 @@
     "next-intl": "^3.25.1",
     "next-safe-action": "^7.9.9",
     "next-themes": "^0.4.3",
-    "nextjs-darkmode": "^1.0.4",
     "react": "^19.0.0-beta-26f2496093-20240514",
     "react-dom": "^19.0.0-beta-26f2496093-20240514",
     "react-hook-form": "^7.53.2",

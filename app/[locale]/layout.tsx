@@ -21,7 +21,7 @@ import { LoginButton } from "./login-button";
 import { ThemeSwitchWrapper } from "@/components/theme-switch-wrapper";
 import { LangSwitchWrapper } from "@/components/lang-switch-wrapper";
 import { DynamicToaster } from "./dynamic-toaster";
-import { Core } from "nextjs-darkmode";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Link shortener",
@@ -56,9 +56,14 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
         <NextIntlClientProvider messages={messages}>
           <DynamicToaster />
-          <Core />
           <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
             <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">
               <div>
@@ -118,6 +123,7 @@ export default async function RootLayout({
             </div>
           </footer>
         </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
