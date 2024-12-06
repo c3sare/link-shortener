@@ -18,7 +18,7 @@ import { useState } from "react";
 import { z } from "zod";
 
 type Props = {
-  children: JSX.Element;
+  children: React.ReactNode;
   title: string | null;
   description: string | null;
   linkId: string;
