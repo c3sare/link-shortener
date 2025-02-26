@@ -82,7 +82,7 @@ interface MultipleSelectorProps {
   >;
   /** hide the clear all button. */
   hideClearAllButton?: boolean;
-  ref?: React.Ref<any>;
+  ref?: React.Ref<unknown>;
 }
 
 export interface MultipleSelectorRef {
@@ -510,7 +510,9 @@ const MultipleSelector = ({
             }}
             onFocus={(event) => {
               setOpen(true);
-              triggerSearchOnFocus && onSearch?.(debouncedSearchTerm);
+
+              if (triggerSearchOnFocus) onSearch?.(debouncedSearchTerm);
+
               inputProps?.onFocus?.(event);
             }}
             placeholder={

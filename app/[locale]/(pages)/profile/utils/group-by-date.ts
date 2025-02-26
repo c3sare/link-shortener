@@ -4,8 +4,8 @@ type Item<T> = T & {
   createdAt: Date;
 };
 
-export const groupByDate = <T extends unknown>(arr: Item<T>[]) => {
-  let obj: Record<string, { redirects: number }> = {};
+export const groupByDate = <T>(arr: Item<T>[]) => {
+  const obj: Record<string, { redirects: number }> = {};
 
   arr.forEach((item) => {
     const date = item.createdAt.toISOString().split("T")[0];
@@ -44,7 +44,7 @@ export const chartDateConfig = (data: ReturnType<typeof groupByDate>) => {
     "#45B39D",
   ];
 
-  let newData: Record<
+  const newData: Record<
     string,
     {
       label: string;

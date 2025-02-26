@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import MultipleSelector from "@/components/ui/multiple-selector";
-import { SettingsIcon, TrashIcon } from "lucide-react";
+import { SettingsIcon } from "lucide-react";
 import type { getUserLabels } from "@/actions/links/getUserLabels";
 import {
   Dialog,
