@@ -1,6 +1,6 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useTransition } from "react";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as v from "valibot";
 
 type PropsType<Z extends Parameters<typeof valibotResolver>[0]> = Omit<
@@ -24,17 +24,17 @@ export const useZodForm = <Z extends Parameters<typeof valibotResolver>[0]>({
     ...form,
     isLoading,
     handleSubmit: (
-      onValid: SubmitHandler<v.InferInput<Z>>,
-      onInvalid?: SubmitErrorHandler<v.InferInput<Z>> | undefined
+      onValid: Parameters<typeof form.handleSubmit>[0],
+      onInvalid?: Parameters<typeof form.handleSubmit>[1]
     ) =>
       form.handleSubmit(
         (data) =>
-          startTransition(async () => {
+          startTransition(() => {
             onValid(data);
           }),
         onInvalid
           ? (data) =>
-              startTransition(async () => {
+              startTransition(() => {
                 onInvalid(data);
               })
           : undefined
