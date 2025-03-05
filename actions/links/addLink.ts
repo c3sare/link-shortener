@@ -1,6 +1,5 @@
 "use server";
 
-import { z } from "zod";
 import { action } from "../safe-action";
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
@@ -9,12 +8,13 @@ import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
 import bcrypt from "bcrypt-edge";
+import * as v from "valibot";
 
 export const addLink = action
   .schema(
-    z.object({
-      url: z.string().url(),
-      passcode: z.string().length(6).optional().nullable(),
+    v.object({
+      url: v.pipe(v.string(), v.url()),
+      passcode: v.nullable(v.optional(v.pipe(v.string(), v.length(6)))),
     })
   )
   .action(async ({ parsedInput: { url, passcode } }) => {

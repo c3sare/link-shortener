@@ -1,13 +1,13 @@
 import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useZodForm } from "@/hooks/useZodForm";
-import { z } from "zod";
+import { useValibotForm } from "@/hooks/useValibotForm";
+import * as v from "valibot";
 
 export const AddLabelForm = () => {
-  const form = useZodForm({
-    schema: z.object({
-      label: z.string().min(1),
+  const form = useValibotForm({
+    schema: v.object({
+      label: v.pipe(v.string(), v.minLength(1)),
     }),
     defaultValues: {
       label: "",

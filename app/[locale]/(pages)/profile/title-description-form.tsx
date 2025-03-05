@@ -13,9 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useZodForm } from "@/hooks/useZodForm";
+import { useValibotForm } from "@/hooks/useValibotForm";
 import { useState } from "react";
-import { z } from "zod";
+import * as v from "valibot";
 
 type Props = {
   children: React.ReactNode;
@@ -31,10 +31,10 @@ export const TitleDescriptionForm = ({
   linkId,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
-  const form = useZodForm({
-    schema: z.object({
-      title: z.string().optional(),
-      description: z.string().optional(),
+  const form = useValibotForm({
+    schema: v.object({
+      title: v.optional(v.string()),
+      description: v.optional(v.string()),
     }),
     defaultValues: {
       title: title ?? "",

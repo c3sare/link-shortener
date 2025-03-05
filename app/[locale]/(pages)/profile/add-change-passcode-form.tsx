@@ -16,11 +16,11 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useZodForm } from "@/hooks/useZodForm";
+import { useValibotForm } from "@/hooks/useValibotForm";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { z } from "zod";
+import * as v from "valibot";
 
 type Props = {
   havePasscode: boolean;
@@ -30,9 +30,9 @@ type Props = {
 export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
   const [open, setIsOpen] = useState(false);
   const t = useTranslations();
-  const form = useZodForm({
-    schema: z.object({
-      passcode: z.string().length(6),
+  const form = useValibotForm({
+    schema: v.object({
+      passcode: v.pipe(v.string(), v.length(6)),
     }),
   });
 

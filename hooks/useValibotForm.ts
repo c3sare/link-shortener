@@ -10,7 +10,9 @@ type PropsType<Z extends Parameters<typeof valibotResolver>[0]> = Omit<
   schema: Z;
 };
 
-export const useZodForm = <Z extends Parameters<typeof valibotResolver>[0]>({
+export const useValibotForm = <
+  Z extends Parameters<typeof valibotResolver>[0]
+>({
   schema,
   ...props
 }: PropsType<Z>) => {

@@ -1,6 +1,6 @@
 "use server";
 
-import { z } from "zod";
+import * as v from "valibot";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as schema from "@/drizzle/schema";
@@ -8,7 +8,7 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const deleteLink = authAction
-  .schema(z.object({ linkId: z.string() }))
+  .schema(v.object({ linkId: v.string() }))
   .action(
     async ({
       parsedInput: { linkId },

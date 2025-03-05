@@ -7,11 +7,11 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useZodForm } from "@/hooks/useZodForm";
 import { useTranslations } from "next-intl";
 import { Controller } from "react-hook-form";
-import { z } from "zod";
+import * as v from "valibot";
 import { confirmLinkPasscode } from "@/actions/links/confirmLinkPasscode";
+import { useValibotForm } from "@/hooks/useValibotForm";
 
 type Props = {
   id: string;
@@ -19,9 +19,9 @@ type Props = {
 
 export const PasscodeForm = ({ id }: Props) => {
   const t = useTranslations();
-  const form = useZodForm({
-    schema: z.object({
-      passcode: z.string().length(6),
+  const form = useValibotForm({
+    schema: v.object({
+      passcode: v.pipe(v.string(), v.length(6)),
     }),
   });
 

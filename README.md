@@ -14,7 +14,7 @@
 - Shadcn/ui
 - React-hook-form
 - Next-safe-actions
-- Zod
+- Valibot
 - Next-intl
 
 ## Features
