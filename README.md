@@ -4,6 +4,11 @@
 
 ![Application Logo](https://github.com/c3sare/link-shortener/assets/80517943/826cc31e-8128-480a-bfc3-c5b3b4f2edee)
 
+![Desktop Performance](https://github.com/user-attachments/assets/fd8f6537-6036-44d3-83d0-b4a46a1b4ba4)
+
+![Mobile performance](https://github.com/user-attachments/assets/a656ab7a-2b2f-408d-909f-0fc7d1dcf0b2)
+
+
 ## Created using these technologies.
 
 - TypeScript
