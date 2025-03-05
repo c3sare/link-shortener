@@ -1,26 +1,22 @@
-import { relations, sql } from "drizzle-orm";
-import {
-  integer,
-  pgTable,
-  primaryKey,
-  serial,
-  text,
-  timestamp,
-} from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
-export const users = pgTable("user", {
-  id: text("id")
+import { relations, sql } from "drizzle-orm";
+import { pgTable, primaryKey } from "drizzle-orm/pg-core";
+
+export const users = pgTable("user", (t) => ({
+  id: t
+    .text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").notNull(),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
-  image: text("image"),
-  createdAt: timestamp("uploaded_at", { mode: "date" })
+  name: t.text("name"),
+  email: t.text("email").notNull(),
+  emailVerified: t.timestamp("emailVerified", { mode: "date" }),
+  image: t.text("image"),
+  createdAt: t
+    .timestamp("uploaded_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
-});
+}));
 
 export const usersRelations = relations(users, ({ many }) => ({
   labels: many(labels),
@@ -29,57 +25,60 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 export const accounts = pgTable(
   "account",
-  {
-    userId: text("userId")
+  (t) => ({
+    userId: t
+      .text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: text("type").$type<AdapterAccountType>().notNull(),
-    provider: text("provider").notNull(),
-    providerAccountId: text("providerAccountId").notNull(),
-    refresh_token: text("refresh_token"),
-    access_token: text("access_token"),
-    expires_at: integer("expires_at"),
-    token_type: text("token_type"),
-    scope: text("scope"),
-    id_token: text("id_token"),
-    session_state: text("session_state"),
-  },
-  (account) => [
+    type: t.text("type").$type<AdapterAccountType>().notNull(),
+    provider: t.text("provider").notNull(),
+    providerAccountId: t.text("providerAccountId").notNull(),
+    refresh_token: t.text("refresh_token"),
+    access_token: t.text("access_token"),
+    expires_at: t.integer("expires_at"),
+    token_type: t.text("token_type"),
+    scope: t.text("scope"),
+    id_token: t.text("id_token"),
+    session_state: t.text("session_state"),
+  }),
+  (t) => [
     primaryKey({
-      columns: [account.provider, account.providerAccountId],
+      columns: [t.provider, t.providerAccountId],
     }),
   ]
 );
 
-export const sessions = pgTable("session", {
-  sessionToken: text("sessionToken").primaryKey(),
-  userId: text("userId")
+export const sessions = pgTable("session", (t) => ({
+  sessionToken: t.text("sessionToken").primaryKey(),
+  userId: t
+    .text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  expires: timestamp("expires", { mode: "date" }).notNull(),
-});
+  expires: t.timestamp("expires", { mode: "date" }).notNull(),
+}));
 
 export const verificationTokens = pgTable(
   "verificationToken",
-  {
-    identifier: text("identifier").notNull(),
-    token: text("token").notNull(),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
-  },
-  (vt) => [primaryKey({ columns: [vt.identifier, vt.token] })]
+  (t) => ({
+    identifier: t.text("identifier").notNull(),
+    token: t.text("token").notNull(),
+    expires: t.timestamp("expires", { mode: "date" }).notNull(),
+  }),
+  (t) => [primaryKey({ columns: [t.identifier, t.token] })]
 );
 
-export const links = pgTable("links", {
-  id: text("id").notNull().primaryKey(),
-  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
-  url: text("url").notNull(),
-  passcode: text("passcode"),
-  title: text("title"),
-  description: text("description"),
-  createdAt: timestamp("created_at", { mode: "date" })
+export const links = pgTable("links", (t) => ({
+  id: t.text("id").notNull().primaryKey(),
+  userId: t.text("user_id").references(() => users.id, { onDelete: "cascade" }),
+  url: t.text("url").notNull(),
+  passcode: t.text("passcode"),
+  title: t.text("title"),
+  description: t.text("description"),
+  createdAt: t
+    .timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
-});
+}));
 
 export const linksRelations = relations(links, ({ many, one }) => ({
   redirects: many(redirects),
@@ -87,29 +86,32 @@ export const linksRelations = relations(links, ({ many, one }) => ({
   labelLinks: many(labelsLinks),
 }));
 
-export const redirects = pgTable("redirects", {
-  id: serial("id").notNull().primaryKey(),
-  linkId: text("link_id")
+export const redirects = pgTable("redirects", (t) => ({
+  id: t.serial("id").notNull().primaryKey(),
+  linkId: t
+    .text("link_id")
     .notNull()
     .references(() => links.id, { onDelete: "cascade" }),
-  ip: text("ip"),
-  country: text("country"),
-  city: text("city"),
-  continent: text("continent"),
-  latitude: text("latitude"),
-  timezone: text("timezone"),
-  createdAt: timestamp("created_at", { mode: "date" })
+  ip: t.text("ip"),
+  country: t.text("country"),
+  city: t.text("city"),
+  continent: t.text("continent"),
+  latitude: t.text("latitude"),
+  timezone: t.text("timezone"),
+  createdAt: t
+    .timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
-});
+}));
 
-export const labels = pgTable("labels", {
-  id: serial("id").notNull().primaryKey(),
-  label: text("label").notNull(),
-  userId: text("user_id")
+export const labels = pgTable("labels", (t) => ({
+  id: t.serial("id").notNull().primaryKey(),
+  label: t.text("label").notNull(),
+  userId: t
+    .text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-});
+}));
 
 export const labelsRelations = relations(labels, ({ many, one }) => ({
   labelLinks: many(labelsLinks),
@@ -118,15 +120,17 @@ export const labelsRelations = relations(labels, ({ many, one }) => ({
 
 export const labelsLinks = pgTable(
   "labels_links",
-  {
-    linkId: text("link_id")
+  (t) => ({
+    linkId: t
+      .text("link_id")
       .notNull()
       .references(() => links.id, { onDelete: "cascade" }),
-    labelId: integer("label_id")
+    labelId: t
+      .integer("label_id")
       .notNull()
       .references(() => labels.id, { onDelete: "cascade" }),
-  },
-  (ll) => [primaryKey({ columns: [ll.linkId, ll.labelId] })]
+  }),
+  (t) => [primaryKey({ columns: [t.linkId, t.labelId] })]
 );
 
 export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
