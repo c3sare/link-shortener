@@ -4,7 +4,7 @@ import * as v from "valibot";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as schema from "@/drizzle/schema";
-import bcrypt from "bcrypt-edge";
+import bcrypt from "bcryptjs";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 

@@ -7,7 +7,7 @@ import { links } from "@/drizzle/schema";
 import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
-import bcrypt from "bcrypt-edge";
+import bcrypt from "bcryptjs";
 import * as v from "valibot";
 
 export const addLink = action

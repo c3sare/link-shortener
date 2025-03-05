@@ -2,7 +2,7 @@ import { signInWithGoogle } from "@/actions/auth/signInWithGoogle";
 import { signOut } from "@/actions/auth/signOut";
 import { auth } from "@/auth";
 import { DropdownMenuServerActionItem } from "@/components/dropdown-menu-server-action-item";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { GithubIcon } from "lucide-react";
 import { LogOutIcon } from "lucide-react";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { signInWithGithub } from "@/actions/auth/signInWithGithub";
@@ -68,7 +68,7 @@ export const LoginButton = async () => {
                   className="flex items-center justify-between gap-4 w-full text-lg font-bold"
                   formAction={signInWithGithub}
                 >
-                  <GitHubLogoIcon width={24} height={24} />
+                  <GithubIcon width={24} height={24} />
                   <span>Github</span>
                 </DropdownMenuServerActionItem>
               </>

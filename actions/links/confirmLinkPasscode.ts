@@ -2,7 +2,7 @@
 
 import * as v from "valibot";
 import { action } from "../safe-action";
-import bcrypt from "bcrypt-edge";
+import bcrypt from "bcryptjs";
 import { db } from "@/drizzle";
 import { redirect } from "next/navigation";
 import { registerRedirect } from "./register-redirect";
