@@ -23,7 +23,7 @@ export const useZodForm = <Z extends ZodSchema>({
 }: PropsType<Z>) => {
   const [isLoading, startTransition] = useTransition();
   const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema) as Resolver<z.TypeOf<Z>, any>,
+    resolver: zodResolver(schema) as Resolver<z.TypeOf<Z>, unknown>,
     ...props,
   });
 

@@ -10,7 +10,7 @@ export const addUserLabel = authAction
   .schema(
     z.object({
       label: z.string(),
-    }),
+    })
   )
   .action(
     async ({
@@ -31,5 +31,5 @@ export const addUserLabel = authAction
       revalidatePath("/[locale]/profile", "page");
 
       return mutation;
-    },
+    }
   );
