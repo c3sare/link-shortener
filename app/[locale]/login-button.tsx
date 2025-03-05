@@ -16,7 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./dynamic-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 export const LoginButton = async () => {
   const session = await auth();
