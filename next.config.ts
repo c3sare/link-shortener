@@ -23,7 +23,6 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "recharts"],
     //   reactCompiler: true,
     //   ppr: "incremental",
   },
