@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import createMiddleware from "next-intl/middleware";
-import { locales } from "./i18n/routing";
 import NextAuth from "next-auth";
+import createMiddleware from "next-intl/middleware";
+
 import { authConfig } from "./auth.config";
+import { locales } from "./i18n/routing";
 
 const { auth } = NextAuth(authConfig);
 

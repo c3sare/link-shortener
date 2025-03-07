@@ -1,6 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unicorn from "eslint-plugin-unicorn";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -25,11 +24,8 @@ const eslintConfig = [
 	{
 		plugins: {
 			unicorn,
-			"simple-import-sort": simpleImportSort,
 		},
 		rules: {
-			"simple-import-sort/exports": "error",
-			"simple-import-sort/imports": "error",
 			"unicorn/no-array-callback-reference": "off",
 			"unicorn/no-array-for-each": "off",
 			"unicorn/no-array-reduce": "off",
