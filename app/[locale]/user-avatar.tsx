@@ -2,12 +2,13 @@
 
 /* eslint-disable jsx-a11y/alt-text */
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { UserIcon } from "lucide-react";
-import { Session } from "next-auth";
 import Image from "next/image";
-import defaultAvatar from "@/public/images/avatars/default.webp";
+import { Session } from "next-auth";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
+import defaultAvatar from "@/public/images/avatars/default.webp";
 
 type Props = {
 	session: Session | null;

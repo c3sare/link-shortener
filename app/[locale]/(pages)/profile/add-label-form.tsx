@@ -1,8 +1,9 @@
+import * as v from "valibot";
+
 import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useValibotForm } from "@/hooks/useValibotForm";
-import * as v from "valibot";
 
 export const AddLabelForm = () => {
 	const form = useValibotForm({

@@ -1,20 +1,22 @@
-import * as v from "valibot";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { addLink } from "@/actions/links/addLink";
-import { Input } from "@/components/ui/input";
-import { ReadyLinkInput } from "./ready-link-input";
 import { useTranslations } from "next-intl";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
 import { Controller } from "react-hook-form";
+import * as v from "valibot";
+
+import { addLink } from "@/actions/links/addLink";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { useValibotForm } from "@/hooks/useValibotForm";
+
+import { ReadyLinkInput } from "./ready-link-input";
 
 const schema = v.pipe(
 	v.object({
@@ -74,7 +76,7 @@ const CreateLinkForm = () => {
 				<Switch
 					checked={isVisiblePasscode ?? false}
 					disabled={isLoading}
-					onCheckedChange={(val) => setValue("addPasscode", val)}
+					onCheckedChange={(value) => setValue("addPasscode", value)}
 					aria-label="Add passcode"
 				/>
 				{t("link_passcode")}

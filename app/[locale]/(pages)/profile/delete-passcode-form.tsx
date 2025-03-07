@@ -1,5 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { useAction } from "next-safe-action/hooks";
+import { useState } from "react";
+
 import { deleteLinkPasscode } from "@/actions/links/delete-link-passcode";
 import {
 	AlertDialog,
@@ -13,9 +17,6 @@ import {
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
-import { useAction } from "next-safe-action/hooks";
-import { useState } from "react";
 
 type Props = {
 	linkId: string;

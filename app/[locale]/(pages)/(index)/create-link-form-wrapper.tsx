@@ -1,7 +1,8 @@
 "use client";
 
-import { CreateLinkFormSkeleton } from "./create-link-form-skeleton";
 import dynamic from "next/dynamic";
+
+import { CreateLinkFormSkeleton } from "./create-link-form-skeleton";
 const CreateLinkForm = dynamic(() => import("./create-link-form"), {
 	ssr: false,
 	loading: () => <CreateLinkFormSkeleton />,

@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import type {
-	LineChart,
-	Line,
-	ResponsiveContainer,
-	XAxis,
-	YAxis,
-	CartesianGrid,
-	Tooltip,
-	LegendProps,
-	Legend,
 	Bar,
 	BarChart,
+	CartesianGrid,
+	Legend,
+	LegendProps,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
 } from "recharts";
 
 const LineChartImpl: typeof LineChart =
@@ -31,15 +31,15 @@ const BarChartImpl: typeof BarChart =
 	require("recharts/es6/chart/BarChart").BarChart;
 
 export {
-	ResponsiveContainerImpl as ResponsiveContainer,
-	LineChartImpl as LineChart,
-	LineImpl as Line,
-	XAxisImpl as XAxis,
-	YAxisImpl as YAxis,
-	TooltipImpl as Tooltip,
-	LegendImpl as Legend,
 	BarImpl as Bar,
 	BarChartImpl as BarChart,
 	CartesianGridImpl as CartesianGrid,
+	LegendImpl as Legend,
 	type LegendProps,
+	LineImpl as Line,
+	LineChartImpl as LineChart,
+	ResponsiveContainerImpl as ResponsiveContainer,
+	TooltipImpl as Tooltip,
+	XAxisImpl as XAxis,
+	YAxisImpl as YAxis,
 };

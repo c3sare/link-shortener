@@ -1,6 +1,10 @@
 "use client";
 
+import { GlobeIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+
+import { usePathname, useRouter } from "@/navigation";
+
 import { Button } from "./ui/button";
 import {
 	DropdownMenu,
@@ -10,8 +14,6 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { GlobeIcon } from "lucide-react";
-import { usePathname, useRouter } from "@/navigation";
 
 const locales = {
 	pl: "Polski",

@@ -1,6 +1,7 @@
+import { TrashIcon } from "lucide-react";
+
 import type { getUserLabels } from "@/actions/links/getUserLabels";
 import { Button } from "@/components/ui/button";
-import { TrashIcon } from "lucide-react";
 
 type Props = {
 	label: Awaited<ReturnType<typeof getUserLabels>>[number];

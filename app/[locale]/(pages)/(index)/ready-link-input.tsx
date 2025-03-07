@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { CopyInput } from "@/components/ui/copy-input";
 import { RefreshCw } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+import { Button } from "@/components/ui/button";
+import { CopyInput } from "@/components/ui/copy-input";
 
 type Props = {
 	url: string;

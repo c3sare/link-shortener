@@ -1,5 +1,7 @@
-import { db } from "@/drizzle";
 import { notFound } from "next/navigation";
+
+import { db } from "@/drizzle";
+
 import { PasscodeForm } from "./passcode-form";
 
 type Props = {

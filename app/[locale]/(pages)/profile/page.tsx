@@ -1,4 +1,9 @@
+import { PlusIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+
+import { getUserLabels } from "@/actions/links/getUserLabels";
 import { getUserLinks } from "@/actions/links/getUserLinks";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -11,17 +16,14 @@ import {
 import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
 import { getBaseUrl } from "@/lib/utils";
-import { PlusIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
+
 import { AddChangePasscodeForm } from "./add-change-passcode-form";
-import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DeleteLinkForm } from "./delete-link-form";
-import { TitleDescriptionForm } from "./title-description-form";
-import { Badge } from "@/components/ui/badge";
-import { PageFilters } from "./page-filters";
-import { getUserLabels } from "@/actions/links/getUserLabels";
+import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DateChart } from "./dynamic-date-chart";
+import { PageFilters } from "./page-filters";
+import { TitleDescriptionForm } from "./title-description-form";
 
 export default async function ProfilePage() {
 	const [t, labels, items] = await Promise.all([

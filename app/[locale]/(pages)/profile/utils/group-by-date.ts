@@ -4,19 +4,19 @@ type Item<T> = T & {
 	createdAt: Date;
 };
 
-export const groupByDate = <T>(arr: Item<T>[]) => {
-	const obj: Record<string, { redirects: number }> = {};
+export const groupByDate = <T>(array: Item<T>[]) => {
+	const object: Record<string, { redirects: number }> = {};
 
-	arr.forEach((item) => {
+	array.forEach((item) => {
 		const date = item.createdAt.toISOString().split("T")[0];
 
-		if (!obj[date]) obj[date] = { redirects: 1 };
-		else obj[date].redirects++;
+		if (!object[date]) object[date] = { redirects: 1 };
+		else object[date].redirects++;
 	});
 
-	return Object.keys(obj).map((item) => ({
+	return Object.keys(object).map((item) => ({
 		date: item,
-		redirects: obj[item].redirects,
+		redirects: object[item].redirects,
 	}));
 };
 
@@ -52,10 +52,10 @@ export const chartDateConfig = (data: ReturnType<typeof groupByDate>) => {
 		}
 	> = {};
 
-	data.forEach((key, i) => {
+	data.forEach((key, index) => {
 		newData[key.date] = {
 			label: key.date,
-			color: colors[i] ?? "#000000",
+			color: colors[index] ?? "#000000",
 		};
 	});
 

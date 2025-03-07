@@ -1,14 +1,12 @@
+import { GithubIcon, LogOutIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+
+import { signInWithGithub } from "@/actions/auth/signInWithGithub";
 import { signInWithGoogle } from "@/actions/auth/signInWithGoogle";
 import { signOut } from "@/actions/auth/signOut";
 import { auth } from "@/auth";
 import { DropdownMenuServerActionItem } from "@/components/dropdown-menu-server-action-item";
-import { GithubIcon } from "lucide-react";
-import { LogOutIcon } from "lucide-react";
 import { GoogleIcon } from "@/components/icons/google-icon";
-import { signInWithGithub } from "@/actions/auth/signInWithGithub";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/navigation";
-import { UserAvatar } from "./user-avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -17,6 +15,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Link } from "@/navigation";
+
+import { UserAvatar } from "./user-avatar";
 
 export const LoginButton = async () => {
 	const session = await auth();

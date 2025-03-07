@@ -1,10 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+
 import { Skeleton } from "./ui/skeleton";
 
 const ThemeSwitch = dynamic(
-	() => import("./theme-switch").then((mod) => mod.ThemeSwitch),
+	() => import("./theme-switch").then((module_) => module_.ThemeSwitch),
 	{
 		ssr: false,
 		loading: () => (

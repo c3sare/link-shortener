@@ -1,10 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import MultipleSelector from "@/components/ui/multiple-selector";
 import { SettingsIcon } from "lucide-react";
+
 import type { getUserLabels } from "@/actions/links/getUserLabels";
+import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -12,7 +11,10 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import MultipleSelector from "@/components/ui/multiple-selector";
 import { Separator } from "@/components/ui/separator";
+
 import { AddLabelForm } from "./add-label-form";
 import { LabelListElement } from "./label-list-element";
 

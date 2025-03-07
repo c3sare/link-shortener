@@ -1,17 +1,19 @@
 "use client";
 
 import { CopyIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
+
 import { Button } from "./button";
 import { Input } from "./input";
-import { cn } from "@/lib/utils";
-import { useRef, useState } from "react";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "./tooltip";
-import { useTranslations } from "next-intl";
 
 type Props = {
 	value: string;

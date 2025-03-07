@@ -130,7 +130,7 @@ function removePickedOption(groupOption: GroupOption, picked: Option[]) {
 
 	for (const [key, value] of Object.entries(cloneOption)) {
 		cloneOption[key] = value.filter(
-			(val) => !picked.find((p) => p.value === val.value),
+			(value_) => !picked.find((p) => p.value === value_.value),
 		);
 	}
 	return cloneOption;

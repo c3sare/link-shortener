@@ -2,6 +2,7 @@
 
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+
 import ThemeSwitchButton from "./theme-switch-button";
 
 export function ThemeSwitch() {

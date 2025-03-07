@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
+
+import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export const runtime = "edge";

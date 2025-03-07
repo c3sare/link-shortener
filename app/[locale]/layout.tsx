@@ -1,23 +1,21 @@
-import { Inter as FontSans } from "next/font/google";
-
-import Image from "next/image";
-import { Suspense } from "react";
-import { getMessages } from "next-intl/server";
-import { NextIntlClientProvider } from "next-intl";
-
 import { ScissorsIcon } from "lucide-react";
-import vercelLogo from "@/public/images/vercel.svg";
+import { Inter as FontSans } from "next/font/google";
+import Image from "next/image";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Suspense } from "react";
+
 import { GithubIcon } from "@/components/icons/github-icon";
-
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Link } from "@/navigation";
-
-import { LoginButton } from "./login-button";
-import { ThemeSwitchWrapper } from "@/components/theme-switch-wrapper";
 import { LangSwitchWrapper } from "@/components/lang-switch-wrapper";
-import { DynamicToaster } from "./dynamic-toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeSwitchWrapper } from "@/components/theme-switch-wrapper";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
+import { Link } from "@/navigation";
+import vercelLogo from "@/public/images/vercel.svg";
+
+import { DynamicToaster } from "./dynamic-toaster";
+import { LoginButton } from "./login-button";
 
 const fontSans = FontSans({
 	subsets: ["latin"],

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+
 import { CreateLinkFormWrapper } from "./create-link-form-wrapper";
 
 export default function Home() {

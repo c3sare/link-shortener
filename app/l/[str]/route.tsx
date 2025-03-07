@@ -1,12 +1,13 @@
+import { notFound, redirect } from "next/navigation";
+import type { NextRequest } from "next/server";
+
 import { registerRedirect } from "@/actions/links/register-redirect";
 import { db } from "@/drizzle";
-import { redirect, notFound } from "next/navigation";
-import { type NextRequest } from "next/server";
 
 export const runtime = "edge";
 
 export async function GET(
-	req: NextRequest,
+	request: NextRequest,
 	{ params }: { params: Promise<{ str: string }> },
 ) {
 	const { str } = await params;

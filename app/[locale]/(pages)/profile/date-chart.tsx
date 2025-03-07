@@ -1,14 +1,16 @@
 "use client";
 
-import * as schema from "@/drizzle/schema";
-import { groupByDate } from "./utils/group-by-date";
+import { useTranslations } from "next-intl";
+
+import { Bar, BarChart, CartesianGrid, XAxis } from "@/components/recharts";
 import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis } from "@/components/recharts";
-import { useTranslations } from "next-intl";
+import * as schema from "@/drizzle/schema";
+
+import { groupByDate } from "./utils/group-by-date";
 
 type Props = {
 	redirects: (typeof schema.redirects.$inferSelect)[];

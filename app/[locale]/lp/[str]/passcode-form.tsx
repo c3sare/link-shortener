@@ -1,5 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { Controller } from "react-hook-form";
+import * as v from "valibot";
+
+import { confirmLinkPasscode } from "@/actions/links/confirmLinkPasscode";
 import { Button } from "@/components/ui/button";
 import {
 	InputOTP,
@@ -7,10 +12,6 @@ import {
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useTranslations } from "next-intl";
-import { Controller } from "react-hook-form";
-import * as v from "valibot";
-import { confirmLinkPasscode } from "@/actions/links/confirmLinkPasscode";
 import { useValibotForm } from "@/hooks/useValibotForm";
 
 type Props = {
@@ -32,7 +33,7 @@ export const PasscodeForm = ({ id }: Props) => {
 		});
 
 		if (response?.data?.isValid === false) {
-			const toast = await import("sonner").then((mod) => mod.toast);
+			const toast = await import("sonner").then((module_) => module_.toast);
 
 			return toast.error(t("invalid_passcode"));
 		}

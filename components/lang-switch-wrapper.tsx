@@ -1,11 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { Button } from "./ui/button";
 import { GlobeIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+
+import { Button } from "./ui/button";
 
 const LangSwitch = dynamic(
-	() => import("./lang-switch").then((mod) => mod.LangSwitch),
+	() => import("./lang-switch").then((module_) => module_.LangSwitch),
 	{
 		ssr: false,
 		loading: () => (

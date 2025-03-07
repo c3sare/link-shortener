@@ -1,5 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Controller } from "react-hook-form";
+import * as v from "valibot";
+
 import { addChangePasscode } from "@/actions/links/add-change-passcode";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,10 +22,6 @@ import {
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { useValibotForm } from "@/hooks/useValibotForm";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Controller } from "react-hook-form";
-import * as v from "valibot";
 
 type Props = {
 	havePasscode: boolean;
