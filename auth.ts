@@ -4,6 +4,6 @@ import github from "next-auth/providers/github";
 import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  ...authConfig,
-  providers: [google, github],
+	...authConfig,
+	providers: [google, github],
 });

@@ -3,5 +3,5 @@
 import { signIn } from "@/auth";
 
 export const signInWithGithub = async () => {
-  await signIn("github");
+	await signIn("github");
 };

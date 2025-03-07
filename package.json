@@ -13,7 +13,7 @@
 		"prepare": "husky"
 	},
 	"lint-staged": {
-		"*.{js,ts,jsx,tsx,json,css,md}": ["biome format --write", "git add"]
+		"*.{js,ts,jsx,tsx,json,css,md}": ["bunx format", "git add"]
 	},
 	"dependencies": {
 		"@auth/drizzle-adapter": "^1.8.0",

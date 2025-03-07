@@ -8,30 +8,30 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const deleteLink = authAction
-  .schema(v.object({ linkId: v.string() }))
-  .action(
-    async ({
-      parsedInput: { linkId },
-      ctx: {
-        session: { id: userId },
-      },
-    }) => {
-      const result = await db
-        .delete(schema.links)
-        .where(
-          and(eq(schema.links.id, linkId), eq(schema.links.userId, userId!))
-        );
+	.schema(v.object({ linkId: v.string() }))
+	.action(
+		async ({
+			parsedInput: { linkId },
+			ctx: {
+				session: { id: userId },
+			},
+		}) => {
+			const result = await db
+				.delete(schema.links)
+				.where(
+					and(eq(schema.links.id, linkId), eq(schema.links.userId, userId!)),
+				);
 
-      if (result.rowCount !== 1)
-        return {
-          success: false,
-        };
+			if (result.rowCount !== 1)
+				return {
+					success: false,
+				};
 
-      revalidatePath("/[locale]/profile", "page");
-      revalidatePath("/profile");
+			revalidatePath("/[locale]/profile", "page");
+			revalidatePath("/profile");
 
-      return {
-        success: true,
-      };
-    }
-  );
+			return {
+				success: true,
+			};
+		},
+	);

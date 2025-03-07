@@ -5,31 +5,31 @@ import { useValibotForm } from "@/hooks/useValibotForm";
 import * as v from "valibot";
 
 export const AddLabelForm = () => {
-  const form = useValibotForm({
-    schema: v.object({
-      label: v.pipe(v.string(), v.minLength(1)),
-    }),
-    defaultValues: {
-      label: "",
-    },
-  });
+	const form = useValibotForm({
+		schema: v.object({
+			label: v.pipe(v.string(), v.minLength(1)),
+		}),
+		defaultValues: {
+			label: "",
+		},
+	});
 
-  const onSubmit = form.handleSubmit(async (data) => {
-    await addUserLabel(data);
-    form.reset();
-  });
+	const onSubmit = form.handleSubmit(async (data) => {
+		await addUserLabel(data);
+		form.reset();
+	});
 
-  return (
-    <form className="flex gap-2" onSubmit={onSubmit}>
-      <Input
-        {...form.register("label")}
-        disabled={form.isLoading}
-        placeholder="New label"
-        className="flex-1"
-      />
-      <Button disabled={form.isLoading} type="submit">
-        Add
-      </Button>
-    </form>
-  );
+	return (
+		<form className="flex gap-2" onSubmit={onSubmit}>
+			<Input
+				{...form.register("label")}
+				disabled={form.isLoading}
+				placeholder="New label"
+				className="flex-1"
+			/>
+			<Button disabled={form.isLoading} type="submit">
+				Add
+			</Button>
+		</form>
+	);
 };
