@@ -10,10 +10,11 @@
     "lint:fix": "next lint --fix",
     "format": "prettier . --write",
     "test": "vitest",
+    "test:e2e": "playwright test",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,json,css,md}": [
+    "*.{js,mjs,ts,jsx,tsx,json,css,md}": [
       "prettier --write",
       "git add"
     ]
