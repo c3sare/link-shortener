@@ -8,7 +8,6 @@
 
 ![Mobile performance](https://github.com/user-attachments/assets/a656ab7a-2b2f-408d-909f-0fc7d1dcf0b2)
 
-
 ## Created using these technologies.
 
 - TypeScript

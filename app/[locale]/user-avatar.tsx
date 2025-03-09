@@ -11,33 +11,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 import defaultAvatar from "@/public/images/avatars/default.webp";
 
 type Props = {
-	session: Session | null;
+  session: Session | null;
 };
 
 export const UserAvatar = ({ session, ...props }: Props) => {
-	const avatarUrl = session?.user?.image ?? defaultAvatar.src;
+  const avatarUrl = session?.user?.image ?? defaultAvatar.src;
 
-	const name = session?.user?.name ?? "User";
+  const name = session?.user?.name ?? "User";
 
-	const imgProps = {
-		src: avatarUrl,
-		alt: name,
-		height: 40,
-		width: 40,
-	};
+  const imgProps = {
+    src: avatarUrl,
+    alt: name,
+    height: 40,
+    width: 40,
+  };
 
-	return (
-		<button className="rounded-full select-none" {...props}>
-			<Avatar>
-				<AvatarImage {...imgProps} asChild>
-					<Image {...imgProps} />
-				</AvatarImage>
-				<AvatarFallback>
-					<Skeleton>
-						<UserIcon />
-					</Skeleton>
-				</AvatarFallback>
-			</Avatar>
-		</button>
-	);
+  return (
+    <button className="rounded-full select-none" {...props}>
+      <Avatar>
+        <AvatarImage {...imgProps} asChild>
+          <Image {...imgProps} />
+        </AvatarImage>
+        <AvatarFallback>
+          <Skeleton>
+            <UserIcon />
+          </Skeleton>
+        </AvatarFallback>
+      </Avatar>
+    </button>
+  );
 };

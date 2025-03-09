@@ -5,7 +5,7 @@ export const locales = ["en", "pl"] as const;
 export type Locale = (typeof locales)[number];
 
 export const routing = defineRouting({
-	locales,
+  locales,
 
-	defaultLocale: locales[0],
+  defaultLocale: locales[0],
 });

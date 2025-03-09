@@ -5,6 +5,6 @@ import google from "next-auth/providers/google";
 import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-	...authConfig,
-	providers: [google, github],
+  ...authConfig,
+  providers: [google, github],
 });

@@ -2,15 +2,15 @@ import { auth } from "@/auth";
 import { db } from "@/drizzle";
 
 export const getUserLabels = async () => {
-	const session = await auth();
+  const session = await auth();
 
-	const userId = session?.user?.id;
+  const userId = session?.user?.id;
 
-	if (!userId) return [];
+  if (!userId) return [];
 
-	const labels = await db.query.labels.findMany({
-		where: (label, { eq }) => eq(label.userId, userId),
-	});
+  const labels = await db.query.labels.findMany({
+    where: (label, { eq }) => eq(label.userId, userId),
+  });
 
-	return labels;
+  return labels;
 };

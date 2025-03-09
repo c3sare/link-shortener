@@ -7,20 +7,20 @@ import { db } from "@/drizzle";
 export const runtime = "edge";
 
 export async function GET(
-	request: NextRequest,
-	{ params }: { params: Promise<{ str: string }> },
+  request: NextRequest,
+  { params }: { params: Promise<{ str: string }> },
 ) {
-	const { str } = await params;
+  const { str } = await params;
 
-	const item = await db.query.links.findFirst({
-		where: (links, { eq }) => eq(links.id, str),
-	});
+  const item = await db.query.links.findFirst({
+    where: (links, { eq }) => eq(links.id, str),
+  });
 
-	if (!item) return notFound();
+  if (!item) return notFound();
 
-	if (item.passcode) return redirect(`/lp/${item.id}`);
+  if (item.passcode) return redirect(`/lp/${item.id}`);
 
-	await registerRedirect(item.id);
+  await registerRedirect(item.id);
 
-	return redirect(item.url);
+  return redirect(item.url);
 }
