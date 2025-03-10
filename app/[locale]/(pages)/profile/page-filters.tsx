@@ -17,26 +17,81 @@ import { Separator } from "@/components/ui/separator";
 
 import { AddLabelForm } from "./add-label-form";
 import { LabelListElement } from "./label-list-element";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRef } from "react";
 
 type Props = {
   labels: Awaited<ReturnType<typeof getUserLabels>>;
 };
 
 export const PageFilters = ({ labels }: Props) => {
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (timeout.current) {
+      clearTimeout(timeout.current);
+      timeout.current = null;
+    }
+
+    timeout.current = setTimeout(() => {
+      const params = new URLSearchParams(searchParams);
+      if (e.target.value) params.set("s", e.target.value);
+      else params.delete("s");
+
+      router.push(`${pathname}?${params.toString()}`);
+    }, 300);
+  };
+
   const options = labels.map((label) => ({
     label: label.label,
     value: label.id.toString(),
   }));
 
+  const values = options.filter((item) =>
+    searchParams.getAll("l").includes(item.value),
+  );
+
   return (
     <div className="w-full flex gap-2 flex-col">
       <div className="flex gap-2 items-center">
-        <Input placeholder="Search" className="flex-1" />
+        <Input
+          defaultValue={searchParams.get("s") ?? ""}
+          placeholder="Search"
+          onChange={onChangeSearchValue}
+          className="flex-1"
+        />
       </div>
       <div className="flex gap-2">
         <MultipleSelector
+          placeholder="labels..."
           commandProps={{ className: "flex-1" }}
           defaultOptions={options}
+          value={values}
+          onChange={(newValues) => {
+            const params = new URLSearchParams(searchParams);
+            if (newValues.length === 0) params.delete("l");
+
+            const findItem = newValues.find(
+              (item) => !values.map((item) => item.value).includes(item.value),
+            );
+
+            if (findItem)
+              if (params.getAll("l").length === 0)
+                params.set("l", findItem.value);
+              else params.append("l", findItem.value);
+
+            const findItemDelete = values.find(
+              (item) =>
+                !newValues.map((item) => item.value).includes(item.value),
+            );
+
+            if (findItemDelete) params.delete("l", findItemDelete.value);
+
+            router.push(`${pathname}?${params.toString()}`);
+          }}
         />
         <Dialog>
           <DialogTrigger asChild>

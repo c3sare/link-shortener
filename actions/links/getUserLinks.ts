@@ -1,7 +1,8 @@
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
+import { like } from "drizzle-orm";
 
-export const getUserLinks = async () => {
+export const getUserLinks = async (search: string = "", labelIds: string[]) => {
   const session = await auth();
 
   const userId = session?.user?.id;
@@ -9,7 +10,14 @@ export const getUserLinks = async () => {
   if (!userId) throw new Error("User not found");
 
   const items = await db.query.links.findMany({
-    where: (links, { eq }) => eq(links.userId, userId),
+    where: (links, { eq, and, or }) =>
+      and(
+        eq(links.userId, userId),
+        or(
+          like(links.title, `%${search}%`),
+          like(links.description, `%${search}%`),
+        ),
+      ),
     orderBy: (links, { desc }) => desc(links.createdAt),
     with: {
       redirects: true,
@@ -22,5 +30,11 @@ export const getUserLinks = async () => {
     },
   });
 
-  return items;
+  return labelIds.length === 0
+    ? items
+    : items.filter((item) =>
+        item.labelLinks.some((labelLink) =>
+          labelIds.includes(labelLink.label.id.toString()),
+        ),
+      );
 };

@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 
 import { getUserLabels } from "@/actions/links/getUserLabels";
 import { getUserLinks } from "@/actions/links/getUserLinks";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,12 +23,22 @@ import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DateChart } from "./dynamic-date-chart";
 import { PageFilters } from "./page-filters";
 import { TitleDescriptionForm } from "./title-description-form";
+import { ItemLabels } from "./item-labels";
 
-export default async function ProfilePage() {
+type Props = {
+  searchParams: Promise<{
+    s?: string;
+    l?: string | string[];
+  }>;
+};
+
+export default async function ProfilePage({ searchParams }: Props) {
+  const { s, l } = await searchParams;
+  const labelsSearch = Array.isArray(l) ? l : l ? [l] : [];
   const [t, labels, items] = await Promise.all([
     getTranslations(),
     getUserLabels(),
-    getUserLinks(),
+    getUserLinks(s, labelsSearch),
   ]);
 
   const baseUrl = getBaseUrl();
@@ -62,13 +71,7 @@ export default async function ProfilePage() {
               </CardHeader>
             </TitleDescriptionForm>
             <CardContent>
-              <div className="hover:bg-gray-100/10 cursor-pointer rounded-sm p-1 text-xs">
-                {item.labelLinks.length > 0
-                  ? item.labelLinks.map(({ label }) => (
-                      <Badge key={label.id}>{label.label}</Badge>
-                    ))
-                  : "No labels..."}
-              </div>
+              <ItemLabels labels={labels} item={item} />
               <div className="flex p-4 w-full flex-col gap-4">
                 <div className="flex-1">
                   <Label className="flex-1">

@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, primaryKey } from "drizzle-orm/pg-core";
+import { index, pgTable, primaryKey } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
 export const users = pgTable("user", (t) => ({
@@ -66,18 +66,32 @@ export const verificationTokens = pgTable(
   (t) => [primaryKey({ columns: [t.identifier, t.token] })],
 );
 
-export const links = pgTable("links", (t) => ({
-  id: t.text("id").notNull().primaryKey(),
-  userId: t.text("user_id").references(() => users.id, { onDelete: "cascade" }),
-  url: t.text("url").notNull(),
-  passcode: t.text("passcode"),
-  title: t.text("title"),
-  description: t.text("description"),
-  createdAt: t
-    .timestamp("created_at", { mode: "date" })
-    .notNull()
-    .default(sql`now()`),
-}));
+export const links = pgTable(
+  "links",
+  (t) => ({
+    id: t.text("id").notNull().primaryKey(),
+    userId: t
+      .text("user_id")
+      .references(() => users.id, { onDelete: "cascade" }),
+    url: t.text("url").notNull(),
+    passcode: t.text("passcode"),
+    title: t.text("title"),
+    description: t.text("description"),
+    createdAt: t
+      .timestamp("created_at", { mode: "date" })
+      .notNull()
+      .default(sql`now()`),
+  }),
+  (table) => [
+    index("search_index").using(
+      "gin",
+      sql`(
+          setweight(to_tsvector('english', ${table.title}), 'A') ||
+          setweight(to_tsvector('english', ${table.description}), 'B')
+      )`,
+    ),
+  ],
+);
 
 export const linksRelations = relations(links, ({ many, one }) => ({
   redirects: many(redirects),

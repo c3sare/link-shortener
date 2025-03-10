@@ -9,7 +9,8 @@ export const action = createSafeActionClient({
 export const authAction = action.use(async (req) => {
   const session = await auth();
 
-  if (!session?.user) throw new Error("User is not logged in");
+  if (!session?.user || !session.user.id)
+    throw new Error("User is not logged in");
 
   return req.next({ ctx: { session: session.user } });
 });
