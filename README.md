@@ -14,7 +14,7 @@
 - Next.js 15
 - Next-auth v5
 - Drizzle ORM
-- TailwindCSS
+- TailwindCSS v4
 - Shadcn/ui
 - React-hook-form
 - Next-safe-actions
@@ -49,7 +49,7 @@
 
 `bun install`
 
-### 3. Add env variables
+### 3. Add env variables to .env file
 
 ```
 DATABASE_URL=
@@ -68,6 +68,6 @@ AUTH_GITHUB_SECRET=
 
 `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET`, its important to sign in with GitHub account, you can generate keys using your github account, [tutorial how to do this](https://youtu.be/v2u8EDGFVpo?si=n__lvjOkKr_Gag52)
 
-### 4. Start your project
+### 4. Start your project in dev mode
 
 `bun run dev`
