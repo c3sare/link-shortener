@@ -1,6 +1,6 @@
 "use client";
 
-import { SettingsIcon } from "lucide-react";
+import { ArrowUpDownIcon, SettingsIcon } from "lucide-react";
 
 import type { getUserLabels } from "@/actions/links/getUserLabels";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,14 @@ export const PageFilters = ({ labels }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const handleToggleOrder = () => {
+    const params = new URLSearchParams(searchParams);
+    if (!params.get("o") || params.get("o") === "asc") params.set("o", "desc");
+    else params.set("o", "asc");
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (timeout.current) {
@@ -90,6 +98,9 @@ export const PageFilters = ({ labels }: Props) => {
             router.push(`${pathname}?${params.toString()}`);
           }}
         />
+        <Button size="icon" onClick={handleToggleOrder}>
+          <ArrowUpDownIcon />
+        </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button className="aspect-square px-1">

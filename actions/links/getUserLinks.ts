@@ -1,13 +1,23 @@
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
-import { like } from "drizzle-orm";
+import { SQL, asc, desc, like } from "drizzle-orm";
+import { links } from "@/drizzle/schema";
 
-export const getUserLinks = async (search: string = "", labelIds: string[]) => {
+export const getUserLinks = async (
+  search: string = "",
+  labelIds: string[],
+  order: string = "asc",
+) => {
   const session = await auth();
 
   const userId = session?.user?.id;
 
   if (!userId) throw new Error("User not found");
+
+  const orderBy: Record<string, SQL<unknown>> = {
+    asc: asc(links.createdAt),
+    desc: desc(links.createdAt),
+  };
 
   const items = await db.query.links.findMany({
     where: (links, { eq, and, or }) =>
@@ -18,7 +28,7 @@ export const getUserLinks = async (search: string = "", labelIds: string[]) => {
           like(links.description, `%${search}%`),
         ),
       ),
-    orderBy: (links, { desc }) => desc(links.createdAt),
+    orderBy: orderBy?.[order] ?? orderBy.asc,
     with: {
       redirects: true,
       labelLinks: {

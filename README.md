@@ -33,10 +33,10 @@
 - Adding title and description for links
 - Filtering links by label, title, description
 - Adding labels for links
+- Sorting links by create time (desc and asc)
 
 ## Planned features
 
-- Sorting links by create time (desc and asc)
 - Links pagination on "/profile" page
 
 ## How to reproduce project

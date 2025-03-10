@@ -29,16 +29,17 @@ type Props = {
   searchParams: Promise<{
     s?: string;
     l?: string | string[];
+    o?: string;
   }>;
 };
 
 export default async function ProfilePage({ searchParams }: Props) {
-  const { s, l } = await searchParams;
+  const { s, l, o } = await searchParams;
   const labelsSearch = Array.isArray(l) ? l : l ? [l] : [];
   const [t, labels, items] = await Promise.all([
     getTranslations(),
     getUserLabels(),
-    getUserLinks(s, labelsSearch),
+    getUserLinks(s, labelsSearch, o),
   ]);
 
   const baseUrl = getBaseUrl();
