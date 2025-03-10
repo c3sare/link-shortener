@@ -4,8 +4,10 @@ import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import ThemeSwitchButton from "./theme-switch-button";
+import { useTranslations } from "next-intl";
 
 export function ThemeSwitch() {
+  const t = useTranslations();
   const { setTheme, theme } = useTheme();
 
   return (
@@ -14,7 +16,7 @@ export function ThemeSwitch() {
         currentMode={theme}
         mode="light"
         setMode={setTheme}
-        name="Light theme"
+        name={t("light_theme")}
       >
         <SunIcon />
       </ThemeSwitchButton>
@@ -22,7 +24,7 @@ export function ThemeSwitch() {
         currentMode={theme}
         mode="system"
         setMode={setTheme}
-        name="System theme"
+        name={t("system_theme")}
       >
         <MonitorIcon />
       </ThemeSwitchButton>
@@ -30,7 +32,7 @@ export function ThemeSwitch() {
         currentMode={theme}
         mode="dark"
         setMode={setTheme}
-        name="Dark theme"
+        name={t("dark_theme")}
       >
         <MoonIcon />
       </ThemeSwitchButton>

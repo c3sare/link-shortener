@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
 
 type Props = {
   item: Awaited<ReturnType<typeof getUserLinks>>[number];
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const ItemLabels = ({ item, labels }: Props) => {
+  const t = useTranslations();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,12 +30,14 @@ export const ItemLabels = ({ item, labels }: Props) => {
               <Badge key={label.id}>{label.label}</Badge>
             ))
           ) : (
-            <span className="text-muted-foreground text-sm">No labels...</span>
+            <span className="text-muted-foreground text-sm">
+              {t("no_labels")}...
+            </span>
           )}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="start">
-        <DropdownMenuLabel>Labels</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("labels")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {labels.map((label) => (
           <DropdownMenuCheckboxItem

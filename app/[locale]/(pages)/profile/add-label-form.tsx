@@ -4,8 +4,10 @@ import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useValibotForm } from "@/hooks/useValibotForm";
+import { useTranslations } from "next-intl";
 
 export const AddLabelForm = () => {
+  const t = useTranslations();
   const form = useValibotForm({
     schema: v.object({
       label: v.pipe(v.string(), v.minLength(1)),
@@ -25,11 +27,11 @@ export const AddLabelForm = () => {
       <Input
         {...form.register("label")}
         disabled={form.isLoading}
-        placeholder="New label"
+        placeholder={t("new_label") + "..."}
         className="flex-1"
       />
       <Button disabled={form.isLoading} type="submit">
-        Add
+        {t("add")}
       </Button>
     </form>
   );

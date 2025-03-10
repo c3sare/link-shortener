@@ -22,6 +22,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
+import { useTranslations } from "next-intl";
 
 /**
  * Variants for the multi-select component to handle different styles.
@@ -126,6 +127,7 @@ export const MultiSelect = React.forwardRef<
     },
     ref,
   ) => {
+    const t = useTranslations();
     const [selectedValues, setSelectedValues] =
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
@@ -274,11 +276,11 @@ export const MultiSelect = React.forwardRef<
         >
           <Command>
             <CommandInput
-              placeholder="Search..."
+              placeholder={`${t("search")}...`}
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{t("no_results")}.</CommandEmpty>
               <CommandGroup>
                 <CommandItem
                   key="all"
@@ -295,7 +297,7 @@ export const MultiSelect = React.forwardRef<
                   >
                     <CheckIcon className="h-4 w-4" />
                   </div>
-                  <span>(Select All)</span>
+                  <span>({t("select_all")})</span>
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
@@ -332,7 +334,7 @@ export const MultiSelect = React.forwardRef<
                         onSelect={handleClear}
                         className="flex-1 justify-center cursor-pointer"
                       >
-                        Clear
+                        {t("clear")}
                       </CommandItem>
                       <Separator
                         orientation="vertical"
@@ -344,7 +346,7 @@ export const MultiSelect = React.forwardRef<
                     onSelect={() => setIsPopoverOpen(false)}
                     className="flex-1 justify-center cursor-pointer max-w-full"
                   >
-                    Close
+                    {t("close")}
                   </CommandItem>
                 </div>
               </CommandGroup>

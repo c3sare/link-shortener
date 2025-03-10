@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useValibotForm } from "@/hooks/useValibotForm";
+import { useTranslations } from "next-intl";
 
 type Props = {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export const TitleDescriptionForm = ({
   description,
   linkId,
 }: Props) => {
+  const t = useTranslations();
   const [open, setOpen] = useState<boolean>(false);
   const form = useValibotForm({
     schema: v.object({
@@ -60,14 +62,14 @@ export const TitleDescriptionForm = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-xs">
         <DialogHeader className="mb-4">
-          <DialogTitle>Edit</DialogTitle>
+          <DialogTitle>{t("edit")}</DialogTitle>
           <DialogDescription>
-            Change title and description of the link
+            {t("change_title_and_description_link")}
           </DialogDescription>
         </DialogHeader>
         <form className="w-full flex flex-col gap-4" onSubmit={onSubmit}>
           <Label className="flex flex-col gap-2">
-            Title
+            {t("title")}
             <Input
               {...form.register("title")}
               disabled={form.isLoading}
@@ -75,7 +77,7 @@ export const TitleDescriptionForm = ({
             />
           </Label>
           <Label className="flex flex-col gap-2">
-            Description
+            {t("description")}
             <Textarea
               {...form.register("description")}
               disabled={form.isLoading}
@@ -83,7 +85,7 @@ export const TitleDescriptionForm = ({
             />
           </Label>
           <Button disabled={form.isLoading} type="submit" className="w-full">
-            Save
+            {t("save")}
           </Button>
         </form>
       </DialogContent>

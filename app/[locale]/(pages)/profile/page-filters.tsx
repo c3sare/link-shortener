@@ -19,12 +19,14 @@ import { AddLabelForm } from "./add-label-form";
 import { LabelListElement } from "./label-list-element";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   labels: Awaited<ReturnType<typeof getUserLabels>>;
 };
 
 export const PageFilters = ({ labels }: Props) => {
+  const t = useTranslations();
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -57,14 +59,14 @@ export const PageFilters = ({ labels }: Props) => {
       <div className="flex gap-2 items-center">
         <Input
           defaultValue={searchParams.get("s") ?? ""}
-          placeholder="Search"
+          placeholder={`${t("search")}...`}
           onChange={onChangeSearchValue}
           className="flex-1"
         />
       </div>
       <div className="flex gap-2">
         <MultiSelect
-          placeholder="Labels..."
+          placeholder={`${t("labels")}...`}
           options={options}
           defaultValue={searchParams.getAll("l")}
           onValueChange={(newValues) => {
@@ -96,7 +98,7 @@ export const PageFilters = ({ labels }: Props) => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Labels</DialogTitle>
+              <DialogTitle>{t("labels")}</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col items-center gap-2 w-full [&>div:not(:last-child)]:border-b border-muted-foreground">
               {labels.length > 0 ? (
@@ -105,7 +107,7 @@ export const PageFilters = ({ labels }: Props) => {
                 ))
               ) : (
                 <span className="text-muted-foreground text-sm">
-                  No labels created yet...
+                  {t("no_labels")}...
                 </span>
               )}
             </div>
