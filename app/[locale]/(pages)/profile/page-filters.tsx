@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import MultipleSelector from "@/components/ui/multiple-selector";
+import { MultiSelect } from "@/components/ui/multi-select";
 import { Separator } from "@/components/ui/separator";
 
 import { AddLabelForm } from "./add-label-form";
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const PageFilters = ({ labels }: Props) => {
-  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const timeout = useRef<Timer | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -50,9 +50,7 @@ export const PageFilters = ({ labels }: Props) => {
     value: label.id.toString(),
   }));
 
-  const values = options.filter((item) =>
-    searchParams.getAll("l").includes(item.value),
-  );
+  const values = searchParams.getAll("l");
 
   return (
     <div className="w-full flex gap-2 flex-col">
@@ -65,30 +63,27 @@ export const PageFilters = ({ labels }: Props) => {
         />
       </div>
       <div className="flex gap-2">
-        <MultipleSelector
-          placeholder="labels..."
-          commandProps={{ className: "flex-1" }}
-          defaultOptions={options}
-          value={values}
-          onChange={(newValues) => {
+        <MultiSelect
+          placeholder="Labels..."
+          options={options}
+          defaultValue={searchParams.getAll("l")}
+          onValueChange={(newValues) => {
             const params = new URLSearchParams(searchParams);
             if (newValues.length === 0) params.delete("l");
 
             const findItem = newValues.find(
-              (item) => !values.map((item) => item.value).includes(item.value),
+              (item) => !values.map((item) => item).includes(item),
             );
 
             if (findItem)
-              if (params.getAll("l").length === 0)
-                params.set("l", findItem.value);
-              else params.append("l", findItem.value);
+              if (params.getAll("l").length === 0) params.set("l", findItem);
+              else params.append("l", findItem);
 
             const findItemDelete = values.find(
-              (item) =>
-                !newValues.map((item) => item.value).includes(item.value),
+              (item) => !newValues.map((item) => item).includes(item),
             );
 
-            if (findItemDelete) params.delete("l", findItemDelete.value);
+            if (findItemDelete) params.delete("l", findItemDelete);
 
             router.push(`${pathname}?${params.toString()}`);
           }}
