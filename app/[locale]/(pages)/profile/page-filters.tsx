@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const PageFilters = ({ labels }: Props) => {
-  const timeout = useRef<Timer | null>(null);
+  const timeout = useRef<NodeJS.Timer | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
