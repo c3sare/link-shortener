@@ -2,7 +2,6 @@ import { ScissorsIcon } from "lucide-react";
 import { Inter as FontSans } from "next/font/google";
 import Image from "next/image";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { Suspense } from "react";
 
 import { GithubIcon } from "@/components/icons/github-icon";
@@ -30,7 +29,6 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  const messages = await getMessages();
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -47,7 +45,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider>
             <DynamicToaster />
             <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
               <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">

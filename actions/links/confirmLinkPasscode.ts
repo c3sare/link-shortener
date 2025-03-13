@@ -16,7 +16,9 @@ export const confirmLinkPasscode = action
   )
   .action(async ({ parsedInput: { passcode, id } }) => {
     const link = await db.query.links.findFirst({
-      where: (links, { eq }) => eq(links.id, id),
+      where: {
+        id,
+      },
     });
 
     if (!link || link.passcode === null) throw new Error("Link not found");

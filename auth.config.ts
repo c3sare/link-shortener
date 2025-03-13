@@ -4,7 +4,7 @@ import type { NextAuthConfig } from "next-auth";
 import { db } from "./drizzle";
 
 export const authConfig = {
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleAdapter(db as any),
   session: {
     strategy: "jwt",
   },

@@ -51,5 +51,6 @@
   "delete_label": "Delete label",
   "light_theme": "Light theme",
   "dark_theme": "Dark theme",
-  "system_theme": "System theme"
+  "system_theme": "System theme",
+  "invalid_passcode": "Invalid passcode"
 }

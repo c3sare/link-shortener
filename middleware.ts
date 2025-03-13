@@ -3,12 +3,12 @@ import NextAuth from "next-auth";
 import createMiddleware from "next-intl/middleware";
 
 import { authConfig } from "./auth.config";
-import { locales } from "./i18n/routing";
+import { routing } from "./i18n/routing";
 
 const { auth } = NextAuth(authConfig);
 
 const I18nMiddleware = createMiddleware({
-  locales,
+  locales: routing.locales,
 
   defaultLocale: "en",
 
@@ -20,7 +20,7 @@ const protectedRoutes = ["/profile"];
 const protectedRoutesWithLocale = [
   ...protectedRoutes,
   ...protectedRoutes.flatMap((route) =>
-    locales.map((locale) => `/${locale}${route}`),
+    routing.locales.map((locale) => `/${locale}${route}`),
   ),
 ];
 

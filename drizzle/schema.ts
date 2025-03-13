@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { index, pgTable, primaryKey } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -15,11 +15,6 @@ export const users = pgTable("user", (t) => ({
     .timestamp("uploaded_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
-}));
-
-export const usersRelations = relations(users, ({ many }) => ({
-  labels: many(labels),
-  links: many(links),
 }));
 
 export const accounts = pgTable(
@@ -93,12 +88,6 @@ export const links = pgTable(
   ],
 );
 
-export const linksRelations = relations(links, ({ many, one }) => ({
-  redirects: many(redirects),
-  user: one(users, { fields: [links.userId], references: [users.id] }),
-  labelLinks: many(labelsLinks),
-}));
-
 export const redirects = pgTable("redirects", (t) => ({
   id: t.serial("id").notNull().primaryKey(),
   linkId: t
@@ -126,11 +115,6 @@ export const labels = pgTable("labels", (t) => ({
     .references(() => users.id, { onDelete: "cascade" }),
 }));
 
-export const labelsRelations = relations(labels, ({ many, one }) => ({
-  labelLinks: many(labelsLinks),
-  user: one(users, { fields: [labels.userId], references: [users.id] }),
-}));
-
 export const labelsLinks = pgTable(
   "labels_links",
   (t) => ({
@@ -145,15 +129,3 @@ export const labelsLinks = pgTable(
   }),
   (t) => [primaryKey({ columns: [t.linkId, t.labelId] })],
 );
-
-export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
-  link: one(links, { fields: [labelsLinks.linkId], references: [links.id] }),
-  label: one(labels, {
-    fields: [labelsLinks.labelId],
-    references: [labels.id],
-  }),
-}));
-
-export const redirectsRelations = relations(redirects, ({ one }) => ({
-  link: one(links, { fields: [redirects.linkId], references: [links.id] }),
-}));
