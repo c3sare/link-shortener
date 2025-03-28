@@ -1,3 +1,2 @@
 bun lint
-bun test
 bunx lint-staged
