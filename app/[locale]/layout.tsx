@@ -50,16 +50,17 @@ export default async function RootLayout({
             <header className="border-b sticky top-0 z-10 bg-background shadow-sm">
               <div className="max-w-7xl px-4 mx-auto flex justify-between items-center h-20">
                 <div>
-                  <Link href="/">
-                    <h1 className="flex items-center gap-2 font-bold select-none">
-                      <ScissorsIcon className="size-8" strokeWidth={2} />{" "}
-                      <span className="flex flex-col">
-                        <span className="border-b-4 border-foreground border-dashed">
-                          Link
-                        </span>
-                        <span>Shortener</span>
+                  <Link
+                    href="/"
+                    className="flex items-center gap-2 font-bold select-none"
+                  >
+                    <ScissorsIcon className="size-8" strokeWidth={2} />{" "}
+                    <span className="flex flex-col">
+                      <span className="border-b-4 border-foreground border-dashed">
+                        Link
                       </span>
-                    </h1>
+                      <span>Shortener</span>
+                    </span>
                   </Link>
                 </div>
                 <nav className="flex gap-4 items-center">

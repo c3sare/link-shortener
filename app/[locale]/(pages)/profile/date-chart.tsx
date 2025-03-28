@@ -23,7 +23,7 @@ export const DateChart = ({ redirects }: Props) => {
   const chartConfig = {
     redirects: {
       label: t("redirects"),
-      color: "hsl(var(--chart-3))",
+      color: "var(--chart-3)",
     },
   };
 
@@ -38,7 +38,7 @@ export const DateChart = ({ redirects }: Props) => {
           axisLine={false}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <Bar dataKey="redirects" fill={`hsl(var(--chart-3))`} radius={4} />
+        <Bar dataKey="redirects" fill={`var(--chart-3)`} radius={4} />
       </BarChart>
     </ChartContainer>
   );

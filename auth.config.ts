@@ -4,6 +4,7 @@ import type { NextAuthConfig } from "next-auth";
 import { db } from "./drizzle";
 
 export const authConfig = {
+  trustHost: true,
   adapter: DrizzleAdapter(db as any),
   session: {
     strategy: "jwt",
