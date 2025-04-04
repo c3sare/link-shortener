@@ -18,7 +18,7 @@ export const useValibotForm = <
 }: PropsType<Z>) => {
   const [isLoading, startTransition] = useTransition();
   const form = useForm<v.InferInput<typeof schema>>({
-    resolver: valibotResolver(schema),
+    resolver: valibotResolver(schema) as ReturnType<typeof valibotResolver>,
     ...props,
   });
 
@@ -27,7 +27,7 @@ export const useValibotForm = <
     isLoading,
     handleSubmit: (
       onValid: Parameters<typeof form.handleSubmit>[0],
-      onInvalid?: Parameters<typeof form.handleSubmit>[1],
+      onInvalid?: Parameters<typeof form.handleSubmit>[1]
     ) =>
       form.handleSubmit(
         (data) =>
@@ -39,7 +39,7 @@ export const useValibotForm = <
               startTransition(() => {
                 onInvalid(data);
               })
-          : undefined,
+          : undefined
       ),
   };
 };
