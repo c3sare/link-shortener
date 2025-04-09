@@ -4,6 +4,17 @@ import { db } from "@/drizzle";
 
 import { PasscodeForm } from "./passcode-form";
 
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+
+  return {
+    title: t("secure_link"),
+  };
+}
+
 type Props = {
   params: Promise<{
     str: string;

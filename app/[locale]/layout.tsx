@@ -15,20 +15,37 @@ import vercelLogo from "@/public/images/vercel.svg";
 
 import { DynamicToaster } from "./dynamic-toaster";
 import { LoginButton } from "./login-button";
+import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
+type Props = Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}>) {
+  params: Promise<{ locale: "pl" | "en" }>;
+}>;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  return {
+    title: {
+      default: t("link_shortner"),
+      template: `%s | ${t("link_shortner")}`,
+    },
+    description:
+      t("created_with") +
+      " Next.js 15, Drizzle ORM, Shadcn/ui, TailwindCSS, Next-intl",
+  };
+}
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -84,6 +101,7 @@ export default async function RootLayout({
                   href="https://vercel.com/"
                   target="_blank"
                   rel="noreferrer"
+                  title={t("redirect_to") + " vercel.com"}
                 >
                   Powered by
                   <div className="flex ml-2">
@@ -97,7 +115,10 @@ export default async function RootLayout({
                   </div>
                 </a>
                 <div className="flex items-center gap-4 flex-wrap sm:justify-center w-full justify-between sm:w-auto">
-                  <a href="https://github.com/c3sare/link-shortener">
+                  <a
+                    href="https://github.com/c3sare/link-shortener"
+                    title={t("look_at_source")}
+                  >
                     <GithubIcon
                       className="dark:invert"
                       width={32}

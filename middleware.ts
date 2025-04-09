@@ -7,22 +7,7 @@ import { routing } from "./i18n/routing";
 
 const { auth } = NextAuth(authConfig);
 
-const I18nMiddleware = createMiddleware({
-  locales: routing.locales,
-
-  defaultLocale: "en",
-
-  localePrefix: "as-needed",
-});
-
 const protectedRoutes = ["/profile"];
-
-const protectedRoutesWithLocale = [
-  ...protectedRoutes,
-  ...protectedRoutes.flatMap((route) =>
-    routing.locales.map((locale) => `/${locale}${route}`),
-  ),
-];
 
 export async function middleware(req: NextRequest) {
   const session = await auth();
@@ -32,17 +17,35 @@ export async function middleware(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith("/l/")) return;
 
   if (!isAuthorized) {
-    if (
-      protectedRoutesWithLocale.some((url) =>
-        req.nextUrl.pathname.startsWith(url),
-      )
-    )
-      return NextResponse.redirect(new URL("/", req.url));
+    const [, locale, ...segments] = req.nextUrl.pathname.split("/");
+
+    if (locale != null) {
+      const restUrl = segments.join("/");
+
+      if (restUrl) {
+        const pathname = "/" + restUrl;
+        const route = protectedRoutes.find((item) => pathname.startsWith(item));
+
+        if (route) return NextResponse.redirect(new URL("/", req.url));
+      }
+    }
   }
+
+  const I18nMiddleware = createMiddleware({
+    locales: routing.locales,
+
+    defaultLocale: "en",
+
+    localePrefix: "as-needed",
+  });
 
   return I18nMiddleware(req);
 }
 
 export const config = {
-  matcher: ["/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)"],
+  matcher: [
+    "/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)",
+    "/",
+    "/(pl|en)/:path*",
+  ],
 };

@@ -25,6 +25,16 @@ import { PageFilters } from "./page-filters";
 import { TitleDescriptionForm } from "./title-description-form";
 import { ItemLabels } from "./item-labels";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+
+  return {
+    title: t("profile"),
+  };
+}
+
 type Props = {
   searchParams: Promise<{
     s?: string;

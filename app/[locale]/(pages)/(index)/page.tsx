@@ -2,6 +2,17 @@ import { useTranslations } from "next-intl";
 
 import { CreateLinkFormWrapper } from "./create-link-form-wrapper";
 
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+
+  return {
+    title: t("home"),
+  };
+}
+
 export default function Home() {
   const t = useTranslations();
 
