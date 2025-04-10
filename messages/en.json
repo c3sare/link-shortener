@@ -58,5 +58,9 @@
   "light_theme": "Light theme",
   "dark_theme": "Dark theme",
   "system_theme": "System theme",
-  "invalid_passcode": "Invalid passcode"
+  "invalid_passcode": "Invalid passcode",
+  "welcome_back": "Welcome back",
+  "login_desc": "Login with your GitHub or Google account",
+  "login_with": "Login with",
+  "go_to_home_page": "Go to home page"
 }

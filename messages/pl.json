@@ -58,5 +58,9 @@
   "delete_label": "Usuń etykietę",
   "light_theme": "Jasny motyw",
   "dark_theme": "Ciemny motyw",
-  "system_theme": "Systemowy motyw"
+  "system_theme": "Systemowy motyw",
+  "welcome_back": "Witaj z powrotem",
+  "login_desc": "Zaloguj się kontem GitHub lub Google",
+  "login_with": "Zaloguj z",
+  "go_to_home_page": "Przejdź do strony głównej"
 }

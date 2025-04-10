@@ -5,7 +5,7 @@ import { db } from "./drizzle";
 
 export const authConfig = {
   trustHost: true,
-  adapter: DrizzleAdapter(db as any),
+  adapter: DrizzleAdapter(db),
   session: {
     strategy: "jwt",
   },

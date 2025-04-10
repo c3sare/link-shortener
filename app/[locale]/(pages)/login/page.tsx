@@ -32,6 +32,7 @@ type Props = {
 };
 
 export default async function LoginPage({ searchParams, params }: Props) {
+  const t = await getTranslations();
   const { locale } = await params;
   const session = await auth();
 
@@ -43,10 +44,8 @@ export default async function LoginPage({ searchParams, params }: Props) {
     <div className="flex-1 flex justify-center items-center flex-col gap-2">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>
-            Login with your GitHub or Google account
-          </CardDescription>
+          <CardTitle className="text-xl">{t("welcome_back")}</CardTitle>
+          <CardDescription>{t("login_desc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form>
@@ -61,7 +60,7 @@ export default async function LoginPage({ searchParams, params }: Props) {
                   }}
                 >
                   <GithubIcon className="size-4 mr-2" />
-                  Login with GitHub
+                  {t("login_with")} GitHub
                 </Button>
                 <Button
                   className="w-full"
@@ -72,7 +71,7 @@ export default async function LoginPage({ searchParams, params }: Props) {
                   }}
                 >
                   <GoogleIcon className="size-4 mr-2" />
-                  Login with Google
+                  {t("login_with")} Google
                 </Button>
               </div>
               <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
@@ -83,7 +82,7 @@ export default async function LoginPage({ searchParams, params }: Props) {
               <Button variant="secondary" asChild>
                 <Link href="/">
                   <ArrowLeft className="mr-2 size-4" />
-                  Go to home page
+                  {t("go_to_home_page")}
                 </Link>
               </Button>
             </div>
