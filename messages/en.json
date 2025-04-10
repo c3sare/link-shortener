@@ -62,5 +62,6 @@
   "welcome_back": "Welcome back",
   "login_desc": "Login with your GitHub or Google account",
   "login_with": "Login with",
-  "go_to_home_page": "Go to home page"
+  "go_to_home_page": "Go to home page",
+  "or": "Or"
 }

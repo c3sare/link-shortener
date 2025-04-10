@@ -62,5 +62,6 @@
   "welcome_back": "Witaj z powrotem",
   "login_desc": "Zaloguj się kontem GitHub lub Google",
   "login_with": "Zaloguj z",
-  "go_to_home_page": "Przejdź do strony głównej"
+  "go_to_home_page": "Przejdź do strony głównej",
+  "or": "Lub"
 }
