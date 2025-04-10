@@ -12,13 +12,11 @@ export const confirmLinkPasscode = action
     v.object({
       passcode: v.pipe(v.string(), v.length(6)),
       id: v.string(),
-    }),
+    })
   )
   .action(async ({ parsedInput: { passcode, id } }) => {
     const link = await db.query.links.findFirst({
-      where: {
-        id,
-      },
+      where: (link, { eq }) => eq(link.id, id),
     });
 
     if (!link || link.passcode === null) throw new Error("Link not found");

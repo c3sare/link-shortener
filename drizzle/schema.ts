@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { index, pgTable, primaryKey } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -39,7 +39,7 @@ export const accounts = pgTable(
     primaryKey({
       columns: [t.provider, t.providerAccountId],
     }),
-  ],
+  ]
 );
 
 export const sessions = pgTable("session", (t) => ({
@@ -58,7 +58,7 @@ export const verificationTokens = pgTable(
     token: t.text("token").notNull(),
     expires: t.timestamp("expires", { mode: "date" }).notNull(),
   }),
-  (t) => [primaryKey({ columns: [t.identifier, t.token] })],
+  (t) => [primaryKey({ columns: [t.identifier, t.token] })]
 );
 
 export const links = pgTable(
@@ -83,9 +83,9 @@ export const links = pgTable(
       sql`(
           setweight(to_tsvector('english', ${table.title}), 'A') ||
           setweight(to_tsvector('english', ${table.description}), 'B')
-      )`,
+      )`
     ),
-  ],
+  ]
 );
 
 export const redirects = pgTable("redirects", (t) => ({
@@ -127,5 +127,33 @@ export const labelsLinks = pgTable(
       .notNull()
       .references(() => labels.id, { onDelete: "cascade" }),
   }),
-  (t) => [primaryKey({ columns: [t.linkId, t.labelId] })],
+  (t) => [primaryKey({ columns: [t.linkId, t.labelId] })]
 );
+
+export const usersRelations = relations(users, ({ many }) => ({
+  labels: many(labels),
+  links: many(links),
+}));
+
+export const linksRelations = relations(links, ({ many, one }) => ({
+  redirects: many(redirects),
+  user: one(users, { fields: [links.userId], references: [users.id] }),
+  labelLinks: many(labelsLinks),
+}));
+
+export const labelsRelations = relations(labels, ({ many, one }) => ({
+  labelLinks: many(labelsLinks),
+  user: one(users, { fields: [labels.userId], references: [users.id] }),
+}));
+
+export const labelsLinksRelations = relations(labelsLinks, ({ one }) => ({
+  link: one(links, { fields: [labelsLinks.linkId], references: [links.id] }),
+  label: one(labels, {
+    fields: [labelsLinks.labelId],
+    references: [labels.id],
+  }),
+}));
+
+export const redirectsRelations = relations(redirects, ({ one }) => ({
+  link: one(links, { fields: [redirects.linkId], references: [links.id] }),
+}));

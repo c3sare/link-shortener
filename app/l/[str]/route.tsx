@@ -8,14 +8,12 @@ export const runtime = "edge";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ str: string }> },
+  { params }: { params: Promise<{ str: string }> }
 ) {
   const { str } = await params;
 
   const item = await db.query.links.findFirst({
-    where: {
-      id: str,
-    },
+    where: (link, { eq }) => eq(link.id, str),
   });
 
   if (!item) return notFound();

@@ -9,9 +9,7 @@ export const getUserLabels = async () => {
   if (!userId) return [];
 
   const labels = await db.query.labels.findMany({
-    where: {
-      userId,
-    },
+    where: (label, { eq }) => eq(label.userId, userId),
   });
 
   return labels;
