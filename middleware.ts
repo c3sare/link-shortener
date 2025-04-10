@@ -26,7 +26,13 @@ export async function middleware(req: NextRequest) {
         const pathname = "/" + restUrl;
         const route = protectedRoutes.find((item) => pathname.startsWith(item));
 
-        if (route) return NextResponse.redirect(new URL("/", req.url));
+        if (route)
+          return NextResponse.redirect(
+            new URL(
+              `/${locale}/login?backUrl=${encodeURIComponent(req.nextUrl.pathname)}`,
+              req.url,
+            ),
+          );
       }
     }
   }
