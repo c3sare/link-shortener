@@ -2,6 +2,8 @@
   "name": "link-shortener",
   "version": "0.1.0",
   "private": true,
+  "author": "Marcin Marciniuk",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
