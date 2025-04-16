@@ -19,8 +19,7 @@ const eslintConfig = [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
-    "plugin:import/typescript",
-    "plugin:playwright/recommended"
+    "plugin:import/typescript"
   ),
   {
     plugins: {
