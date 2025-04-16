@@ -13,7 +13,9 @@ export async function GET(
   const { str } = await params;
 
   const item = await db.query.links.findFirst({
-    where: (link, { eq }) => eq(link.id, str),
+    where: {
+      id: str,
+    },
   });
 
   if (!item) return notFound();

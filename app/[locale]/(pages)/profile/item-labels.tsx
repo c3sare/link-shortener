@@ -25,9 +25,9 @@ export const ItemLabels = ({ item, labels }: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="hover:bg-gray-100/10 cursor-pointer rounded-sm p-1 text-xs space-x-2">
-          {item?.labelLinks.length > 0 ? (
-            item.labelLinks.map(({ label: { id, label } }) => (
-              <Badge key={id}>{label}</Badge>
+          {item.labels.length > 0 ? (
+            item.labels.map((label) => (
+              <Badge key={label.id}>{label.label}</Badge>
             ))
           ) : (
             <span className="text-muted-foreground text-sm">
@@ -39,19 +39,19 @@ export const ItemLabels = ({ item, labels }: Props) => {
       <DropdownMenuContent side="bottom" align="start">
         <DropdownMenuLabel>{t("labels")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {labels.map(({ label, id }) => (
+        {labels.map((label) => (
           <DropdownMenuCheckboxItem
-            key={id}
-            checked={item.labelLinks.some(({ label }) => label.id === id)}
+            key={label.id}
+            checked={item.labels.some((labelx) => label.id === labelx.id)}
             onCheckedChange={async (value) => {
               await addLabelToLink({
-                labelId: id,
+                labelId: label.id,
                 linkId: item.id,
                 value: !!value,
               });
             }}
           >
-            {label}
+            {label.label}
           </DropdownMenuCheckboxItem>
         ))}
       </DropdownMenuContent>

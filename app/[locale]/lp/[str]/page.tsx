@@ -27,8 +27,12 @@ export default async function PasscodeLinkPage({ params }: Props) {
     columns: {
       id: true,
     },
-    where: (link, { eq, and, isNotNull }) =>
-      and(eq(link.id, str), isNotNull(link.passcode)),
+    where: {
+      id: str,
+      passcode: {
+        isNotNull: true,
+      },
+    },
   });
 
   if (!link) return notFound();
