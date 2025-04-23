@@ -30,20 +30,14 @@ export async function middleware(req: NextRequest) {
           return NextResponse.redirect(
             new URL(
               `/${locale}/login?backUrl=${encodeURIComponent(req.nextUrl.pathname)}`,
-              req.url,
-            ),
+              req.url
+            )
           );
       }
     }
   }
 
-  const I18nMiddleware = createMiddleware({
-    locales: routing.locales,
-
-    defaultLocale: "en",
-
-    localePrefix: "as-needed",
-  });
+  const I18nMiddleware = createMiddleware(routing);
 
   return I18nMiddleware(req);
 }
