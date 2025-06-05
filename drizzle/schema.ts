@@ -43,9 +43,9 @@ export const accounts = pgTable(
 );
 
 export const sessions = pgTable("session", (t) => ({
-  sessionToken: t.text().primaryKey(),
+  sessionToken: t.text("sessionToken").primaryKey(),
   userId: t
-    .text()
+    .text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: t.timestamp({ mode: "date" }).notNull(),
@@ -59,6 +59,30 @@ export const verificationTokens = pgTable(
     expires: t.timestamp({ mode: "date" }).notNull(),
   }),
   (t) => [primaryKey({ columns: [t.identifier, t.token] })],
+);
+
+export const authenticators = pgTable(
+  "authenticator",
+  (t) => ({
+    credentialID: t.text("credentialID").notNull().unique(),
+    userId: t
+      .text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    providerAccountId: t.text("providerAccountId").notNull(),
+    credentialPublicKey: t.text("credentialPublicKey").notNull(),
+    counter: t.integer("counter").notNull(),
+    credentialDeviceType: t.text("credentialDeviceType").notNull(),
+    credentialBackedUp: t.boolean("credentialBackedUp").notNull(),
+    transports: t.text("transports"),
+  }),
+  (authenticator) => [
+    {
+      compositePK: primaryKey({
+        columns: [authenticator.userId, authenticator.credentialID],
+      }),
+    },
+  ],
 );
 
 export const links = pgTable(
