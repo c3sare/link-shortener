@@ -9,7 +9,7 @@ export const users = pgTable("user", (t) => ({
     .$defaultFn(() => crypto.randomUUID()),
   name: t.text(),
   email: t.text().notNull(),
-  emailVerified: t.timestamp({ mode: "date" }),
+  emailVerified: t.timestamp("emailVerified", { mode: "date" }),
   image: t.text(),
   createdAt: t
     .timestamp({ mode: "date" })
@@ -21,12 +21,12 @@ export const accounts = pgTable(
   "account",
   (t) => ({
     userId: t
-      .text()
+      .text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: t.text().$type<AdapterAccountType>().notNull(),
     provider: t.text().notNull(),
-    providerAccountId: t.text().notNull(),
+    providerAccountId: t.text("providerAccountId").notNull(),
     refresh_token: t.text(),
     access_token: t.text(),
     expires_at: t.integer(),
