@@ -9,10 +9,10 @@ export const users = pgTable("user", (t) => ({
     .$defaultFn(() => crypto.randomUUID()),
   name: t.text(),
   email: t.text().notNull(),
-  emailVerified: t.timestamp("email_verified", { mode: "date" }),
+  emailVerified: t.timestamp({ mode: "date" }),
   image: t.text(),
   createdAt: t
-    .timestamp("created_at", { mode: "date" })
+    .timestamp({ mode: "date" })
     .notNull()
     .default(sql`now()`),
 }));
@@ -48,7 +48,7 @@ export const sessions = pgTable("session", (t) => ({
     .text()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  expires: t.timestamp("expires", { mode: "date" }).notNull(),
+  expires: t.timestamp({ mode: "date" }).notNull(),
 }));
 
 export const verificationTokens = pgTable(
@@ -56,7 +56,7 @@ export const verificationTokens = pgTable(
   (t) => ({
     identifier: t.text().notNull(),
     token: t.text().notNull(),
-    expires: t.timestamp("expires", { mode: "date" }).notNull(),
+    expires: t.timestamp({ mode: "date" }).notNull(),
   }),
   (t) => [primaryKey({ columns: [t.identifier, t.token] })],
 );
@@ -71,7 +71,7 @@ export const links = pgTable(
     title: t.text(),
     description: t.text(),
     createdAt: t
-      .timestamp("created_at", { mode: "date" })
+      .timestamp({ mode: "date" })
       .notNull()
       .default(sql`now()`),
   }),
@@ -99,7 +99,7 @@ export const redirects = pgTable("redirects", (t) => ({
   latitude: t.text(),
   timezone: t.text(),
   createdAt: t
-    .timestamp("created_at", { mode: "date" })
+    .timestamp({ mode: "date" })
     .notNull()
     .default(sql`now()`),
 }));
