@@ -4,15 +4,15 @@ import type { AdapterAccountType } from "next-auth/adapters";
 
 export const users = pgTable("user", (t) => ({
   id: t
-    .text("id")
+    .text()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  name: t.text("name"),
-  email: t.text("email").notNull(),
-  emailVerified: t.timestamp("emailVerified", { mode: "date" }),
-  image: t.text("image"),
+  name: t.text(),
+  email: t.text().notNull(),
+  emailVerified: t.timestamp("email_verified", { mode: "date" }),
+  image: t.text(),
   createdAt: t
-    .timestamp("uploaded_at", { mode: "date" })
+    .timestamp("created_at", { mode: "date" })
     .notNull()
     .default(sql`now()`),
 }));
@@ -21,31 +21,31 @@ export const accounts = pgTable(
   "account",
   (t) => ({
     userId: t
-      .text("userId")
+      .text()
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: t.text("type").$type<AdapterAccountType>().notNull(),
-    provider: t.text("provider").notNull(),
-    providerAccountId: t.text("providerAccountId").notNull(),
-    refresh_token: t.text("refresh_token"),
-    access_token: t.text("access_token"),
-    expires_at: t.integer("expires_at"),
-    token_type: t.text("token_type"),
-    scope: t.text("scope"),
-    id_token: t.text("id_token"),
-    session_state: t.text("session_state"),
+    type: t.text().$type<AdapterAccountType>().notNull(),
+    provider: t.text().notNull(),
+    providerAccountId: t.text().notNull(),
+    refresh_token: t.text(),
+    access_token: t.text(),
+    expires_at: t.integer(),
+    token_type: t.text(),
+    scope: t.text(),
+    id_token: t.text(),
+    session_state: t.text(),
   }),
   (t) => [
     primaryKey({
       columns: [t.provider, t.providerAccountId],
     }),
-  ]
+  ],
 );
 
 export const sessions = pgTable("session", (t) => ({
-  sessionToken: t.text("sessionToken").primaryKey(),
+  sessionToken: t.text().primaryKey(),
   userId: t
-    .text("userId")
+    .text()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: t.timestamp("expires", { mode: "date" }).notNull(),
@@ -54,24 +54,22 @@ export const sessions = pgTable("session", (t) => ({
 export const verificationTokens = pgTable(
   "verificationToken",
   (t) => ({
-    identifier: t.text("identifier").notNull(),
-    token: t.text("token").notNull(),
+    identifier: t.text().notNull(),
+    token: t.text().notNull(),
     expires: t.timestamp("expires", { mode: "date" }).notNull(),
   }),
-  (t) => [primaryKey({ columns: [t.identifier, t.token] })]
+  (t) => [primaryKey({ columns: [t.identifier, t.token] })],
 );
 
 export const links = pgTable(
   "links",
   (t) => ({
-    id: t.text("id").notNull().primaryKey(),
-    userId: t
-      .text("user_id")
-      .references(() => users.id, { onDelete: "cascade" }),
-    url: t.text("url").notNull(),
-    passcode: t.text("passcode"),
-    title: t.text("title"),
-    description: t.text("description"),
+    id: t.text().notNull().primaryKey(),
+    userId: t.text().references(() => users.id, { onDelete: "cascade" }),
+    url: t.text().notNull(),
+    passcode: t.text(),
+    title: t.text(),
+    description: t.text(),
     createdAt: t
       .timestamp("created_at", { mode: "date" })
       .notNull()
@@ -83,23 +81,23 @@ export const links = pgTable(
       sql`(
           setweight(to_tsvector('english', ${table.title}), 'A') ||
           setweight(to_tsvector('english', ${table.description}), 'B')
-      )`
+      )`,
     ),
-  ]
+  ],
 );
 
 export const redirects = pgTable("redirects", (t) => ({
-  id: t.serial("id").notNull().primaryKey(),
+  id: t.serial().notNull().primaryKey(),
   linkId: t
-    .text("link_id")
+    .text()
     .notNull()
     .references(() => links.id, { onDelete: "cascade" }),
-  ip: t.text("ip"),
-  country: t.text("country"),
-  city: t.text("city"),
-  continent: t.text("continent"),
-  latitude: t.text("latitude"),
-  timezone: t.text("timezone"),
+  ip: t.text(),
+  country: t.text(),
+  city: t.text(),
+  continent: t.text(),
+  latitude: t.text(),
+  timezone: t.text(),
   createdAt: t
     .timestamp("created_at", { mode: "date" })
     .notNull()
@@ -107,10 +105,10 @@ export const redirects = pgTable("redirects", (t) => ({
 }));
 
 export const labels = pgTable("labels", (t) => ({
-  id: t.serial("id").notNull().primaryKey(),
-  label: t.text("label").notNull(),
+  id: t.serial().notNull().primaryKey(),
+  label: t.text().notNull(),
   userId: t
-    .text("user_id")
+    .text()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 }));
@@ -119,15 +117,15 @@ export const labelsLinks = pgTable(
   "labels_links",
   (t) => ({
     linkId: t
-      .text("link_id")
+      .text()
       .notNull()
       .references(() => links.id, { onDelete: "cascade" }),
     labelId: t
-      .integer("label_id")
+      .integer()
       .notNull()
       .references(() => labels.id, { onDelete: "cascade" }),
   }),
-  (t) => [primaryKey({ columns: [t.linkId, t.labelId] })]
+  (t) => [primaryKey({ columns: [t.linkId, t.labelId] })],
 );
 
 export const usersRelations = relations(users, ({ many }) => ({
