@@ -17,6 +17,10 @@ export const AddLabelForm = () => {
     },
   });
 
+  const { isLoading, isSubmitting } = form.formState;
+
+  const disabled = isLoading || isSubmitting;
+
   const onSubmit = form.handleSubmit(async (data) => {
     await addUserLabel(data);
     form.reset();
@@ -26,11 +30,11 @@ export const AddLabelForm = () => {
     <form className="flex gap-2" onSubmit={onSubmit}>
       <Input
         {...form.register("label")}
-        disabled={form.isLoading}
+        disabled={disabled}
         placeholder={t("new_label") + "..."}
         className="flex-1"
       />
-      <Button disabled={form.isLoading} type="submit">
+      <Button disabled={form.disabledSubmit} type="submit">
         {t("add")}
       </Button>
     </form>

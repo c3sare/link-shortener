@@ -35,12 +35,27 @@ const schema = v.pipe(
 const CreateLinkForm = () => {
   const t = useTranslations();
   const [url, setUrl] = useState<string | null>(null);
-  const { register, handleSubmit, setValue, watch, control, isLoading } =
-    useValibotForm({
-      schema,
-    });
+  const {
+    disabledSubmit,
+    reset,
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState: { isLoading, isSubmitting },
+  } = useValibotForm({
+    defaultValues: {
+      addPasscode: false,
+      passcode: "",
+      url: "",
+    },
+    schema,
+  });
 
   const isVisiblePasscode = watch("addPasscode");
+
+  const disabled = isLoading || isSubmitting;
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await addLink({
@@ -50,12 +65,7 @@ const CreateLinkForm = () => {
 
     const url = response?.data?.shorterUrl;
 
-    if (url) {
-      setValue("url", "");
-      setValue("addPasscode", false);
-      setValue("passcode", undefined);
-      setUrl(url);
-    }
+    if (url) reset();
   });
 
   return url ? (
@@ -66,16 +76,20 @@ const CreateLinkForm = () => {
         <Input
           {...register("url")}
           placeholder={t("shortener_input_placeholder")}
-          disabled={isLoading}
+          disabled={disabled}
         />
-        <Button disabled={isLoading} type="submit" className="w-full sm:w-20">
+        <Button
+          disabled={disabledSubmit}
+          type="submit"
+          className="w-full sm:w-20"
+        >
           {t("shortener_form_submit")}
         </Button>
       </div>
       <Label className="w-full flex items-center gap-2 justify-center">
         <Switch
           checked={isVisiblePasscode ?? false}
-          disabled={isLoading}
+          disabled={disabled}
           onCheckedChange={(value) => setValue("addPasscode", value)}
           aria-label="Add passcode"
         />
@@ -86,7 +100,7 @@ const CreateLinkForm = () => {
           <Controller
             name="passcode"
             control={control}
-            disabled={isLoading}
+            disabled={disabled}
             render={({ field }) => (
               <InputOTP maxLength={6} {...field} className="max-w-sm mx-auto">
                 <InputOTPGroup>

@@ -20,11 +20,13 @@ type Props = {
 
 export const PasscodeForm = ({ id }: Props) => {
   const t = useTranslations();
-  const form = useValibotForm({
+  const { disabledSubmit, ...form } = useValibotForm({
     schema: v.object({
       passcode: v.pipe(v.string(), v.length(6)),
     }),
   });
+
+  const { isLoading, isSubmitting } = form.formState;
 
   const onSubmit = form.handleSubmit(async (data) => {
     const response = await confirmLinkPasscode({
@@ -48,7 +50,7 @@ export const PasscodeForm = ({ id }: Props) => {
       <Controller
         name="passcode"
         control={form.control}
-        disabled={form.isLoading}
+        disabled={isLoading || isSubmitting}
         render={({ field }) => (
           <InputOTP maxLength={6} {...field}>
             <InputOTPGroup>
@@ -65,8 +67,8 @@ export const PasscodeForm = ({ id }: Props) => {
           </InputOTP>
         )}
       />
-      <Button disabled={form.isLoading} type="submit">
-        {t("confirm")}
+      <Button disabled={disabledSubmit} type="submit">
+        {isSubmitting ? t("loading") + "..." : t("confirm")}
       </Button>
     </form>
   );

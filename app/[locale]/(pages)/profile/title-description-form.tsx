@@ -45,6 +45,10 @@ export const TitleDescriptionForm = ({
     },
   });
 
+  const { isLoading, isSubmitting } = form.formState;
+
+  const disabled = isLoading || isSubmitting;
+
   const onSubmit = form.handleSubmit(async (data) => {
     await updateTitleDesc({
       linkId,
@@ -57,7 +61,7 @@ export const TitleDescriptionForm = ({
   return (
     <Dialog
       open={open}
-      onOpenChange={(value) => (form.isLoading ? null : setOpen(value))}
+      onOpenChange={(value) => (isSubmitting ? null : setOpen(value))}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-xs">
@@ -72,7 +76,7 @@ export const TitleDescriptionForm = ({
             {t("title")}
             <Input
               {...form.register("title")}
-              disabled={form.isLoading}
+              disabled={disabled}
               className="w-full"
             />
           </Label>
@@ -80,12 +84,16 @@ export const TitleDescriptionForm = ({
             {t("description")}
             <Textarea
               {...form.register("description")}
-              disabled={form.isLoading}
+              disabled={disabled}
               className="w-full resize-none"
             />
           </Label>
-          <Button disabled={form.isLoading} type="submit" className="w-full">
-            {t("save")}
+          <Button
+            disabled={form.disabledSubmit}
+            type="submit"
+            className="w-full"
+          >
+            {isSubmitting ? t("loading") + "..." : t("save")}
           </Button>
         </form>
       </DialogContent>

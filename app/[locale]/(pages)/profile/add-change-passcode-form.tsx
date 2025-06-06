@@ -37,6 +37,10 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
     }),
   });
 
+  const { isLoading, isSubmitting } = form.formState;
+
+  const disabled = isLoading || isSubmitting;
+
   const onSubmit = form.handleSubmit(async (data) => {
     await addChangePasscode({
       linkId,
@@ -51,7 +55,7 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
     <Dialog
       open={open}
       onOpenChange={(isOpen) => {
-        if (form.isLoading) return;
+        if (isSubmitting) return;
         setIsOpen(isOpen);
       }}
     >
@@ -72,7 +76,7 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
             <Controller
               name="passcode"
               control={form.control}
-              disabled={form.isLoading}
+              disabled={disabled}
               render={({ field }) => (
                 <InputOTP maxLength={6} {...field}>
                   <InputOTPGroup>
@@ -90,8 +94,8 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
               )}
             />
           </div>
-          <Button disabled={form.isLoading} type="submit">
-            {t("confirm")}
+          <Button disabled={form.disabledSubmit} type="submit">
+            {isSubmitting ? t("loading") + "..." : t("confirm")}
           </Button>
         </form>
       </DialogContent>
