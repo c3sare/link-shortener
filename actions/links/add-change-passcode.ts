@@ -1,6 +1,6 @@
 "use server";
 
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as schema from "@/drizzle/schema";
@@ -9,10 +9,10 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const addChangePasscode = authAction
-  .schema(
-    v.object({
-      linkId: v.string(),
-      passcode: v.pipe(v.string(), v.length(6)),
+  .inputSchema(
+    z.object({
+      linkId: z.string(),
+      passcode: z.string().check(z.length(6)),
     }),
   )
   .action(

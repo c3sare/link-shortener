@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 
 import { updateTitleDesc } from "@/actions/links/update-title-desc";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useValibotForm } from "@/hooks/useValibotForm";
+import { useZodForm } from "@/hooks/useZodForm";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -34,10 +34,10 @@ export const TitleDescriptionForm = ({
 }: Props) => {
   const t = useTranslations();
   const [open, setOpen] = useState<boolean>(false);
-  const form = useValibotForm({
-    schema: v.object({
-      title: v.optional(v.string()),
-      description: v.optional(v.string()),
+  const form = useZodForm({
+    schema: z.object({
+      title: z.optional(z.string()),
+      description: z.optional(z.string()),
     }),
     defaultValues: {
       title: title ?? "",

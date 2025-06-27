@@ -8,13 +8,13 @@ import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
 import bcrypt from "bcryptjs";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 
 export const addLink = action
-  .schema(
-    v.object({
-      url: v.pipe(v.string(), v.url()),
-      passcode: v.nullable(v.optional(v.pipe(v.string(), v.length(6)))),
+  .inputSchema(
+    z.object({
+      url: z.url(),
+      passcode: z.nullable(z.optional(z.string().check(z.length(6)))),
     }),
   )
   .action(async ({ parsedInput: { url, passcode } }) => {

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 
 import { addChangePasscode } from "@/actions/links/add-change-passcode";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useValibotForm } from "@/hooks/useValibotForm";
+import { useZodForm } from "@/hooks/useZodForm";
 
 type Props = {
   havePasscode: boolean;
@@ -31,9 +31,9 @@ type Props = {
 export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
   const [open, setIsOpen] = useState(false);
   const t = useTranslations();
-  const form = useValibotForm({
-    schema: v.object({
-      passcode: v.pipe(v.string(), v.length(6)),
+  const form = useZodForm({
+    schema: z.object({
+      passcode: z.string().check(z.length(6)),
     }),
   });
 

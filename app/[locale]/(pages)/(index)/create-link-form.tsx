@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 
 import { addLink } from "@/actions/links/addLink";
 import { Button } from "@/components/ui/button";
@@ -14,17 +14,17 @@ import {
 } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useValibotForm } from "@/hooks/useValibotForm";
+import { useZodForm } from "@/hooks/useZodForm";
 
 import { ReadyLinkInput } from "./ready-link-input";
 
-const schema = v.pipe(
-  v.object({
-    url: v.pipe(v.string(), v.url()),
-    addPasscode: v.optional(v.boolean()),
-    passcode: v.optional(v.pipe(v.string(), v.length(6))),
+const schema = z.pipe(
+  z.object({
+    url: z.url(),
+    addPasscode: z.optional(z.boolean()),
+    passcode: z.optional(z.string().check(z.length(6))),
   }),
-  v.transform((input) => {
+  z.transform((input) => {
     if (input.addPasscode && input?.passcode?.length !== 6) {
       throw new Error("Passcode must be 6 characters long");
     }
@@ -44,7 +44,7 @@ const CreateLinkForm = () => {
     watch,
     control,
     formState: { isLoading, isSubmitting },
-  } = useValibotForm({
+  } = useZodForm({
     defaultValues: {
       addPasscode: false,
       passcode: "",

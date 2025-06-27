@@ -1,6 +1,6 @@
 "use server";
 
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as s from "@/drizzle/schema";
@@ -8,11 +8,11 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const updateTitleDesc = authAction
-  .schema(
-    v.object({
-      linkId: v.string(),
-      title: v.optional(v.string()),
-      description: v.optional(v.string()),
+  .inputSchema(
+    z.object({
+      linkId: z.string(),
+      title: z.optional(z.string()),
+      description: z.optional(z.string()),
     }),
   )
   .action(

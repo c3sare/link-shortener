@@ -1,15 +1,15 @@
 "use server";
 
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as s from "@/drizzle/schema";
 import { revalidatePath } from "next/cache";
 
 export const addUserLabel = authAction
-  .schema(
-    v.object({
-      label: v.string(),
+  .inputSchema(
+    z.object({
+      label: z.string(),
     }),
   )
   .action(

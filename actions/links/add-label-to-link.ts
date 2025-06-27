@@ -3,18 +3,18 @@
 import { db } from "@/drizzle";
 import * as s from "@/drizzle/schema";
 import { authAction } from "../safe-action";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-const schema = v.object({
-  linkId: v.string(),
-  labelId: v.pipe(v.number(), v.minValue(1)),
-  value: v.boolean(),
+const schema = z.object({
+  linkId: z.string(),
+  labelId: z.number().check(z.minimum(1)),
+  value: z.boolean(),
 });
 
 export const addLabelToLink = authAction
-  .schema(schema)
+  .inputSchema(schema)
   .action(async ({ parsedInput: { linkId, labelId, value } }) => {
     if (value) {
       const addItem = await db

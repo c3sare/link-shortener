@@ -2,8 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Controller } from "react-hook-form";
-import * as v from "valibot";
-
+import { z } from "zod/v4-mini";
 import { confirmLinkPasscode } from "@/actions/links/confirmLinkPasscode";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +11,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useValibotForm } from "@/hooks/useValibotForm";
+import { useZodForm } from "@/hooks/useZodForm";
 
 type Props = {
   id: string;
@@ -20,9 +19,9 @@ type Props = {
 
 export const PasscodeForm = ({ id }: Props) => {
   const t = useTranslations();
-  const { disabledSubmit, ...form } = useValibotForm({
-    schema: v.object({
-      passcode: v.pipe(v.string(), v.length(6)),
+  const { disabledSubmit, ...form } = useZodForm({
+    schema: z.object({
+      passcode: z.string().check(z.length(6)),
     }),
   });
 

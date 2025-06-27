@@ -1,6 +1,6 @@
 "use server";
 
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import { action } from "../safe-action";
 import bcrypt from "bcryptjs";
 import { db } from "@/drizzle";
@@ -8,11 +8,11 @@ import { redirect } from "next/navigation";
 import { registerRedirect } from "./register-redirect";
 
 export const confirmLinkPasscode = action
-  .schema(
-    v.object({
-      passcode: v.pipe(v.string(), v.length(6)),
-      id: v.string(),
-    })
+  .inputSchema(
+    z.object({
+      passcode: z.string().check(z.length(6)),
+      id: z.string(),
+    }),
   )
   .action(async ({ parsedInput: { passcode, id } }) => {
     const link = await db.query.links.findFirst({

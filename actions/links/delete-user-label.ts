@@ -2,13 +2,13 @@
 
 import { db } from "@/drizzle";
 import { authAction } from "../safe-action";
-import * as v from "valibot";
+import { z } from "zod/v4-mini";
 import * as s from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const deleteUserLabel = authAction
-  .schema(v.pipe(v.number(), v.minValue(1)))
+  .inputSchema(z.number().check(z.minimum(1)))
   .action(async ({ parsedInput: labelId, ctx: { session } }) => {
     const deletedItem = await db
       .delete(s.labels)
