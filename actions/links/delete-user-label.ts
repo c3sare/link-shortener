@@ -2,7 +2,7 @@
 
 import { db } from "@/drizzle";
 import { authAction } from "../safe-action";
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 import * as s from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";

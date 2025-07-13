@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 
 import { updateTitleDesc } from "@/actions/links/update-title-desc";
 import { Button } from "@/components/ui/button";

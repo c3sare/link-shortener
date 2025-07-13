@@ -1,6 +1,6 @@
 "use server";
 
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 import { action } from "../safe-action";
 import bcrypt from "bcryptjs";
 import { db } from "@/drizzle";

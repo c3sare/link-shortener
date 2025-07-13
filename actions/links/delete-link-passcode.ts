@@ -1,6 +1,6 @@
 "use server";
 
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as schema from "@/drizzle/schema";

@@ -8,7 +8,7 @@ import { getBaseUrl } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { count } from "drizzle-orm";
 import bcrypt from "bcryptjs";
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 
 export const addLink = action
   .inputSchema(

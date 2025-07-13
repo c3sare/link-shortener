@@ -1,4 +1,4 @@
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 
 import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";

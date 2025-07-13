@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { z } from "zod/v4-mini";
+import { z } from "zod/mini";
 
 import { addChangePasscode } from "@/actions/links/add-change-passcode";
 import { Button } from "@/components/ui/button";
