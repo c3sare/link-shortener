@@ -1,7 +1,7 @@
 import { ScissorsIcon } from "lucide-react";
 import { Inter as FontSans } from "next/font/google";
 import Image from "next/image";
-import { NextIntlClientProvider } from "next-intl";
+import { Locale, NextIntlClientProvider } from "next-intl";
 import { Suspense } from "react";
 
 import { GithubIcon } from "@/components/icons/github-icon";
@@ -25,7 +25,7 @@ const fontSans = FontSans({
 
 type Props = Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: "pl" | "en" }>;
+  params: Promise<{ locale: Locale }>;
 }>;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
