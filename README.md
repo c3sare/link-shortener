@@ -1,6 +1,6 @@
 # Link shortener
 
-[DEMO](https://link-shortener-omega-ten.vercel.app/)
+[DEMO](https://link-shortenerx.netlify.app/pl)
 
 ![Application Logo](https://github.com/c3sare/link-shortener/assets/80517943/826cc31e-8128-480a-bfc3-c5b3b4f2edee)
 
