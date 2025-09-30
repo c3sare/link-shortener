@@ -19,7 +19,7 @@ const eslintConfig = [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
   ),
   {
     plugins: {
@@ -31,6 +31,17 @@ const eslintConfig = [
       "unicorn/no-array-reduce": "off",
       "unicorn/prevent-abbreviations": "off",
     },
+  },
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "cypress.config.ts",
+      "cypress/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
   },
   eslintConfigPrettier,
 ];
