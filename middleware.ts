@@ -30,8 +30,8 @@ export async function middleware(req: NextRequest) {
           return NextResponse.redirect(
             new URL(
               `/${locale}/login?backUrl=${encodeURIComponent(req.nextUrl.pathname)}`,
-              req.url
-            )
+              req.url,
+            ),
           );
       }
     }

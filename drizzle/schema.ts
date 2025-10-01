@@ -11,10 +11,7 @@ export const users = pgTable("user", (t) => ({
   email: t.text().notNull(),
   emailVerified: t.timestamp("emailVerified", { mode: "date" }),
   image: t.text(),
-  createdAt: t
-    .timestamp({ mode: "date" })
-    .notNull()
-    .default(sql`now()`),
+  createdAt: t.timestamp({ mode: "date" }).notNull().default(sql`now()`),
 }));
 
 export const accounts = pgTable(
@@ -94,10 +91,7 @@ export const links = pgTable(
     passcode: t.text(),
     title: t.text(),
     description: t.text(),
-    createdAt: t
-      .timestamp({ mode: "date" })
-      .notNull()
-      .default(sql`now()`),
+    createdAt: t.timestamp({ mode: "date" }).notNull().default(sql`now()`),
   }),
   (table) => [
     index("search_index").using(
@@ -122,10 +116,7 @@ export const redirects = pgTable("redirects", (t) => ({
   continent: t.text(),
   latitude: t.text(),
   timezone: t.text(),
-  createdAt: t
-    .timestamp({ mode: "date" })
-    .notNull()
-    .default(sql`now()`),
+  createdAt: t.timestamp({ mode: "date" }).notNull().default(sql`now()`),
 }));
 
 export const labels = pgTable("labels", (t) => ({

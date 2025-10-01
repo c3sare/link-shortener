@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "@next/env";
 
 import { defineConfig } from "drizzle-kit";
 

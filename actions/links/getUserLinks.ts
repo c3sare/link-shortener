@@ -6,7 +6,7 @@ import { links } from "@/drizzle/schema";
 export const getUserLinks = async (
   search: string = "",
   labelIds: string[],
-  order: string = "asc"
+  order: string = "asc",
 ) => {
   const session = await auth();
 
@@ -25,8 +25,8 @@ export const getUserLinks = async (
         eq(links.userId, userId),
         or(
           like(links.title, `%${search}%`),
-          like(links.description, `%${search}%`)
-        )
+          like(links.description, `%${search}%`),
+        ),
       ),
     orderBy: orderBy?.[order] ?? orderBy.asc,
     with: {
@@ -44,7 +44,7 @@ export const getUserLinks = async (
     ? items
     : items.filter((item) =>
         item.labelLinks.some((labelLink) =>
-          labelIds.includes(labelLink.label.id.toString())
-        )
+          labelIds.includes(labelLink.label.id.toString()),
+        ),
       );
 };

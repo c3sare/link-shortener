@@ -8,7 +8,7 @@ export const runtime = "edge";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ str: string }> }
+  { params }: { params: Promise<{ str: string }> },
 ) {
   const { str } = await params;
 
