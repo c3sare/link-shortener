@@ -67,7 +67,7 @@ export const PasscodeForm = ({ id }: Props) => {
         )}
       />
       <Button disabled={disabledSubmit} type="submit">
-        {isSubmitting ? t("loading") + "..." : t("confirm")}
+        {isSubmitting ? `${t("loading")}...` : t("confirm")}
       </Button>
     </form>
   );

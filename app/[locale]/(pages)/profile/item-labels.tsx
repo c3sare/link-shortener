@@ -1,8 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { addLabelToLink } from "@/actions/links/add-label-to-link";
-import { getUserLabels } from "@/actions/links/getUserLabels";
-import { getUserLinks } from "@/actions/links/getUserLinks";
+import type { getUserLabels } from "@/actions/links/getUserLabels";
+import type { getUserLinks } from "@/actions/links/getUserLinks";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -12,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTranslations } from "next-intl";
 
 type Props = {
   item: Awaited<ReturnType<typeof getUserLinks>>[number];

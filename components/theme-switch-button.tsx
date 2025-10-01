@@ -17,6 +17,7 @@ export default function ThemeSwitchButton({
 }: Props) {
   return (
     <button
+      type="button"
       onClick={() => setMode(mode)}
       className={cn(
         "size-10 rounded-full flex items-center justify-center",

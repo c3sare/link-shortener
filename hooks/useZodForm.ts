@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
-import { FieldValues, useForm, UseFormProps } from "react-hook-form";
-import * as z from "zod/mini";
+import { type FieldValues, type UseFormProps, useForm } from "react-hook-form";
+import type * as z from "zod/mini";
 
 type PropsType<TFormValues extends FieldValues> = Omit<
   UseFormProps<TFormValues>,

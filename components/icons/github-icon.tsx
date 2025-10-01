@@ -10,6 +10,7 @@ export const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
+    <title>GitHub</title>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(2.000000, 2.000000)" fillRule="nonzero">
         <rect

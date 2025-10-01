@@ -1,7 +1,9 @@
 "use client";
 
 import { ArrowUpDownIcon, SettingsIcon } from "lucide-react";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import type { getUserLabels } from "@/actions/links/getUserLabels";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,12 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Separator } from "@/components/ui/separator";
-
 import { AddLabelForm } from "./add-label-form";
 import { LabelListElement } from "./label-list-element";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef } from "react";
-import { useTranslations } from "next-intl";
 
 type Props = {
   labels: Awaited<ReturnType<typeof getUserLabels>>;

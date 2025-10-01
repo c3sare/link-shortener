@@ -1,8 +1,8 @@
-import { MetadataRoute } from "next";
-import { Locale } from "next-intl";
+import type { MetadataRoute } from "next";
+import type { Locale } from "next-intl";
 import { routing } from "../i18n/routing";
-import { getPathname } from "../navigation";
 import { getBaseUrl } from "../lib/utils";
+import { getPathname } from "../navigation";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [...getEntries("/"), ...getEntries("/pathnames")];

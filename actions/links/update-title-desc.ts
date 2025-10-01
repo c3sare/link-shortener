@@ -1,11 +1,11 @@
 "use server";
 
-import { z } from "zod/mini";
-import { authAction } from "../safe-action";
-import { db } from "@/drizzle";
-import * as s from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { z } from "zod/mini";
+import { db } from "@/drizzle";
+import * as s from "@/drizzle/schema";
+import { authAction } from "../safe-action";
 
 export const updateTitleDesc = authAction
   .inputSchema(
@@ -28,7 +28,7 @@ export const updateTitleDesc = authAction
           title: title === "" ? null : title,
           description: description === "" ? null : description,
         })
-        .where(and(eq(s.links.id, linkId), eq(s.links.userId, userId!)));
+        .where(and(eq(s.links.id, linkId), eq(s.links.userId, userId)));
 
       if (result.rowCount === 0)
         return {

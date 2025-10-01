@@ -1,12 +1,12 @@
 "use server";
 
-import { z } from "zod/mini";
-import { authAction } from "../safe-action";
-import { db } from "@/drizzle";
-import * as schema from "@/drizzle/schema";
 import bcrypt from "bcryptjs";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { z } from "zod/mini";
+import { db } from "@/drizzle";
+import * as schema from "@/drizzle/schema";
+import { authAction } from "../safe-action";
 
 export const addChangePasscode = authAction
   .inputSchema(
@@ -30,7 +30,7 @@ export const addChangePasscode = authAction
           passcode: passcodeHash,
         })
         .where(
-          and(eq(schema.links.id, linkId), eq(schema.links.userId, userId!)),
+          and(eq(schema.links.id, linkId), eq(schema.links.userId, userId)),
         );
 
       if (result.rowCount !== 1)

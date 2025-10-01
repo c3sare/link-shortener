@@ -8,7 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import * as schema from "@/drizzle/schema";
+import type * as schema from "@/drizzle/schema";
 
 import { groupByDate } from "./utils/group-by-date";
 

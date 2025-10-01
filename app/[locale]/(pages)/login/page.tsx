@@ -1,5 +1,8 @@
-import { getTranslations } from "next-intl/server";
+import { ArrowLeft, GithubIcon } from "lucide-react";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { auth, signIn } from "@/auth";
+import { GoogleIcon } from "@/components/icons/google-icon";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,11 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { GoogleIcon } from "@/components/icons/google-icon";
-import { ArrowLeft, GithubIcon } from "lucide-react";
-import { auth, signIn } from "@/auth";
-import { redirect, Link } from "@/navigation";
 import type { routing } from "@/i18n/routing";
+import { Link, redirect } from "@/navigation";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

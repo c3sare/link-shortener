@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import NextAuth from "next-auth";
 import createMiddleware from "next-intl/middleware";
 
@@ -23,13 +23,15 @@ export async function middleware(req: NextRequest) {
       const restUrl = segments.join("/");
 
       if (restUrl) {
-        const pathname = "/" + restUrl;
+        const pathname = `/${restUrl}`;
         const route = protectedRoutes.find((item) => pathname.startsWith(item));
 
         if (route)
           return NextResponse.redirect(
             new URL(
-              `/${locale}/login?backUrl=${encodeURIComponent(req.nextUrl.pathname)}`,
+              `/${locale}/login?backUrl=${encodeURIComponent(
+                req.nextUrl.pathname,
+              )}`,
               req.url,
             ),
           );

@@ -95,7 +95,7 @@ export const AddChangePasscodeForm = ({ havePasscode, linkId }: Props) => {
             />
           </div>
           <Button disabled={form.disabledSubmit} type="submit">
-            {isSubmitting ? t("loading") + "..." : t("confirm")}
+            {isSubmitting ? `${t("loading")}...` : t("confirm")}
           </Button>
         </form>
       </DialogContent>

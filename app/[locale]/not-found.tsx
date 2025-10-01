@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigation";
-import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

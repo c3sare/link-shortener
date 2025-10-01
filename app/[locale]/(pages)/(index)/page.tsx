@@ -1,9 +1,8 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
-import { CreateLinkFormWrapper } from "./create-link-form-wrapper";
-
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { CreateLinkFormWrapper } from "./create-link-form-wrapper";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

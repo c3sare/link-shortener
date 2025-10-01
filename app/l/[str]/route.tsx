@@ -7,7 +7,7 @@ import { db } from "@/drizzle";
 export const runtime = "edge";
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ str: string }> },
 ) {
   const { str } = await params;

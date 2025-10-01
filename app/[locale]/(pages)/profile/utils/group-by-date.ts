@@ -1,4 +1,4 @@
-import { ChartConfig } from "@/components/ui/chart";
+import type { ChartConfig } from "@/components/ui/chart";
 
 type Item<T> = T & {
   createdAt: Date;

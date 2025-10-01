@@ -28,8 +28,8 @@ export const CopyInput = ({ value, className }: Props) => {
   const handleCopy = () => {
     setIsVisibleTooltip(true);
     setTimeout(() => setIsVisibleTooltip(false), 1000);
-    inputRef.current!.select();
-    inputRef.current!.setSelectionRange(0, value.length);
+    inputRef.current?.select();
+    inputRef.current?.setSelectionRange(0, value.length);
     navigator.clipboard.writeText(value);
   };
 
@@ -44,8 +44,8 @@ export const CopyInput = ({ value, className }: Props) => {
         value={value}
         className="flex-1 pr-11"
         onFocus={() => {
-          inputRef.current!.select();
-          inputRef.current!.setSelectionRange(0, value.length);
+          inputRef.current?.select();
+          inputRef.current?.setSelectionRange(0, value.length);
         }}
         ref={inputRef}
         readOnly

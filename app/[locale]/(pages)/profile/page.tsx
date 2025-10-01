@@ -1,6 +1,6 @@
 import { PlusIcon } from "lucide-react";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-
 import { getUserLabels } from "@/actions/links/getUserLabels";
 import { getUserLinks } from "@/actions/links/getUserLinks";
 import { Button } from "@/components/ui/button";
@@ -16,16 +16,13 @@ import { CopyInput } from "@/components/ui/copy-input";
 import { Label } from "@/components/ui/label";
 import { getBaseUrl } from "@/lib/utils";
 import { Link } from "@/navigation";
-
 import { AddChangePasscodeForm } from "./add-change-passcode-form";
 import { DeleteLinkForm } from "./delete-link-form";
 import { DeletePasscodeForm } from "./delete-passcode-form";
 import { DateChart } from "./dynamic-date-chart";
+import { ItemLabels } from "./item-labels";
 import { PageFilters } from "./page-filters";
 import { TitleDescriptionForm } from "./title-description-form";
-import { ItemLabels } from "./item-labels";
-
-import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

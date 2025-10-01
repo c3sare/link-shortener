@@ -1,6 +1,6 @@
+import { asc, desc, like, type SQL } from "drizzle-orm";
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
-import { SQL, asc, desc, like } from "drizzle-orm";
 import { links } from "@/drizzle/schema";
 
 export const getUserLinks = async (

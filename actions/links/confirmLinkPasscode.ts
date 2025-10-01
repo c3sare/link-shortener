@@ -1,10 +1,10 @@
 "use server";
 
-import { z } from "zod/mini";
-import { action } from "../safe-action";
 import bcrypt from "bcryptjs";
-import { db } from "@/drizzle";
 import { redirect } from "next/navigation";
+import { z } from "zod/mini";
+import { db } from "@/drizzle";
+import { action } from "../safe-action";
 import { registerRedirect } from "./register-redirect";
 
 export const confirmLinkPasscode = action

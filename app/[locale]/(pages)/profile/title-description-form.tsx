@@ -1,8 +1,8 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { z } from "zod/mini";
-
 import { updateTitleDesc } from "@/actions/links/update-title-desc";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useZodForm } from "@/hooks/useZodForm";
-import { useTranslations } from "next-intl";
 
 type Props = {
   children: React.ReactNode;
@@ -93,7 +92,7 @@ export const TitleDescriptionForm = ({
             type="submit"
             className="w-full"
           >
-            {isSubmitting ? t("loading") + "..." : t("save")}
+            {isSubmitting ? `${t("loading")}...` : t("save")}
           </Button>
         </form>
       </DialogContent>

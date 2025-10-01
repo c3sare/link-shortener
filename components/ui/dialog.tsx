@@ -1,11 +1,10 @@
 "use client";
 
-import { Dialog as DialogPrimitive } from "radix-ui";
 import { X } from "lucide-react";
-import * as React from "react";
-
-import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { Dialog as DialogPrimitive } from "radix-ui";
+import type * as React from "react";
+import { cn } from "@/lib/utils";
 
 const Dialog = DialogPrimitive.Root;
 

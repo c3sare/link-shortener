@@ -4,7 +4,7 @@
 
 import { UserIcon } from "lucide-react";
 import Image from "next/image";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";

@@ -1,11 +1,11 @@
 "use server";
 
+import { and, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
+import { z } from "zod/mini";
 import { db } from "@/drizzle";
 import * as s from "@/drizzle/schema";
 import { authAction } from "../safe-action";
-import { z } from "zod/mini";
-import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 
 const schema = z.object({
   linkId: z.string(),

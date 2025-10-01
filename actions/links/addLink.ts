@@ -1,14 +1,14 @@
 "use server";
 
-import { action } from "../safe-action";
+import bcrypt from "bcryptjs";
+import { count } from "drizzle-orm";
+import { nanoid } from "nanoid";
+import { z } from "zod/mini";
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
 import { links } from "@/drizzle/schema";
 import { getBaseUrl } from "@/lib/utils";
-import { nanoid } from "nanoid";
-import { count } from "drizzle-orm";
-import bcrypt from "bcryptjs";
-import { z } from "zod/mini";
+import { action } from "../safe-action";
 
 export const addLink = action
   .inputSchema(
@@ -46,7 +46,7 @@ export const addLink = action
 
         if (!link) throw new Error("Can't insert link!");
 
-        return { shorterUrl: getBaseUrl() + "/l/" + link.id };
+        return { shorterUrl: `${getBaseUrl()}/l/${link.id}` };
       } catch {
         searchMore = true;
       }

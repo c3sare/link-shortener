@@ -8,6 +8,7 @@ export const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
+    <title>Google</title>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-300.000000, -7399.000000)" fill="currentColor">
         <g transform="translate(56.000000, 160.000000)">

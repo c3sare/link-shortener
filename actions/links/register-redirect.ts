@@ -1,5 +1,5 @@
-import { db } from "@/drizzle";
 import { headers } from "next/headers";
+import { db } from "@/drizzle";
 import * as schema from "@/drizzle/schema";
 
 export const registerRedirect = async (linkId: string) => {

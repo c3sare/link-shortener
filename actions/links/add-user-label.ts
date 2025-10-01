@@ -1,10 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod/mini";
-import { authAction } from "../safe-action";
 import { db } from "@/drizzle";
 import * as s from "@/drizzle/schema";
-import { revalidatePath } from "next/cache";
+import { authAction } from "../safe-action";
 
 export const addUserLabel = authAction
   .inputSchema(
@@ -23,7 +23,7 @@ export const addUserLabel = authAction
         .insert(s.labels)
         .values({
           label,
-          userId: userId!,
+          userId,
         })
         .returning();
 

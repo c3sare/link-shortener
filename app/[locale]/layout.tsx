@@ -1,9 +1,10 @@
 import { ScissorsIcon } from "lucide-react";
+import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import Image from "next/image";
-import { Locale, NextIntlClientProvider } from "next-intl";
+import { type Locale, NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-
 import { GithubIcon } from "@/components/icons/github-icon";
 import { LangSwitchWrapper } from "@/components/lang-switch-wrapper";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -12,11 +13,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Link } from "@/navigation";
 import vercelLogo from "@/public/images/vercel.svg";
-
 import { DynamicToaster } from "./dynamic-toaster";
 import { LoginButton } from "./login-button";
-import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -101,7 +99,7 @@ export default async function RootLayout({ children, params }: Props) {
                   href="https://vercel.com/"
                   target="_blank"
                   rel="noreferrer"
-                  title={t("redirect_to") + " vercel.com"}
+                  title={`${t("redirect_to")} vercel.com`}
                 >
                   Powered by
                   <div className="flex ml-2">

@@ -1,10 +1,9 @@
+import { useTranslations } from "next-intl";
 import { z } from "zod/mini";
-
 import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useZodForm } from "@/hooks/useZodForm";
-import { useTranslations } from "next-intl";
 
 export const AddLabelForm = () => {
   const t = useTranslations();
@@ -31,7 +30,7 @@ export const AddLabelForm = () => {
       <Input
         {...form.register("label")}
         disabled={disabled}
-        placeholder={t("new_label") + "..."}
+        placeholder={`${t("new_label")}...`}
         className="flex-1"
       />
       <Button disabled={form.disabledSubmit} type="submit">

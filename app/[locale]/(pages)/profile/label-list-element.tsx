@@ -1,10 +1,9 @@
 import { TrashIcon } from "lucide-react";
-
-import type { getUserLabels } from "@/actions/links/getUserLabels";
-import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 import { deleteUserLabel } from "@/actions/links/delete-user-label";
-import { useTranslations } from "next-intl";
+import type { getUserLabels } from "@/actions/links/getUserLabels";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   label: Awaited<ReturnType<typeof getUserLabels>>[number];
