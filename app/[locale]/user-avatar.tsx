@@ -4,14 +4,13 @@
 
 import { UserIcon } from "lucide-react";
 import Image from "next/image";
-import type { Session } from "next-auth";
-
+import type { auth } from "@/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import defaultAvatar from "@/public/images/avatars/default.webp";
 
 type Props = {
-  session: Session | null;
+  session: Awaited<ReturnType<typeof auth>>;
 };
 
 export const UserAvatar = ({ session, ...props }: Props) => {

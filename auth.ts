@@ -1,10 +1,25 @@
-import NextAuth from "next-auth";
-import github from "next-auth/providers/github";
-import google from "next-auth/providers/google";
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { headers } from "next/headers";
+import { db } from "@/drizzle";
 
-import { authConfig } from "./auth.config";
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  ...authConfig,
-  providers: [google, github],
+export const ba = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "pg",
+  }),
+  socialProviders: {
+    github: {
+      clientId: process.env.AUTH_GITHUB_ID as string,
+      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+    },
+    google: {
+      clientId: process.env.AUTH_GOOGLE_ID as string,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
+    },
+  },
 });
+
+export const auth = async () =>
+  await ba.api.getSession({
+    headers: await headers(),
+  });

@@ -1,18 +1,15 @@
+import { getSessionCookie } from "better-auth/cookies";
 import { type NextRequest, NextResponse } from "next/server";
-import NextAuth from "next-auth";
 import createMiddleware from "next-intl/middleware";
 
-import { authConfig } from "./auth.config";
 import { routing } from "./i18n/routing";
-
-const { auth } = NextAuth(authConfig);
 
 const protectedRoutes = ["/profile"];
 
 export async function middleware(req: NextRequest) {
-  const session = await auth();
+  const sessionCookie = getSessionCookie(req);
 
-  const isAuthorized = !!session?.user;
+  const isAuthorized = !!sessionCookie;
 
   if (req.nextUrl.pathname.startsWith("/l/")) return;
 

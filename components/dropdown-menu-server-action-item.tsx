@@ -1,21 +1,32 @@
-import { cn } from "@/lib/utils";
+"use client";
 
+import { signIn, signOut } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { DropdownMenuItem } from "./ui/dropdown-menu";
 
-type Props = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
+type Props = {
+  className?: string;
+  children?: React.ReactNode;
+  social: "google" | "github" | "signOut";
+};
 
 export const DropdownMenuServerActionItem = ({
   children,
-  formAction,
+  social,
   className,
   ...rest
 }: Props) => (
-  <DropdownMenuItem className={cn("cursor-pointer", className)} asChild>
-    <button formAction={formAction} {...rest}>
-      {children}
-    </button>
+  <DropdownMenuItem
+    onClick={async () => {
+      if (social === "signOut") await signOut();
+      else
+        await signIn.social({
+          provider: social,
+        });
+    }}
+    className={cn("cursor-pointer", className)}
+    asChild
+  >
+    <button {...rest}>{children}</button>
   </DropdownMenuItem>
 );
