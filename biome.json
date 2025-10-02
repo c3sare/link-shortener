@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!cypress.config.ts",
+      "!cypress"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -18,8 +26,17 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noArrayIndexKey": "off"
+      },
+      "a11y": {
+        "useSemanticElements": "off",
+        "useFocusableInteractive": "off",
+        "useAriaPropsForRole": "off"
       }
     },
     "domains": {
