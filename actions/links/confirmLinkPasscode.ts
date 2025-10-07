@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 import { db } from "@/drizzle";
 import { action } from "../safe-action";
 import { registerRedirect } from "./register-redirect";

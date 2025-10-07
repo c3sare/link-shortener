@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 import { addUserLabel } from "@/actions/links/add-user-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

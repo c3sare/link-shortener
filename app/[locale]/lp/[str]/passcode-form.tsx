@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Controller } from "react-hook-form";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 import { confirmLinkPasscode } from "@/actions/links/confirmLinkPasscode";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 
 import { addLink } from "@/actions/links/addLink";
 import { Button } from "@/components/ui/button";

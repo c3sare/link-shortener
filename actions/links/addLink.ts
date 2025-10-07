@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import { count } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 import { auth } from "@/auth";
 import { db } from "@/drizzle";
 import { links } from "@/drizzle/schema";

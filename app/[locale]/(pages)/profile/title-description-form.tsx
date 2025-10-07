@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { z } from "zod/mini";
+import * as z from "zod/mini";
 import { updateTitleDesc } from "@/actions/links/update-title-desc";
 import { Button } from "@/components/ui/button";
 import {
